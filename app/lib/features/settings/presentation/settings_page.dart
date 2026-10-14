@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/widgets/widgets.dart';
+import '../../auth/data/auth_repository.dart';
 import '../../profile/data/profile_repository.dart';
 import '../../verification/presentation/verification_page.dart';
+import 'delete_account_dialog.dart';
 import 'language_picker.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -66,15 +67,27 @@ class SettingsPage extends ConsumerWidget {
               gap,
               GlassSection(
                 title: t.settingsAccount,
-                child: FlamButton(
-                  label: t.actionSignOut,
-                  icon: const Icon(Icons.logout_rounded),
-                  variant: FlamVariant.glass,
-                  expand: true,
-                  onPressed: () async {
-                    await Supabase.instance.client.auth.signOut();
-                    // El router lleva al login.
-                  },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    FlamButton(
+                      label: t.actionSignOut,
+                      icon: const Icon(Icons.logout_rounded),
+                      variant: FlamVariant.glass,
+                      expand: true,
+                      // El router lleva al login.
+                      onPressed: () =>
+                          ref.read(authRepositoryProvider).signOut(),
+                    ),
+                    const SizedBox(height: 8),
+                    FlamButton(
+                      label: t.deleteAccount,
+                      icon: const Icon(Icons.delete_forever_rounded),
+                      variant: FlamVariant.ghost,
+                      expand: true,
+                      onPressed: () => showDeleteAccountDialog(context),
+                    ),
+                  ],
                 ),
               ),
             ],

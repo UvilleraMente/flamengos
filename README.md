@@ -42,7 +42,16 @@ para evitar carreras.
    **en orden** (0001, luego 0002…). Cada uno se ejecuta una sola vez.
 2. **Authentication → Sign In / Providers → Email**: para la demo, desactiva
    *Confirm email*.
-3. *(Opcional)* **Database → Extensions**: verifica que `pg_cron` esté activo.
+3. **Authentication → URL Configuration → Redirect URLs**, agrega:
+   - `http://localhost:*/**` (web en desarrollo)
+   - `com.flamengos.flamengos://login-callback` (app Android/iOS)
+   - la URL de la web cuando la publiques
+4. **Authentication → Emails → Templates → Reset Password**: pega
+   `supabase/templates/reset_password.html` (agrega el código de 6 dígitos).
+5. **Correo real (producción)**: el SMTP de Supabase solo envía a los miembros
+   del equipo y pocos correos por hora. Configura uno propio en
+   **Authentication → Emails → SMTP Settings** (Resend, SendGrid, Brevo…).
+6. *(Opcional)* **Database → Extensions**: verifica que `pg_cron` esté activo.
 
 ### Moderación (admin, desde el SQL Editor)
 

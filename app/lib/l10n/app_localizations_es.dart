@@ -101,6 +101,89 @@ class AppLocalizationsEs extends AppLocalizations {
   String get splashError => 'No pudimos cargar tu perfil';
 
   @override
+  String get authForgotPassword => '¿Olvidaste tu contraseña?';
+
+  @override
+  String get forgotTitle => 'Recuperar contraseña';
+
+  @override
+  String get forgotIntro =>
+      'Escribe tu correo y te enviaremos un código para crear una contraseña nueva.';
+
+  @override
+  String get forgotSend => 'Enviar código';
+
+  @override
+  String forgotSentMessage(String email) {
+    return 'Revisa $email. Escribe el código de 6 dígitos o abre el enlace del correo.';
+  }
+
+  @override
+  String get forgotCode => 'Código';
+
+  @override
+  String get forgotVerify => 'Verificar';
+
+  @override
+  String get forgotInvalidCode => 'Código incorrecto o vencido.';
+
+  @override
+  String get forgotResend => 'Reenviar código';
+
+  @override
+  String forgotResendIn(int seconds) {
+    return 'Reenviar en $seconds s';
+  }
+
+  @override
+  String get forgotChangeEmail => 'Usar otro correo';
+
+  @override
+  String get resetTitle => 'Crea tu contraseña nueva';
+
+  @override
+  String get resetNewPassword => 'Contraseña nueva';
+
+  @override
+  String get resetConfirmPassword => 'Repite la contraseña';
+
+  @override
+  String get resetMismatch => 'Las contraseñas no coinciden';
+
+  @override
+  String get resetSave => 'Guardar contraseña';
+
+  @override
+  String get resetHint => 'Después entrarás directo a tu cuenta.';
+
+  @override
+  String get resetDone => 'Contraseña actualizada 🦩';
+
+  @override
+  String get deleteAccount => 'Eliminar cuenta';
+
+  @override
+  String get deleteAccountTitle => '¿Eliminar tu cuenta?';
+
+  @override
+  String get deleteAccountMessage =>
+      'Se borrarán tu perfil, fotos, solicitudes y conversaciones. Si tienes pareja, terminará de inmediato. No se puede deshacer.';
+
+  @override
+  String get deleteAccountWord => 'ELIMINAR';
+
+  @override
+  String deleteAccountTypeHint(String word) {
+    return 'Escribe $word para confirmar';
+  }
+
+  @override
+  String get deleteAccountAction => 'Eliminar para siempre';
+
+  @override
+  String get deleteAccountDone => 'Tu cuenta fue eliminada. ¡Buen vuelo! 🦩';
+
+  @override
   String get genderWoman => 'Mujer';
 
   @override

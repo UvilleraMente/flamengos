@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../settings/presentation/language_picker.dart';
+import '../data/auth_repository.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final _form = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -32,21 +35,16 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _submit() async {
     if (!_form.currentState!.validate()) return;
     setState(() => _busy = true);
-    final auth = Supabase.instance.client.auth;
+    final auth = ref.read(authRepositoryProvider);
+    final email = _email.text.trim();
     try {
       if (_isSignUp) {
-        final res = await auth.signUp(
-          email: _email.text.trim(),
-          password: _password.text,
-        );
-        if (res.session == null && mounted) {
+        final signedIn = await auth.signUp(email, _password.text);
+        if (!signedIn && mounted) {
           showInfo(context, context.l10n.authCheckEmail);
         }
       } else {
-        await auth.signInWithPassword(
-          email: _email.text.trim(),
-          password: _password.text,
-        );
+        await auth.signIn(email, _password.text);
       }
       // El router redirige solo al detectar la sesión.
     } catch (e) {
@@ -150,7 +148,19 @@ class _LoginPageState extends State<LoginPage> {
                                     ? null
                                     : t.authPasswordTooShort,
                               ),
-                              const SizedBox(height: 22),
+                              if (!_isSignUp)
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: TextButton(
+                                    onPressed: () => context.push(
+                                      Routes.forgotPassword,
+                                      extra: _email.text.trim(),
+                                    ),
+                                    child: Text(t.authForgotPassword),
+                                  ),
+                                )
+                              else
+                                const SizedBox(height: 22),
                               FlamButton(
                                 label: _isSignUp
                                     ? t.authCreateAccount

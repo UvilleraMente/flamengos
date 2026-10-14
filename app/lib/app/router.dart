@@ -4,7 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../core/supabase/supabase_providers.dart';
+import '../features/auth/data/auth_repository.dart';
+import '../features/auth/presentation/forgot_password_page.dart';
 import '../features/auth/presentation/login_page.dart';
+import '../features/auth/presentation/reset_password_page.dart';
 import '../features/auth/presentation/splash_page.dart';
 import '../features/home/presentation/home_shell.dart';
 import '../features/location/presentation/location_picker_page.dart';
@@ -17,6 +20,8 @@ import '../features/verification/presentation/verification_page.dart';
 abstract final class Routes {
   static const home = '/';
   static const login = '/login';
+  static const forgotPassword = '/forgot-password';
+  static const resetPassword = '/reset-password';
   static const splash = '/splash';
   static const onboarding = '/onboarding';
   static const editProfile = '/profile/edit';
@@ -32,6 +37,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   final refresh = ValueNotifier(0);
   ref.listen(currentUserIdProvider, (_, _) => refresh.value++);
   ref.listen(myProfileProvider, (_, _) => refresh.value++);
+  ref.listen(passwordRecoveryProvider, (_, _) => refresh.value++);
   ref.onDispose(refresh.dispose);
 
   return GoRouter(
@@ -41,18 +47,41 @@ final routerProvider = Provider<GoRouter>((ref) {
       final here = state.matchedLocation;
       String? goTo(String path) => here == path ? null : path;
 
-      if (ref.read(currentUserIdProvider) == null) return goTo(Routes.login);
+      if (ref.read(currentUserIdProvider) == null) {
+        // Sin sesión solo se puede entrar o recuperar la contraseña.
+        return here == Routes.forgotPassword ? null : goTo(Routes.login);
+      }
+
+      // Entró con un enlace/código de recuperación: primero, contraseña nueva.
+      if (ref.read(passwordRecoveryProvider)) {
+        return goTo(Routes.resetPassword);
+      }
 
       final profile = ref.read(myProfileProvider);
       if (profile.isLoading || profile.hasError) return goTo(Routes.splash);
       if (profile.value == null) return goTo(Routes.onboarding);
 
-      const gates = {Routes.login, Routes.splash, Routes.onboarding};
+      const gates = {
+        Routes.login,
+        Routes.forgotPassword,
+        Routes.resetPassword,
+        Routes.splash,
+        Routes.onboarding,
+      };
       return gates.contains(here) ? Routes.home : null;
     },
     routes: [
       GoRoute(path: Routes.home, builder: (_, _) => const HomeShell()),
       GoRoute(path: Routes.login, builder: (_, _) => const LoginPage()),
+      GoRoute(
+        path: Routes.forgotPassword,
+        builder: (_, state) =>
+            ForgotPasswordPage(initialEmail: state.extra as String?),
+      ),
+      GoRoute(
+        path: Routes.resetPassword,
+        builder: (_, _) => const ResetPasswordPage(),
+      ),
       GoRoute(path: Routes.splash, builder: (_, _) => const SplashPage()),
       GoRoute(
         path: Routes.onboarding,

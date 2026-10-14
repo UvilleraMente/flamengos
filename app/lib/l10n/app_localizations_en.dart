@@ -99,6 +99,89 @@ class AppLocalizationsEn extends AppLocalizations {
   String get splashError => 'We couldn\'t load your profile';
 
   @override
+  String get authForgotPassword => 'Forgot your password?';
+
+  @override
+  String get forgotTitle => 'Reset password';
+
+  @override
+  String get forgotIntro =>
+      'Enter your email and we\'ll send you a code to create a new password.';
+
+  @override
+  String get forgotSend => 'Send code';
+
+  @override
+  String forgotSentMessage(String email) {
+    return 'Check $email. Enter the 6-digit code or open the link in the email.';
+  }
+
+  @override
+  String get forgotCode => 'Code';
+
+  @override
+  String get forgotVerify => 'Verify';
+
+  @override
+  String get forgotInvalidCode => 'Wrong or expired code.';
+
+  @override
+  String get forgotResend => 'Resend code';
+
+  @override
+  String forgotResendIn(int seconds) {
+    return 'Resend in $seconds s';
+  }
+
+  @override
+  String get forgotChangeEmail => 'Use another email';
+
+  @override
+  String get resetTitle => 'Create your new password';
+
+  @override
+  String get resetNewPassword => 'New password';
+
+  @override
+  String get resetConfirmPassword => 'Repeat the password';
+
+  @override
+  String get resetMismatch => 'Passwords don\'t match';
+
+  @override
+  String get resetSave => 'Save password';
+
+  @override
+  String get resetHint => 'You\'ll go straight into your account afterwards.';
+
+  @override
+  String get resetDone => 'Password updated 🦩';
+
+  @override
+  String get deleteAccount => 'Delete account';
+
+  @override
+  String get deleteAccountTitle => 'Delete your account?';
+
+  @override
+  String get deleteAccountMessage =>
+      'Your profile, photos, requests and chats will be erased. If you have a pair, it ends immediately. This can\'t be undone.';
+
+  @override
+  String get deleteAccountWord => 'DELETE';
+
+  @override
+  String deleteAccountTypeHint(String word) {
+    return 'Type $word to confirm';
+  }
+
+  @override
+  String get deleteAccountAction => 'Delete forever';
+
+  @override
+  String get deleteAccountDone => 'Your account was deleted. Fly safe! 🦩';
+
+  @override
   String get genderWoman => 'Woman';
 
   @override

@@ -278,6 +278,156 @@ abstract class AppLocalizations {
   /// **'No pudimos cargar tu perfil'**
   String get splashError;
 
+  /// No description provided for @authForgotPassword.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Olvidaste tu contraseña?'**
+  String get authForgotPassword;
+
+  /// No description provided for @forgotTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Recuperar contraseña'**
+  String get forgotTitle;
+
+  /// No description provided for @forgotIntro.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe tu correo y te enviaremos un código para crear una contraseña nueva.'**
+  String get forgotIntro;
+
+  /// No description provided for @forgotSend.
+  ///
+  /// In es, this message translates to:
+  /// **'Enviar código'**
+  String get forgotSend;
+
+  /// No description provided for @forgotSentMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Revisa {email}. Escribe el código de 6 dígitos o abre el enlace del correo.'**
+  String forgotSentMessage(String email);
+
+  /// No description provided for @forgotCode.
+  ///
+  /// In es, this message translates to:
+  /// **'Código'**
+  String get forgotCode;
+
+  /// No description provided for @forgotVerify.
+  ///
+  /// In es, this message translates to:
+  /// **'Verificar'**
+  String get forgotVerify;
+
+  /// No description provided for @forgotInvalidCode.
+  ///
+  /// In es, this message translates to:
+  /// **'Código incorrecto o vencido.'**
+  String get forgotInvalidCode;
+
+  /// No description provided for @forgotResend.
+  ///
+  /// In es, this message translates to:
+  /// **'Reenviar código'**
+  String get forgotResend;
+
+  /// No description provided for @forgotResendIn.
+  ///
+  /// In es, this message translates to:
+  /// **'Reenviar en {seconds} s'**
+  String forgotResendIn(int seconds);
+
+  /// No description provided for @forgotChangeEmail.
+  ///
+  /// In es, this message translates to:
+  /// **'Usar otro correo'**
+  String get forgotChangeEmail;
+
+  /// No description provided for @resetTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Crea tu contraseña nueva'**
+  String get resetTitle;
+
+  /// No description provided for @resetNewPassword.
+  ///
+  /// In es, this message translates to:
+  /// **'Contraseña nueva'**
+  String get resetNewPassword;
+
+  /// No description provided for @resetConfirmPassword.
+  ///
+  /// In es, this message translates to:
+  /// **'Repite la contraseña'**
+  String get resetConfirmPassword;
+
+  /// No description provided for @resetMismatch.
+  ///
+  /// In es, this message translates to:
+  /// **'Las contraseñas no coinciden'**
+  String get resetMismatch;
+
+  /// No description provided for @resetSave.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar contraseña'**
+  String get resetSave;
+
+  /// No description provided for @resetHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Después entrarás directo a tu cuenta.'**
+  String get resetHint;
+
+  /// No description provided for @resetDone.
+  ///
+  /// In es, this message translates to:
+  /// **'Contraseña actualizada 🦩'**
+  String get resetDone;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar cuenta'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Eliminar tu cuenta?'**
+  String get deleteAccountTitle;
+
+  /// No description provided for @deleteAccountMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Se borrarán tu perfil, fotos, solicitudes y conversaciones. Si tienes pareja, terminará de inmediato. No se puede deshacer.'**
+  String get deleteAccountMessage;
+
+  /// No description provided for @deleteAccountWord.
+  ///
+  /// In es, this message translates to:
+  /// **'ELIMINAR'**
+  String get deleteAccountWord;
+
+  /// No description provided for @deleteAccountTypeHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe {word} para confirmar'**
+  String deleteAccountTypeHint(String word);
+
+  /// No description provided for @deleteAccountAction.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar para siempre'**
+  String get deleteAccountAction;
+
+  /// No description provided for @deleteAccountDone.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu cuenta fue eliminada. ¡Buen vuelo! 🦩'**
+  String get deleteAccountDone;
+
   /// No description provided for @genderWoman.
   ///
   /// In es, this message translates to:
