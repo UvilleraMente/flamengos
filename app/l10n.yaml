@@ -1,0 +1,7 @@
+# Traducciones: edita lib/l10n/app_es.arb (plantilla) y app_en.arb.
+# `flutter pub get` / `flutter run` regeneran lib/l10n/app_localizations*.dart.
+arb-dir: lib/l10n
+template-arb-file: app_es.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+nullable-getter: false

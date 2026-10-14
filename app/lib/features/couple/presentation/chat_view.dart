@@ -1,0 +1,196 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+
+import '../../../core/errors.dart';
+import '../../../core/l10n/l10n.dart';
+import '../../../core/theme/tokens.dart';
+import '../domain/couple.dart';
+import '../data/couple_repository.dart';
+import '../../../shared/feedback.dart';
+import '../../../shared/widgets/widgets.dart';
+
+class ChatView extends ConsumerStatefulWidget {
+  const ChatView({super.key, required this.matchId, required this.me});
+
+  final String matchId;
+  final String me;
+
+  @override
+  ConsumerState<ChatView> createState() => _ChatViewState();
+}
+
+class _ChatViewState extends ConsumerState<ChatView> {
+  final _input = TextEditingController();
+  bool _sending = false;
+
+  @override
+  void dispose() {
+    _input.dispose();
+    super.dispose();
+  }
+
+  Future<void> _send() async {
+    final body = _input.text.trim();
+    if (body.isEmpty || _sending) return;
+    setState(() => _sending = true);
+    try {
+      await ref
+          .read(coupleRepositoryProvider)
+          .sendMessage(widget.matchId, body);
+      _input.clear();
+    } catch (e) {
+      if (mounted) showError(context, e);
+    } finally {
+      if (mounted) setState(() => _sending = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final messages = ref.watch(messagesProvider(widget.matchId));
+
+    return Column(
+      children: [
+        Expanded(
+          child: messages.when(
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (e, _) => EmptyState(
+              emoji: '🪶',
+              title: context.l10n.chatLoadError,
+              message: describeError(context, e),
+            ),
+            data: (list) => list.isEmpty
+                ? EmptyState(
+                    emoji: '💬',
+                    title: context.l10n.chatEmptyTitle,
+                    message: context.l10n.chatEmptyMessage,
+                  )
+                : ListView.builder(
+                    reverse: true,
+                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                    itemCount: list.length,
+                    itemBuilder: (_, i) {
+                      final index = list.length - 1 - i;
+                      final m = list[index];
+                      final next = index + 1 < list.length
+                          ? list[index + 1]
+                          : null;
+                      return _Bubble(
+                        message: m,
+                        mine: m.senderId == widget.me,
+                        // Agrupa mensajes seguidos del mismo autor.
+                        tail: next == null || next.senderId != m.senderId,
+                      );
+                    },
+                  ),
+          ),
+        ),
+        SafeArea(
+          top: false,
+          minimum: const EdgeInsets.only(bottom: 8),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 720),
+              child: Glass(
+                blur: true,
+                radius: FlamRadius.pill,
+                padding: const EdgeInsets.fromLTRB(18, 4, 4, 4),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _input,
+                        decoration: InputDecoration(
+                          hintText: context.l10n.chatHint,
+                          filled: false,
+                          border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(vertical: 12),
+                        ),
+                        textCapitalization: TextCapitalization.sentences,
+                        minLines: 1,
+                        maxLines: 4,
+                        maxLength: 2000,
+                        buildCounter:
+                            (
+                              _, {
+                              required currentLength,
+                              required isFocused,
+                              maxLength,
+                            }) => null,
+                        onSubmitted: (_) => _send(),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    FlamIconButton(
+                      icon: const Icon(Icons.arrow_upward_rounded),
+                      variant: FlamVariant.primary,
+                      size: 44,
+                      tooltip: context.l10n.chatSend,
+                      onPressed: _sending ? null : _send,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _Bubble extends StatelessWidget {
+  const _Bubble({
+    required this.message,
+    required this.mine,
+    required this.tail,
+  });
+
+  final ChatMessage message;
+  final bool mine;
+  final bool tail;
+
+  @override
+  Widget build(BuildContext context) {
+    const r = Radius.circular(FlamRadius.lg);
+    const small = Radius.circular(6);
+    return Align(
+      alignment: mine ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 320),
+        margin: EdgeInsets.only(bottom: tail ? 10 : 3),
+        padding: const EdgeInsets.fromLTRB(14, 9, 14, 7),
+        decoration: BoxDecoration(
+          gradient: mine ? FlamGradients.primary : FlamGradients.glass,
+          border: mine ? null : Border.all(color: FlamColors.glassBorder),
+          borderRadius: BorderRadius.only(
+            topLeft: r,
+            topRight: r,
+            bottomLeft: mine || !tail ? r : small,
+            bottomRight: !mine || !tail ? r : small,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              message.body,
+              style: const TextStyle(fontSize: 15.5, height: 1.3),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              DateFormat.Hm(
+                context.localeTag,
+              ).format(message.createdAt.toLocal()),
+              style: const TextStyle(fontSize: 11, color: FlamColors.textMuted),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

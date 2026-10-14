@@ -1,0 +1,17 @@
+# Sistema / editores
+.DS_Store
+Thumbs.db
+*.log
+
+# Secretos locales (nunca subir)
+.env
+.env.*
+*.keystore
+*.jks
+key.properties
+google-services.json
+GoogleService-Info.plist
+
+# Supabase CLI (si se usa en el futuro)
+supabase/.temp/
+supabase/.branches/
