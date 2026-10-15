@@ -383,7 +383,7 @@ abstract class AppLocalizations {
   /// No description provided for @resetDone.
   ///
   /// In es, this message translates to:
-  /// **'Contraseña actualizada 🦩'**
+  /// **'Contraseña actualizada'**
   String get resetDone;
 
   /// No description provided for @deleteAccount.
@@ -425,7 +425,7 @@ abstract class AppLocalizations {
   /// No description provided for @deleteAccountDone.
   ///
   /// In es, this message translates to:
-  /// **'Tu cuenta fue eliminada. ¡Buen vuelo! 🦩'**
+  /// **'Tu cuenta fue eliminada. ¡Buen vuelo!'**
   String get deleteAccountDone;
 
   /// No description provided for @genderWoman.
@@ -527,7 +527,7 @@ abstract class AppLocalizations {
   /// No description provided for @discoverRequestSent.
   ///
   /// In es, this message translates to:
-  /// **'Solicitud enviada a {name} 🦩 Tiene 48 h para responder.'**
+  /// **'Solicitud enviada a {name}. Tiene 48 h para responder.'**
   String discoverRequestSent(String name);
 
   /// No description provided for @discoverLoadError.
@@ -827,7 +827,7 @@ abstract class AppLocalizations {
   /// No description provided for @requestsAcceptAction.
   ///
   /// In es, this message translates to:
-  /// **'Aceptar 🦩'**
+  /// **'Aceptar'**
   String get requestsAcceptAction;
 
   /// No description provided for @matchTitle.
@@ -887,13 +887,13 @@ abstract class AppLocalizations {
   /// No description provided for @coupleYouAskedToEnd.
   ///
   /// In es, this message translates to:
-  /// **'Pediste terminar 💔'**
+  /// **'Pediste terminar'**
   String get coupleYouAskedToEnd;
 
   /// No description provided for @couplePartnerAskedToEnd.
   ///
   /// In es, this message translates to:
-  /// **'{name} quiere terminar 💔'**
+  /// **'{name} quiere terminar'**
   String couplePartnerAskedToEnd(String name);
 
   /// No description provided for @coupleDissolvesIn.
@@ -1001,7 +1001,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileCreateIntro.
   ///
   /// In es, this message translates to:
-  /// **'Cuéntale al mundo quién eres. Un buen perfil consigue más solicitudes 🦩'**
+  /// **'Cuéntale al mundo quién eres. Un buen perfil consigue más solicitudes'**
   String get profileCreateIntro;
 
   /// No description provided for @profilePhotos.
@@ -1109,7 +1109,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileStart.
   ///
   /// In es, this message translates to:
-  /// **'Empezar a volar 🦩'**
+  /// **'Empezar a volar'**
   String get profileStart;
 
   /// No description provided for @profileSave.
@@ -1406,17 +1406,59 @@ abstract class AppLocalizations {
   /// **'Firefly'**
   String get themeFirefly;
 
+  /// No description provided for @themeSpicebug.
+  ///
+  /// In es, this message translates to:
+  /// **'Spicebug'**
+  String get themeSpicebug;
+
   /// No description provided for @themeLight.
   ///
   /// In es, this message translates to:
-  /// **'Claro'**
+  /// **'Cricket'**
   String get themeLight;
 
   /// No description provided for @themeDark.
   ///
   /// In es, this message translates to:
-  /// **'Oscuro'**
+  /// **'Cricket'**
   String get themeDark;
+
+  /// No description provided for @themeFireflyHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Noche rosa'**
+  String get themeFireflyHint;
+
+  /// No description provided for @themeSpicebugHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Verde profundo'**
+  String get themeSpicebugHint;
+
+  /// No description provided for @themeLightHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Claro'**
+  String get themeLightHint;
+
+  /// No description provided for @themeDarkHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Oscuro'**
+  String get themeDarkHint;
+
+  /// No description provided for @settingsLegal.
+  ///
+  /// In es, this message translates to:
+  /// **'Ayuda y legal'**
+  String get settingsLegal;
+
+  /// No description provided for @settingsMadeBy.
+  ///
+  /// In es, this message translates to:
+  /// **'Flamengos · CreativeMinds by Andresnael'**
+  String get settingsMadeBy;
 
   /// No description provided for @appearanceFont.
   ///
@@ -1463,7 +1505,7 @@ abstract class AppLocalizations {
   /// No description provided for @coupleMapTitle.
   ///
   /// In es, this message translates to:
-  /// **'Están a {km} km 💕'**
+  /// **'Están a {km} km'**
   String coupleMapTitle(int km);
 
   /// No description provided for @helpTitle.
@@ -1637,7 +1679,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumFounder.
   ///
   /// In es, this message translates to:
-  /// **'Fundador: premium para siempre 🦩'**
+  /// **'Fundador: premium para siempre'**
   String get premiumFounder;
 
   /// No description provided for @premiumUntil.
@@ -1645,6 +1687,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Premium hasta el {date}'**
   String premiumUntil(String date);
+
+  /// No description provided for @premiumPerksTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Beneficios Premium'**
+  String get premiumPerksTitle;
 
   /// No description provided for @premiumFree.
   ///

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../core/theme/tokens.dart';
-import 'glass.dart';
 
-/// Logotipo "Flamengos" en letra script con degradado.
+/// Logotipo "Flamengos": letra script con degradado; en Cricket (minimalista)
+/// va en la fuente de la app, sólido y compacto.
 class Wordmark extends StatelessWidget {
   const Wordmark({super.key, this.size = 30});
 
@@ -11,6 +11,18 @@ class Wordmark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (FlamColors.palette.isSolid) {
+      return Text(
+        'flamengos',
+        style: TextStyle(
+          fontSize: size * 0.82,
+          height: 1.3,
+          fontWeight: FontWeight.w800,
+          letterSpacing: -0.04 * size,
+          color: FlamColors.pink,
+        ),
+      );
+    }
     return ShaderMask(
       blendMode: BlendMode.srcIn,
       shaderCallback: FlamGradients.logo.createShader,
@@ -20,6 +32,21 @@ class Wordmark extends StatelessWidget {
       ),
     );
   }
+}
+
+/// El flamenco de la marca (el mismo dibujo del ícono de la app).
+class FlamLogo extends StatelessWidget {
+  const FlamLogo({super.key, this.size = 72});
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) => Image.asset(
+    'assets/images/flamingo.png',
+    width: size,
+    height: size,
+    filterQuality: FilterQuality.medium,
+  );
 }
 
 /// Late suavemente (splash, celebraciones).
@@ -61,13 +88,13 @@ class EmptyState extends StatelessWidget {
     super.key,
     required this.title,
     required this.message,
-    this.emoji = '🦩',
+    this.icon = Icons.explore_outlined,
     this.action,
   });
 
   final String title;
   final String message;
-  final String emoji;
+  final IconData icon;
   final Widget? action;
 
   @override
@@ -80,18 +107,23 @@ class EmptyState extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Glass(
-                radius: FlamRadius.pill,
-                padding: const EdgeInsets.all(26),
-                child: Text(emoji, style: const TextStyle(fontSize: 48)),
+              Container(
+                width: 76,
+                height: 76,
+                decoration: BoxDecoration(
+                  color: FlamColors.pink.withValues(alpha: 0.12),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(icon, size: 34, color: FlamColors.pink),
               ),
               const SizedBox(height: 20),
               Text(
                 title,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   fontWeight: FontWeight.w700,
+                  letterSpacing: -0.2,
                 ),
               ),
               const SizedBox(height: 8),

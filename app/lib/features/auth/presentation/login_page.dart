@@ -69,10 +69,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 constraints: const BoxConstraints(maxWidth: 420),
                 child: Column(
                   children: [
-                    const Heartbeat(
-                      scale: 0.08,
-                      child: Text('🦩', style: TextStyle(fontSize: 76)),
-                    ),
+                    const Heartbeat(scale: 0.08, child: FlamLogo(size: 104)),
                     const Wordmark(size: 46),
                     const SizedBox(height: 4),
                     Text(

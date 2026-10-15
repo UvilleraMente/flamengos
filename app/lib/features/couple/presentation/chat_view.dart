@@ -123,13 +123,13 @@ class _ChatViewState extends ConsumerState<ChatView> {
           child: messages.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (e, _) => EmptyState(
-              emoji: '🪶',
+              icon: Icons.cloud_off_rounded,
               title: context.l10n.chatLoadError,
               message: describeError(context, e),
             ),
             data: (list) => list.isEmpty && !typing
                 ? EmptyState(
-                    emoji: '💬',
+                    icon: Icons.chat_bubble_outline_rounded,
                     title: context.l10n.chatEmptyTitle,
                     message: context.l10n.chatEmptyMessage,
                   )

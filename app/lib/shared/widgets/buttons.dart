@@ -244,11 +244,7 @@ class FlamChip extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (selected) ...[
-              const Icon(
-                Icons.check_rounded,
-                size: 18,
-                color: FlamColors.onAccent,
-              ),
+              Icon(Icons.check_rounded, size: 18, color: FlamColors.onAccent),
               const SizedBox(width: 6),
             ],
             Text(

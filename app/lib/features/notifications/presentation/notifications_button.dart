@@ -91,7 +91,7 @@ class _NotificationsSheet extends ConsumerWidget {
           Expanded(
             child: list.isEmpty
                 ? EmptyState(
-                    emoji: '🔔',
+                    icon: Icons.notifications_none_rounded,
                     title: t.notificationsEmptyTitle,
                     message: t.notificationsEmptyMessage,
                   )

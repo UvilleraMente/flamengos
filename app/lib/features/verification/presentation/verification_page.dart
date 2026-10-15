@@ -92,13 +92,13 @@ class _VerificationPageState extends ConsumerState<VerificationPage> {
     final Widget body;
     if (verified) {
       body = EmptyState(
-        emoji: '✅',
+        icon: Icons.verified_rounded,
         title: t.verificationApprovedTitle,
         message: t.verificationApprovedMessage,
       );
     } else if (status == VerificationStatus.pending) {
       body = EmptyState(
-        emoji: '🕵️',
+        icon: Icons.hourglass_top_rounded,
         title: t.verificationPendingTitle,
         message: t.verificationPendingMessage,
       );

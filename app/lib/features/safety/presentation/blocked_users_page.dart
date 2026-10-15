@@ -20,13 +20,13 @@ class BlockedUsersPage extends ConsumerWidget {
       body: blocked.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => EmptyState(
-          emoji: '🪶',
+          icon: Icons.cloud_off_rounded,
           title: t.errorGeneric,
           message: describeError(context, e),
         ),
         data: (list) => list.isEmpty
             ? EmptyState(
-                emoji: '🕊️',
+                icon: Icons.shield_outlined,
                 title: t.blockedEmptyTitle,
                 message: t.blockedEmptyMessage,
               )

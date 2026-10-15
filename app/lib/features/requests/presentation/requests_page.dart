@@ -78,7 +78,7 @@ class _RequestsPageState extends ConsumerState<RequestsPage> {
     final t = context.l10n;
     if (value.hasError) {
       return EmptyState(
-        emoji: '🪶',
+        icon: Icons.cloud_off_rounded,
         title: t.requestsLoadError,
         message: describeError(context, value.error!),
       );
@@ -95,12 +95,12 @@ class _RequestsPageState extends ConsumerState<RequestsPage> {
     if (requests.isEmpty) {
       return _incoming
           ? EmptyState(
-              emoji: '💌',
+              icon: Icons.mail_outline_rounded,
               title: t.requestsReceivedEmptyTitle,
               message: t.requestsReceivedEmptyMessage,
             )
           : EmptyState(
-              emoji: '🕊️',
+              icon: Icons.send_outlined,
               title: t.requestsSentEmptyTitle,
               message: t.requestsSentEmptyMessage(
                 ref.watch(requestLimitProvider),
@@ -163,7 +163,7 @@ class _RequestTileState extends ConsumerState<_RequestTile> {
     final t = context.l10n;
     final ok = await confirm(
       context,
-      emoji: '💕',
+      icon: Icons.favorite_border_rounded,
       title: t.requestsAcceptTitle(other?.displayName ?? t.someone),
       message: t.requestsAcceptMessage,
       action: t.requestsAcceptAction,

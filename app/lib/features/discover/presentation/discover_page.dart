@@ -114,7 +114,7 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
           },
         ),
         FlamIconButton(
-          icon: const Text('🦩'),
+          icon: const Icon(Icons.favorite_rounded),
           size: 64,
           variant: FlamVariant.primary,
           tooltip: t.discoverRequest,
@@ -150,7 +150,11 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
                   message: t.discoverActiveRequestsHint,
                   child: GlassPill(
                     color: full ? FlamColors.coral : null,
-                    leading: const Text('🦩'),
+                    leading: Icon(
+                      Icons.favorite_rounded,
+                      size: 14,
+                      color: full ? FlamColors.coral : FlamColors.pink,
+                    ),
                     child: Text('$active/$limit'),
                   ),
                 ),
@@ -183,7 +187,7 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
     final t = context.l10n;
     if (_error != null) {
       return EmptyState(
-        emoji: '🪶',
+        icon: Icons.cloud_off_rounded,
         title: t.discoverLoadError,
         message: describeError(context, _error!),
         action: FlamButton(label: t.actionRetry, onPressed: _load),
@@ -191,9 +195,7 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
     }
     final queue = _queue;
     if (queue == null || me == null) {
-      return const Center(
-        child: Heartbeat(child: Text('🦩', style: TextStyle(fontSize: 56))),
-      );
+      return const Center(child: Heartbeat(child: FlamLogo(size: 72)));
     }
 
     final needsLocation = me.location == null && me.searchCenter == null;
@@ -279,7 +281,7 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
               ),
               const SizedBox(width: 20),
               FlamIconButton(
-                icon: const Text('🦩'),
+                icon: const Icon(Icons.favorite_rounded),
                 size: 72,
                 variant: FlamVariant.primary,
                 tooltip: t.discoverRequest,

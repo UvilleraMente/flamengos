@@ -7,9 +7,30 @@ import '../../../core/theme/appearance.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/widgets/widgets.dart';
 
+String themeName(AppLocalizations t, FlamTheme theme) => switch (theme) {
+  FlamTheme.firefly => t.themeFirefly,
+  FlamTheme.spicebug => t.themeSpicebug,
+  FlamTheme.light => t.themeLight,
+  FlamTheme.dark => t.themeDark,
+};
+
+String _themeHint(AppLocalizations t, FlamTheme theme) => switch (theme) {
+  FlamTheme.firefly => t.themeFireflyHint,
+  FlamTheme.spicebug => t.themeSpicebugHint,
+  FlamTheme.light => t.themeLightHint,
+  FlamTheme.dark => t.themeDarkHint,
+};
+
+String _caseName(AppLocalizations t, TextCase c) => switch (c) {
+  TextCase.normal => t.textCaseNormal,
+  TextCase.upper => t.textCaseUpper,
+  TextCase.lower => t.textCaseLower,
+  TextCase.title => t.textCaseTitle,
+};
+
 /// Tema, fuente, tamaño de letra y formato de letras.
-class AppearanceOptions extends ConsumerWidget {
-  const AppearanceOptions({super.key});
+class AppearanceGroup extends ConsumerWidget {
+  const AppearanceGroup({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,246 +42,214 @@ class AppearanceOptions extends ConsumerWidget {
       controller.update(next);
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return SettingsGroup(
+      title: t.settingsAppearance,
       children: [
-        _Label(t.appearanceTheme),
-        Row(
-          children: [
-            for (final theme in FlamTheme.values) ...[
-              if (theme.index > 0) const SizedBox(width: 10),
+        Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final theme in FlamTheme.values) ...[
+                if (theme.index > 0) const SizedBox(width: 10),
+                Expanded(
+                  child: _ThemeCard(
+                    theme: theme,
+                    name: themeName(t, theme),
+                    hint: _themeHint(t, theme),
+                    selected: look.theme == theme,
+                    onTap: () => set(look.copyWith(theme: theme)),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+        SettingsTile(
+          icon: Icons.text_fields_rounded,
+          color: const Color(0xFF5856D6),
+          title: t.appearanceFont,
+          value: look.font.family,
+          onTap: () => showChoiceSheet(
+            context,
+            title: t.appearanceFont,
+            options: [for (final f in FlamFont.values) (f, f.family)],
+            selected: look.font,
+            styleOf: (f) => TextStyle(fontFamily: f.family),
+            onSelected: (f) => set(look.copyWith(font: f)),
+          ),
+        ),
+        SettingsTile(
+          icon: Icons.format_size_rounded,
+          color: const Color(0xFF34C759),
+          title: t.appearanceTextSize,
+          value: '${(look.textScale * 100).round()}%',
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(54, 0, 12, 6),
+          child: Row(
+            children: [
+              const Text('A', style: TextStyle(fontSize: 13)),
               Expanded(
-                child: _ThemeSwatch(
-                  theme: theme,
-                  label: switch (theme) {
-                    FlamTheme.firefly => t.themeFirefly,
-                    FlamTheme.light => t.themeLight,
-                    FlamTheme.dark => t.themeDark,
-                  },
-                  selected: look.theme == theme,
-                  onTap: () => set(look.copyWith(theme: theme)),
+                child: Slider.adaptive(
+                  value: look.textScale,
+                  min: Appearance.minScale,
+                  max: Appearance.maxScale,
+                  divisions: 9,
+                  onChanged: (v) =>
+                      controller.update(look.copyWith(textScale: v)),
                 ),
               ),
+              const Text('A', style: TextStyle(fontSize: 22)),
             ],
-          ],
+          ),
         ),
-        const SizedBox(height: 20),
-        _Label(t.appearanceFont),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final font in FlamFont.values)
-              _FontChip(
-                font: font,
-                selected: look.font == font,
-                onTap: () => set(look.copyWith(font: font)),
-              ),
-          ],
-        ),
-        const SizedBox(height: 20),
-        _Label(
-          t.appearanceTextSize,
-          trailing: '${(look.textScale * 100).round()}%',
-        ),
-        Row(
-          children: [
-            const Text('A', style: TextStyle(fontSize: 13)),
-            Expanded(
-              child: Slider(
-                value: look.textScale,
-                min: Appearance.minScale,
-                max: Appearance.maxScale,
-                divisions: 9,
-                onChanged: (v) =>
-                    controller.update(look.copyWith(textScale: v)),
-              ),
-            ),
-            const Text('A', style: TextStyle(fontSize: 22)),
-          ],
-        ),
-        const SizedBox(height: 12),
-        _Label(t.appearanceTextCase),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final c in TextCase.values)
-              FlamChip(
-                label: switch (c) {
-                  TextCase.normal => t.textCaseNormal,
-                  TextCase.upper => t.textCaseUpper,
-                  TextCase.lower => t.textCaseLower,
-                  TextCase.title => t.textCaseTitle,
-                },
-                selected: look.textCase == c,
-                onTap: () => set(look.copyWith(textCase: c)),
-              ),
-          ],
+        SettingsTile(
+          icon: Icons.title_rounded,
+          color: const Color(0xFFFF9500),
+          title: t.appearanceTextCase,
+          value: _caseName(t, look.textCase),
+          onTap: () => showChoiceSheet(
+            context,
+            title: t.appearanceTextCase,
+            options: [for (final c in TextCase.values) (c, _caseName(t, c))],
+            selected: look.textCase,
+            onSelected: (c) => set(look.copyWith(textCase: c)),
+          ),
         ),
       ],
     );
   }
 }
 
-class _Label extends StatelessWidget {
-  const _Label(this.text, {this.trailing});
-
-  final String text;
-  final String? trailing;
-
-  @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: 10),
-    child: Row(
-      children: [
-        Expanded(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: FlamColors.textMuted,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        if (trailing != null)
-          Text(
-            trailing!,
-            style: TextStyle(
-              color: FlamColors.blush,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-      ],
-    ),
-  );
-}
-
-/// Miniatura del tema: su fondo, una tarjeta de vidrio y el acento.
-class _ThemeSwatch extends StatelessWidget {
-  const _ThemeSwatch({
+/// Vista previa del tema: su fondo, una tarjeta y un botón con su acento.
+class _ThemeCard extends StatelessWidget {
+  const _ThemeCard({
     required this.theme,
-    required this.label,
+    required this.name,
+    required this.hint,
     required this.selected,
     required this.onTap,
   });
 
   final FlamTheme theme;
-  final String label;
+  final String name;
+  final String hint;
   final bool selected;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final p = FlamPalette.of(theme);
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          AnimatedContainer(
-            duration: FlamMotion.medium,
-            height: 86,
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(FlamRadius.md),
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.alphaBlend(
-                    FlamColors.pink.withValues(alpha: p.glows.first.$4),
-                    p.background.first,
+    final glow = p.glows.isEmpty ? null : p.glows.first;
+    return Semantics(
+      button: true,
+      selected: selected,
+      label: name,
+      child: GestureDetector(
+        onTap: onTap,
+        child: SizedBox(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AnimatedContainer(
+                duration: FlamMotion.medium,
+                height: 72,
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      glow == null
+                          ? p.background.first
+                          : Color.alphaBlend(
+                              glow.$3.withValues(alpha: glow.$4),
+                              p.background.first,
+                            ),
+                      p.background[1],
+                    ],
                   ),
-                  p.background[1],
-                ],
-              ),
-              border: Border.all(
-                color: selected ? FlamColors.pink : p.glassBorder,
-                width: selected ? 2.5 : 1,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 10,
-                  width: 46,
-                  decoration: BoxDecoration(
-                    color: p.text,
-                    borderRadius: BorderRadius.circular(4),
+                  border: Border.all(
+                    color: selected ? FlamColors.pink : FlamColors.glassBorder,
+                    width: selected ? 2.5 : 1,
                   ),
                 ),
-                const SizedBox(height: 8),
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: p.glass),
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: p.glassBorder),
-                    ),
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.all(6),
-                    child: Container(
-                      width: 18,
-                      height: 18,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: FlamGradients.primary,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(colors: p.glass),
+                          borderRadius: BorderRadius.circular(6),
+                          border: p.isSolid
+                              ? null
+                              : Border.all(color: p.glassBorder),
+                        ),
+                        padding: const EdgeInsets.all(6),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _Line(color: p.text, width: 34),
+                            const SizedBox(height: 4),
+                            _Line(color: p.textFaint, width: 22),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 6),
+                    Container(
+                      height: 12,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [p.accent, p.accentEnd],
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
+                  color: selected ? FlamColors.text : FlamColors.textMuted,
+                ),
+              ),
+              Text(
+                hint,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 12, color: FlamColors.textFaint),
+              ),
+            ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            label,
-            style: TextStyle(
-              fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-              color: selected ? FlamColors.text : FlamColors.textMuted,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 }
 
-/// Chip que muestra el nombre de la fuente escrito con esa fuente.
-class _FontChip extends StatelessWidget {
-  const _FontChip({
-    required this.font,
-    required this.selected,
-    required this.onTap,
-  });
+class _Line extends StatelessWidget {
+  const _Line({required this.color, required this.width});
 
-  final FlamFont font;
-  final bool selected;
-  final VoidCallback onTap;
+  final Color color;
+  final double width;
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: FlamMotion.fast,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        decoration: BoxDecoration(
-          gradient: selected ? FlamGradients.primary : FlamGradients.glass,
-          borderRadius: BorderRadius.circular(FlamRadius.pill),
-          border: selected ? null : Border.all(color: FlamColors.glassBorder),
-        ),
-        child: Text(
-          'Aa  ${font.family}',
-          style: TextStyle(
-            fontFamily: font.family,
-            fontWeight: FontWeight.w600,
-            fontSize: 15,
-            color: selected ? FlamColors.onAccent : FlamColors.text,
-          ),
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Container(
+    width: width,
+    height: 5,
+    decoration: BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(3),
+    ),
+  );
 }

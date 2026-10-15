@@ -157,10 +157,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Heartbeat(
-              scale: 0.15,
-              child: Text('🦩💕🦩', style: TextStyle(fontSize: 56)),
-            ),
+            const Heartbeat(scale: 0.15, child: FlamLogo(size: 110)),
             const SizedBox(height: 12),
             Text(
               t.matchTitle,

@@ -156,7 +156,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resetHint => 'You\'ll go straight into your account afterwards.';
 
   @override
-  String get resetDone => 'Password updated 🦩';
+  String get resetDone => 'Password updated';
 
   @override
   String get deleteAccount => 'Delete account';
@@ -180,7 +180,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteAccountAction => 'Delete forever';
 
   @override
-  String get deleteAccountDone => 'Your account was deleted. Fly safe! 🦩';
+  String get deleteAccountDone => 'Your account was deleted. Fly safe!';
 
   @override
   String get genderWoman => 'Woman';
@@ -245,7 +245,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String discoverRequestSent(String name) {
-    return 'Request sent to $name 🦩 They have 48 h to answer.';
+    return 'Request sent to $name. They have 48 h to answer.';
   }
 
   @override
@@ -416,7 +416,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'You\'ll be exclusive: all your other requests, sent and received, will be cancelled. If one of you later wants to end it, the pair dissolves in 12 h.';
 
   @override
-  String get requestsAcceptAction => 'Accept 🦩';
+  String get requestsAcceptAction => 'Accept';
 
   @override
   String get matchTitle => 'You\'re a pair!';
@@ -458,11 +458,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get coupleEndAction => 'End it';
 
   @override
-  String get coupleYouAskedToEnd => 'You asked to end it 💔';
+  String get coupleYouAskedToEnd => 'You asked to end it';
 
   @override
   String couplePartnerAskedToEnd(String name) {
-    return '$name wants to end it 💔';
+    return '$name wants to end it';
   }
 
   @override
@@ -523,7 +523,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileCreateIntro =>
-      'Tell the world who you are. A good profile gets more requests 🦩';
+      'Tell the world who you are. A good profile gets more requests';
 
   @override
   String get profilePhotos => 'Photos';
@@ -583,7 +583,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'What makes you smile, your ideal plan, your song…';
 
   @override
-  String get profileStart => 'Start flying 🦩';
+  String get profileStart => 'Start flying';
 
   @override
   String get profileSave => 'Save changes';
@@ -756,10 +756,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get themeFirefly => 'Firefly';
 
   @override
-  String get themeLight => 'Light';
+  String get themeSpicebug => 'Spicebug';
 
   @override
-  String get themeDark => 'Dark';
+  String get themeLight => 'Cricket';
+
+  @override
+  String get themeDark => 'Cricket';
+
+  @override
+  String get themeFireflyHint => 'Pink night';
+
+  @override
+  String get themeSpicebugHint => 'Deep green';
+
+  @override
+  String get themeLightHint => 'Light';
+
+  @override
+  String get themeDarkHint => 'Dark';
+
+  @override
+  String get settingsLegal => 'Help & legal';
+
+  @override
+  String get settingsMadeBy => 'Flamengos · CreativeMinds by Andresnael';
 
   @override
   String get appearanceFont => 'Font';
@@ -784,7 +805,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String coupleMapTitle(int km) {
-    return 'You\'re $km km apart 💕';
+    return 'You\'re $km km apart';
   }
 
   @override
@@ -880,12 +901,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumTitle => 'Premium';
 
   @override
-  String get premiumFounder => 'Founder: premium forever 🦩';
+  String get premiumFounder => 'Founder: premium forever';
 
   @override
   String premiumUntil(String date) {
     return 'Premium until $date';
   }
+
+  @override
+  String get premiumPerksTitle => 'Premium perks';
 
   @override
   String get premiumFree => 'Free account';

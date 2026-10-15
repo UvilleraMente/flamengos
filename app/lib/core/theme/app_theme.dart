@@ -60,9 +60,7 @@ ThemeData buildFlamTheme({String fontFamily = 'Outfit'}) {
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: palette.brightness == Brightness.light
-          ? const Color(0x0F1E1424)
-          : const Color(0x1AFFFFFF),
+      fillColor: palette.field,
       labelStyle: TextStyle(color: palette.textMuted),
       floatingLabelStyle: TextStyle(
         color: palette.blush,
@@ -141,10 +139,8 @@ ThemeData buildFlamTheme({String fontFamily = 'Outfit'}) {
       thumbColor: const WidgetStatePropertyAll(Colors.white),
       trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
     ),
-    progressIndicatorTheme: const ProgressIndicatorThemeData(
-      color: FlamColors.pink,
-    ),
-    textSelectionTheme: const TextSelectionThemeData(
+    progressIndicatorTheme: ProgressIndicatorThemeData(color: FlamColors.pink),
+    textSelectionTheme: TextSelectionThemeData(
       cursorColor: FlamColors.pink,
       selectionColor: Color(0x66FF5C93),
       selectionHandleColor: FlamColors.pink,

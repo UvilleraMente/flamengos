@@ -6,17 +6,21 @@ import '../../../app/env.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
+import '../../../shared/widgets/widgets.dart';
 import '../../profile/data/profile_repository.dart';
+import '../../profile/domain/profile.dart';
 
-/// Estado premium, sus beneficios y el modo incógnito (en Ajustes).
-class PremiumOptions extends ConsumerStatefulWidget {
-  const PremiumOptions({super.key});
+const _premiumColor = Color(0xFFFF9F0A);
+
+/// Estado premium y modo incógnito (en Ajustes).
+class PremiumGroup extends ConsumerStatefulWidget {
+  const PremiumGroup({super.key});
 
   @override
-  ConsumerState<PremiumOptions> createState() => _PremiumOptionsState();
+  ConsumerState<PremiumGroup> createState() => _PremiumGroupState();
 }
 
-class _PremiumOptionsState extends ConsumerState<PremiumOptions> {
+class _PremiumGroupState extends ConsumerState<PremiumGroup> {
   bool _saving = false;
 
   Future<void> _setIncognito(bool value) async {
@@ -38,71 +42,105 @@ class _PremiumOptionsState extends ConsumerState<PremiumOptions> {
     final me = ref.watch(myProfileProvider).value;
     if (me == null) return const SizedBox.shrink();
     final premium = me.isPremium;
-    final until = me.premiumUntil;
 
-    final status = me.founder
-        ? t.premiumFounder
-        : premium && until != null
-        ? t.premiumUntil(
-            DateFormat.yMMMd(context.localeTag).format(until.toLocal()),
-          )
-        : t.premiumFree;
-
-    Widget perk(String text) => Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3),
-      child: Row(
-        children: [
-          Icon(
-            premium ? Icons.check_circle_rounded : Icons.lock_outline_rounded,
-            size: 18,
-            color: premium ? FlamColors.mint : FlamColors.textMuted,
-          ),
-          const SizedBox(width: 10),
-          Expanded(child: Text(text)),
-        ],
-      ),
-    );
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return SettingsGroup(
+      title: t.premiumTitle,
+      footer: premium ? null : t.premiumComingSoon,
       children: [
-        Row(
-          children: [
-            Icon(
-              Icons.workspace_premium_rounded,
-              color: premium ? FlamColors.blush : FlamColors.textMuted,
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                status,
-                style: const TextStyle(fontWeight: FontWeight.w700),
-              ),
-            ),
-          ],
+        SettingsTile(
+          icon: Icons.workspace_premium_rounded,
+          color: _premiumColor,
+          title: t.premiumPerksTitle,
+          onTap: () => _showPerks(context, premium),
         ),
-        const SizedBox(height: 10),
-        perk(t.premiumPerkRequests(Env.premiumMaxActiveRequests)),
-        perk(t.premiumPerkIncognito),
-        perk(t.premiumPerkSeen),
-        perk(t.premiumPerkTyping),
-        const SizedBox(height: 4),
-        SwitchListTile.adaptive(
-          contentPadding: EdgeInsets.zero,
-          title: Text(
-            t.premiumPerkIncognito,
-            style: const TextStyle(fontWeight: FontWeight.w600),
+        SettingsTile(
+          icon: Icons.visibility_off_rounded,
+          color: const Color(0xFF8E8E93),
+          title: t.premiumPerkIncognito,
+          subtitle: premium ? t.premiumIncognitoHint : t.premiumOnly,
+          trailing: Switch.adaptive(
+            value: premium && me.incognito,
+            onChanged: premium && !_saving ? _setIncognito : null,
           ),
-          subtitle: Text(premium ? t.premiumIncognitoHint : t.premiumOnly),
-          value: premium && me.incognito,
-          onChanged: premium && !_saving ? _setIncognito : null,
         ),
-        if (!premium)
-          Text(
-            t.premiumComingSoon,
-            style: TextStyle(color: FlamColors.textMuted, fontSize: 13),
-          ),
       ],
     );
   }
+}
+
+String premiumStatus(BuildContext context, Profile me) {
+  final t = context.l10n;
+  final until = me.premiumUntil;
+  if (me.founder) return t.premiumFounder;
+  if (me.isPremium && until != null) {
+    return t.premiumUntil(
+      DateFormat.yMMMd(context.localeTag).format(until.toLocal()),
+    );
+  }
+  return t.premiumFree;
+}
+
+void _showPerks(BuildContext context, bool premium) {
+  final t = context.l10n;
+  showModalBottomSheet<void>(
+    context: context,
+    showDragHandle: true,
+    builder: (_) => SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                const Icon(
+                  Icons.workspace_premium_rounded,
+                  color: _premiumColor,
+                  size: 28,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  t.premiumTitle,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            for (final (icon, text) in [
+              (
+                Icons.favorite_rounded,
+                t.premiumPerkRequests(Env.premiumMaxActiveRequests),
+              ),
+              (Icons.visibility_off_rounded, t.premiumPerkIncognito),
+              (Icons.done_all_rounded, t.premiumPerkSeen),
+              (Icons.more_horiz_rounded, t.premiumPerkTyping),
+            ])
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Row(
+                  children: [
+                    Icon(icon, size: 22, color: FlamColors.pink),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Text(text, style: const TextStyle(fontSize: 16)),
+                    ),
+                  ],
+                ),
+              ),
+            if (!premium) ...[
+              const SizedBox(height: 8),
+              Text(
+                t.premiumComingSoon,
+                style: TextStyle(color: FlamColors.textMuted),
+              ),
+            ],
+          ],
+        ),
+      ),
+    ),
+  );
 }

@@ -402,7 +402,7 @@ class _PhotoGrid extends StatelessWidget {
                     : Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.add_a_photo_rounded,
                             color: FlamColors.pink,
                           ),

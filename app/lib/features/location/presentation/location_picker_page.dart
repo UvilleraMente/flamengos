@@ -118,7 +118,11 @@ class _LocationPickerPageState extends ConsumerState<LocationPickerPage> {
                         width: 48,
                         height: 48,
                         alignment: Alignment.topCenter,
-                        child: const Text('📍', style: TextStyle(fontSize: 40)),
+                        child: Icon(
+                          Icons.location_on_rounded,
+                          size: 44,
+                          color: FlamColors.pink,
+                        ),
                       ),
                     ],
                   ),

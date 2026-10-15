@@ -99,10 +99,22 @@ class _CoupleHeader extends ConsumerWidget {
                 children: [
                   Avatar(me, radius: 24),
                   Positioned(right: 0, child: Avatar(partner, radius: 24)),
-                  const Positioned(
-                    left: 34,
-                    bottom: -2,
-                    child: Text('💕', style: TextStyle(fontSize: 20)),
+                  Positioned(
+                    left: 36,
+                    bottom: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        color: FlamColors.pink,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: FlamColors.night, width: 2),
+                      ),
+                      child: Icon(
+                        Icons.favorite_rounded,
+                        size: 12,
+                        color: FlamColors.onAccent,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -194,7 +206,7 @@ class _CoupleHeader extends ConsumerWidget {
     final t = context.l10n;
     final ok = await confirm(
       context,
-      emoji: '💔',
+      icon: Icons.heart_broken_outlined,
       title: t.coupleEndTitle,
       message: t.coupleEndMessage(partner?.displayName ?? t.someone),
       action: t.coupleEndAction,

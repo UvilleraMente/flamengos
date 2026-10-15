@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../app/env.dart';
 import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
@@ -20,10 +22,8 @@ class SettingsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final t = context.l10n;
-    final verified = ref.watch(
-      myProfileProvider.select((p) => p.value?.verified ?? false),
-    );
-    const gap = SizedBox(height: 14);
+    final me = ref.watch(myProfileProvider).value;
+    const gap = SizedBox(height: 26);
 
     return Scaffold(
       appBar: AppBar(title: Text(t.settingsTitle)),
@@ -31,85 +31,126 @@ class SettingsPage extends ConsumerWidget {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 560),
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(16, 4, 16, 32),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 40),
             children: [
-              GlassSection(
-                title: t.premiumTitle,
-                child: const PremiumOptions(),
-              ),
-              gap,
-              GlassSection(
-                title: t.settingsAppearance,
-                child: const AppearanceOptions(),
-              ),
-              gap,
-              GlassSection(
-                title: t.settingsLanguage,
-                child: const LanguageOptions(),
-              ),
-              gap,
-              GlassSection(
-                title: t.settingsVerification,
-                child: _Row(
-                  leading: verified
-                      ? const VerifiedBadge(size: 26)
-                      : const Icon(
-                          Icons.verified_outlined,
-                          color: FlamColors.mint,
+              if (me != null) ...[
+                Glass(
+                  padding: const EdgeInsets.all(14),
+                  radius: FlamRadius.md,
+                  child: Row(
+                    children: [
+                      Avatar(me, radius: 30),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    me.displayName,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                                if (me.verified) ...[
+                                  const SizedBox(width: 6),
+                                  const VerifiedBadge(size: 18),
+                                ],
+                              ],
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              premiumStatus(context, me),
+                              style: TextStyle(color: FlamColors.textMuted),
+                            ),
+                          ],
                         ),
-                  title: verified
-                      ? t.verificationApprovedShort
-                      : t.verificationCta,
-                  trailing: const VerificationStatusPill(),
-                  onTap: () => context.push(Routes.verification),
-                ),
-              ),
-              gap,
-              GlassSection(
-                title: t.settingsSafety,
-                child: _Row(
-                  leading: Icon(Icons.block_rounded, color: FlamColors.blush),
-                  title: t.blockedTitle,
-                  onTap: () => context.push(Routes.blocked),
-                ),
-              ),
-              gap,
-              GlassSection(
-                title: t.helpTitle,
-                child: _Row(
-                  leading: Icon(
-                    Icons.help_outline_rounded,
-                    color: FlamColors.blush,
+                      ),
+                    ],
                   ),
-                  title: t.helpSubtitle,
-                  onTap: () => context.push(Routes.help),
                 ),
+                gap,
+              ],
+              const PremiumGroup(),
+              gap,
+              const AppearanceGroup(),
+              gap,
+              const SettingsGroup(children: [LanguageTile()]),
+              gap,
+              SettingsGroup(
+                title: t.settingsSafety,
+                children: [
+                  SettingsTile(
+                    icon: Icons.verified_rounded,
+                    color: FlamColors.mint,
+                    title: me?.verified ?? false
+                        ? t.verificationApprovedShort
+                        : t.verificationCta,
+                    trailing: const VerificationStatusPill(),
+                    onTap: () => context.push(Routes.verification),
+                  ),
+                  SettingsTile(
+                    icon: Icons.block_rounded,
+                    color: const Color(0xFFFF3B30),
+                    title: t.blockedTitle,
+                    onTap: () => context.push(Routes.blocked),
+                  ),
+                ],
               ),
               gap,
-              GlassSection(
+              SettingsGroup(
+                title: t.settingsLegal,
+                children: [
+                  SettingsTile(
+                    icon: Icons.help_rounded,
+                    color: const Color(0xFF007AFF),
+                    title: t.helpTitle,
+                    onTap: () => context.push(Routes.help),
+                  ),
+                  SettingsTile(
+                    icon: Icons.description_rounded,
+                    color: const Color(0xFF8E8E93),
+                    title: t.legalTerms,
+                    onTap: () => launchUrl(Uri.parse(Env.termsUrl)),
+                  ),
+                  SettingsTile(
+                    icon: Icons.privacy_tip_rounded,
+                    color: const Color(0xFF8E8E93),
+                    title: t.legalPrivacy,
+                    onTap: () => launchUrl(Uri.parse(Env.privacyUrl)),
+                  ),
+                ],
+              ),
+              gap,
+              SettingsGroup(
                 title: t.settingsAccount,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    FlamButton(
-                      label: t.actionSignOut,
-                      icon: const Icon(Icons.logout_rounded),
-                      variant: FlamVariant.glass,
-                      expand: true,
-                      // El router lleva al login.
-                      onPressed: () =>
-                          ref.read(authRepositoryProvider).signOut(),
-                    ),
-                    const SizedBox(height: 8),
-                    FlamButton(
-                      label: t.deleteAccount,
-                      icon: const Icon(Icons.delete_forever_rounded),
-                      variant: FlamVariant.ghost,
-                      expand: true,
-                      onPressed: () => showDeleteAccountDialog(context),
-                    ),
-                  ],
-                ),
+                children: [
+                  SettingsTile(
+                    icon: Icons.logout_rounded,
+                    color: const Color(0xFF8E8E93),
+                    title: t.actionSignOut,
+                    // El router lleva al login.
+                    onTap: () => ref.read(authRepositoryProvider).signOut(),
+                  ),
+                  SettingsTile(
+                    icon: Icons.delete_forever_rounded,
+                    color: FlamColors.danger,
+                    title: t.deleteAccount,
+                    destructive: true,
+                    onTap: () => showDeleteAccountDialog(context),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 28),
+              Text(
+                t.settingsMadeBy,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 12, color: FlamColors.textFaint),
               ),
             ],
           ),
@@ -117,41 +158,4 @@ class SettingsPage extends ConsumerWidget {
       ),
     );
   }
-}
-
-class _Row extends StatelessWidget {
-  const _Row({
-    required this.leading,
-    required this.title,
-    required this.onTap,
-    this.trailing,
-  });
-
-  final Widget leading;
-  final String title;
-  final Widget? trailing;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) => InkWell(
-    onTap: onTap,
-    borderRadius: BorderRadius.circular(FlamRadius.md),
-    child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        children: [
-          leading,
-          const SizedBox(width: 14),
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(fontWeight: FontWeight.w600),
-            ),
-          ),
-          if (trailing != null) ...[trailing!, const SizedBox(width: 6)],
-          Icon(Icons.chevron_right_rounded, color: FlamColors.textMuted),
-        ],
-      ),
-    ),
-  );
 }

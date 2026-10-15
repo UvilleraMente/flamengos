@@ -48,7 +48,11 @@ class _ProfileCardState extends State<ProfileCard> {
               ColoredBox(
                 color: FlamColors.plum,
                 child: Center(
-                  child: Text('🦩', style: TextStyle(fontSize: 96)),
+                  child: Icon(
+                    Icons.person_rounded,
+                    size: 120,
+                    color: FlamColors.textFaint,
+                  ),
                 ),
               )
             else

@@ -115,7 +115,11 @@ void showCoupleMap(BuildContext context, Profile me, Profile partner) {
                             height: 40,
                             child: Center(
                               child: GlassPill(
-                                leading: const Text('💕'),
+                                leading: Icon(
+                                  Icons.favorite_rounded,
+                                  size: 14,
+                                  color: FlamColors.pink,
+                                ),
                                 child: Text('$km km'),
                               ),
                             ),

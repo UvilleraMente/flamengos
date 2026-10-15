@@ -17,7 +17,7 @@ class SplashPage extends ConsumerWidget {
     return Scaffold(
       body: profile.hasError
           ? EmptyState(
-              emoji: '🪶',
+              icon: Icons.cloud_off_rounded,
               title: t.splashError,
               message: describeError(context, profile.error!),
               action: Column(
@@ -39,7 +39,7 @@ class SplashPage extends ConsumerWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Heartbeat(child: Text('🦩', style: TextStyle(fontSize: 72))),
+                  Heartbeat(child: FlamLogo(size: 96)),
                   Wordmark(size: 36),
                 ],
               ),

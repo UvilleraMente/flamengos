@@ -63,7 +63,7 @@ Future<bool> confirm(
   required String title,
   required String message,
   required String action,
-  String emoji = '🦩',
+  IconData icon = Icons.help_outline_rounded,
   bool destructive = false,
 }) async {
   final ok = await showGlassDialog<bool>(
@@ -71,7 +71,20 @@ Future<bool> confirm(
     builder: (context) => Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(emoji, style: const TextStyle(fontSize: 44)),
+        Container(
+          width: 64,
+          height: 64,
+          decoration: BoxDecoration(
+            color: (destructive ? FlamColors.danger : FlamColors.pink)
+                .withValues(alpha: 0.12),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            icon,
+            size: 30,
+            color: destructive ? FlamColors.danger : FlamColors.pink,
+          ),
+        ),
         const SizedBox(height: 12),
         Text(
           title,

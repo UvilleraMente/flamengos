@@ -31,12 +31,16 @@ class Glass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final shape = BorderRadius.circular(radius);
+    // En temas sólidos (Cricket) las tarjetas no llevan borde, como en iOS.
+    final showBorder = borderColor != null || !FlamColors.palette.isSolid;
     final box = DecoratedBox(
       decoration: BoxDecoration(
         gradient:
             gradient ?? (blur ? FlamGradients.frosted : FlamGradients.glass),
         borderRadius: shape,
-        border: Border.all(color: borderColor ?? FlamColors.glassBorder),
+        border: showBorder
+            ? Border.all(color: borderColor ?? FlamColors.glassBorder)
+            : null,
       ),
       child: Padding(padding: padding, child: child),
     );

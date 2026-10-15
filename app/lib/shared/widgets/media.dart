@@ -68,13 +68,17 @@ class Avatar extends StatelessWidget {
               width: (radius * 2 * dpr).round(),
             ),
       child: url == null
-          ? Text('🦩', style: TextStyle(fontSize: radius * 0.9))
+          ? Icon(
+              Icons.person_rounded,
+              size: radius * 1.1,
+              color: FlamColors.textFaint,
+            )
           : null,
     );
     if (!ring) return avatar;
     return Container(
       padding: const EdgeInsets.all(2.5),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: FlamGradients.primary,
       ),

@@ -73,7 +73,7 @@ del desarrollador visible. Usa la prueba cerrada como tu beta real.
 > 🗺️ Busca por edad, distancia o en otra ciudad con el mapa.
 > ✅ Perfiles verificados con selfie, reportes y bloqueos.
 > 🔒 Tu ubicación siempre es aproximada y la app bloquea capturas de pantalla.
-> 🌙 Tres temas (Firefly, claro y oscuro), varias fuentes y tamaño de letra.
+> 🎨 Temas Firefly, Spicebug y Cricket (claro u oscuro), varias fuentes y tamaño de letra.
 >
 > Solo para mayores de 18 años.
 

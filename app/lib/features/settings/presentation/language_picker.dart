@@ -8,30 +8,37 @@ import '../../../shared/widgets/widgets.dart';
 /// Nombre de cada idioma escrito en su propio idioma.
 const languageNames = {'es': 'Español', 'en': 'English'};
 
-/// Opciones de idioma: el del dispositivo + cada idioma soportado.
-class LanguageOptions extends ConsumerWidget {
-  const LanguageOptions({super.key});
+/// Fila de Ajustes con el idioma actual; abre la lista de idiomas.
+class LanguageTile extends ConsumerWidget {
+  const LanguageTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final t = context.l10n;
     final current = ref.watch(localeProvider);
-    final controller = ref.read(localeProvider.notifier);
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: [
-        FlamChip(
-          label: context.l10n.languageSystem,
-          selected: current == null,
-          onTap: () => controller.set(null),
-        ),
-        for (final locale in AppLocalizations.supportedLocales)
-          FlamChip(
-            label: languageNames[locale.languageCode] ?? locale.languageCode,
-            selected: current?.languageCode == locale.languageCode,
-            onTap: () => controller.set(locale),
-          ),
-      ],
+    String name(Locale? l) => l == null
+        ? t.languageSystem
+        : languageNames[l.languageCode] ?? l.languageCode;
+    return SettingsTile(
+      icon: Icons.language_rounded,
+      color: const Color(0xFF007AFF),
+      title: t.settingsLanguage,
+      value: name(current),
+      onTap: () => showChoiceSheet<Locale?>(
+        context,
+        title: t.settingsLanguage,
+        options: [
+          (null, t.languageSystem),
+          for (final l in AppLocalizations.supportedLocales) (l, name(l)),
+        ],
+        selected: current == null
+            ? null
+            : AppLocalizations.supportedLocales.firstWhere(
+                (l) => l.languageCode == current.languageCode,
+                orElse: () => current,
+              ),
+        onSelected: ref.read(localeProvider.notifier).set,
+      ),
     );
   }
 }
