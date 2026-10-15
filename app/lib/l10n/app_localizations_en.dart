@@ -114,7 +114,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String forgotSentMessage(String email) {
-    return 'Check $email. Enter the 6-digit code or open the link in the email.';
+    return 'Check $email. Enter the code or open the link in the email.';
   }
 
   @override
@@ -946,6 +946,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get themeDark => 'Cricket';
+
+  @override
+  String get themeCaribe => 'Caribe';
+
+  @override
+  String get themeCaribeHint => 'Turquoise';
+
+  @override
+  String get themeCoral => 'Coral';
+
+  @override
+  String get themeCoralHint => 'Peach';
+
+  @override
+  String get themeMidnight => 'Midnight';
+
+  @override
+  String get themeMidnightHint => 'Navy & gold';
+
+  @override
+  String get themeLavender => 'Lavender';
+
+  @override
+  String get themeLavenderHint => 'Pastel lilac';
+
+  @override
+  String get themeGraphite => 'Graphite';
+
+  @override
+  String get themeGraphiteHint => 'Gray & red';
 
   @override
   String get themeFireflyHint => 'Pink night';

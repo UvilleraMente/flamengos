@@ -5,7 +5,8 @@ import 'app_localizations.dart';
 
 /// Traducciones con el formato de letras elegido por el usuario.
 class CasedLocalizations extends AppLocalizations {
-  CasedLocalizations(this._inner, this._transform) : super(_inner.localeName);
+  CasedLocalizations(this._inner, this._transform)
+    : super(_inner.localeName);
 
   final AppLocalizations _inner;
   final String Function(String) _transform;
@@ -113,8 +114,7 @@ class CasedLocalizations extends AppLocalizations {
   String get forgotSend => _transform(_inner.forgotSend);
 
   @override
-  String forgotSentMessage(String email) =>
-      _transform(_inner.forgotSentMessage(email));
+  String forgotSentMessage(String email) => _transform(_inner.forgotSentMessage(email));
 
   @override
   String get forgotCode => _transform(_inner.forgotCode);
@@ -129,8 +129,7 @@ class CasedLocalizations extends AppLocalizations {
   String get forgotResend => _transform(_inner.forgotResend);
 
   @override
-  String forgotResendIn(int seconds) =>
-      _transform(_inner.forgotResendIn(seconds));
+  String forgotResendIn(int seconds) => _transform(_inner.forgotResendIn(seconds));
 
   @override
   String get forgotChangeEmail => _transform(_inner.forgotChangeEmail);
@@ -169,8 +168,7 @@ class CasedLocalizations extends AppLocalizations {
   String get deleteAccountWord => _transform(_inner.deleteAccountWord);
 
   @override
-  String deleteAccountTypeHint(String word) =>
-      _transform(_inner.deleteAccountTypeHint(word));
+  String deleteAccountTypeHint(String word) => _transform(_inner.deleteAccountTypeHint(word));
 
   @override
   String get deleteAccountAction => _transform(_inner.deleteAccountAction);
@@ -203,15 +201,13 @@ class CasedLocalizations extends AppLocalizations {
   String timeMinutes(int minutes) => _transform(_inner.timeMinutes(minutes));
 
   @override
-  String timeHoursMinutes(int hours, int minutes) =>
-      _transform(_inner.timeHoursMinutes(hours, minutes));
+  String timeHoursMinutes(int hours, int minutes) => _transform(_inner.timeHoursMinutes(hours, minutes));
 
   @override
   String get timeJustNow => _transform(_inner.timeJustNow);
 
   @override
-  String timeMinutesAgo(int minutes) =>
-      _transform(_inner.timeMinutesAgo(minutes));
+  String timeMinutesAgo(int minutes) => _transform(_inner.timeMinutesAgo(minutes));
 
   @override
   String timeHoursAgo(int hours) => _transform(_inner.timeHoursAgo(hours));
@@ -226,12 +222,10 @@ class CasedLocalizations extends AppLocalizations {
   String get discoverTitle => _transform(_inner.discoverTitle);
 
   @override
-  String get discoverActiveRequestsHint =>
-      _transform(_inner.discoverActiveRequestsHint);
+  String get discoverActiveRequestsHint => _transform(_inner.discoverActiveRequestsHint);
 
   @override
-  String discoverRequestSent(String name) =>
-      _transform(_inner.discoverRequestSent(name));
+  String discoverRequestSent(String name) => _transform(_inner.discoverRequestSent(name));
 
   @override
   String get discoverLoadError => _transform(_inner.discoverLoadError);
@@ -252,12 +246,10 @@ class CasedLocalizations extends AppLocalizations {
   String get discoverBoosted => _transform(_inner.discoverBoosted);
 
   @override
-  String discoverLimitReached(int max) =>
-      _transform(_inner.discoverLimitReached(max));
+  String discoverLimitReached(int max) => _transform(_inner.discoverLimitReached(max));
 
   @override
-  String get discoverLocationBanner =>
-      _transform(_inner.discoverLocationBanner);
+  String get discoverLocationBanner => _transform(_inner.discoverLocationBanner);
 
   @override
   String get discoverPass => _transform(_inner.discoverPass);
@@ -293,8 +285,7 @@ class CasedLocalizations extends AppLocalizations {
   String get filtersAge => _transform(_inner.filtersAge);
 
   @override
-  String filtersAgeRange(int min, int max) =>
-      _transform(_inner.filtersAgeRange(min, max));
+  String filtersAgeRange(int min, int max) => _transform(_inner.filtersAgeRange(min, max));
 
   @override
   String get filtersDistance => _transform(_inner.filtersDistance);
@@ -339,8 +330,7 @@ class CasedLocalizations extends AppLocalizations {
   String get locationUseMine => _transform(_inner.locationUseMine);
 
   @override
-  String get locationServiceDisabled =>
-      _transform(_inner.locationServiceDisabled);
+  String get locationServiceDisabled => _transform(_inner.locationServiceDisabled);
 
   @override
   String get locationDenied => _transform(_inner.locationDenied);
@@ -355,31 +345,25 @@ class CasedLocalizations extends AppLocalizations {
   String get requestsTitle => _transform(_inner.requestsTitle);
 
   @override
-  String requestsReceivedTab(int count) =>
-      _transform(_inner.requestsReceivedTab(count));
+  String requestsReceivedTab(int count) => _transform(_inner.requestsReceivedTab(count));
 
   @override
-  String requestsSentTab(int count, int max) =>
-      _transform(_inner.requestsSentTab(count, max));
+  String requestsSentTab(int count, int max) => _transform(_inner.requestsSentTab(count, max));
 
   @override
   String get requestsLoadError => _transform(_inner.requestsLoadError);
 
   @override
-  String get requestsReceivedEmptyTitle =>
-      _transform(_inner.requestsReceivedEmptyTitle);
+  String get requestsReceivedEmptyTitle => _transform(_inner.requestsReceivedEmptyTitle);
 
   @override
-  String get requestsReceivedEmptyMessage =>
-      _transform(_inner.requestsReceivedEmptyMessage);
+  String get requestsReceivedEmptyMessage => _transform(_inner.requestsReceivedEmptyMessage);
 
   @override
-  String get requestsSentEmptyTitle =>
-      _transform(_inner.requestsSentEmptyTitle);
+  String get requestsSentEmptyTitle => _transform(_inner.requestsSentEmptyTitle);
 
   @override
-  String requestsSentEmptyMessage(int max) =>
-      _transform(_inner.requestsSentEmptyMessage(max));
+  String requestsSentEmptyMessage(int max) => _transform(_inner.requestsSentEmptyMessage(max));
 
   @override
   String get requestsAccept => _transform(_inner.requestsAccept);
@@ -388,8 +372,7 @@ class CasedLocalizations extends AppLocalizations {
   String get requestsDecline => _transform(_inner.requestsDecline);
 
   @override
-  String requestsAcceptTitle(String name) =>
-      _transform(_inner.requestsAcceptTitle(name));
+  String requestsAcceptTitle(String name) => _transform(_inner.requestsAcceptTitle(name));
 
   @override
   String get requestsAcceptMessage => _transform(_inner.requestsAcceptMessage);
@@ -407,8 +390,7 @@ class CasedLocalizations extends AppLocalizations {
   String get matchGoToChat => _transform(_inner.matchGoToChat);
 
   @override
-  String coupleTogetherSince(int days) =>
-      _transform(_inner.coupleTogetherSince(days));
+  String coupleTogetherSince(int days) => _transform(_inner.coupleTogetherSince(days));
 
   @override
   String get coupleViewProfile => _transform(_inner.coupleViewProfile);
@@ -420,8 +402,7 @@ class CasedLocalizations extends AppLocalizations {
   String get coupleEndTitle => _transform(_inner.coupleEndTitle);
 
   @override
-  String coupleEndMessage(String name) =>
-      _transform(_inner.coupleEndMessage(name));
+  String coupleEndMessage(String name) => _transform(_inner.coupleEndMessage(name));
 
   @override
   String get coupleEndAction => _transform(_inner.coupleEndAction);
@@ -430,12 +411,10 @@ class CasedLocalizations extends AppLocalizations {
   String get coupleYouAskedToEnd => _transform(_inner.coupleYouAskedToEnd);
 
   @override
-  String couplePartnerAskedToEnd(String name) =>
-      _transform(_inner.couplePartnerAskedToEnd(name));
+  String couplePartnerAskedToEnd(String name) => _transform(_inner.couplePartnerAskedToEnd(name));
 
   @override
-  String coupleDissolvesIn(String time) =>
-      _transform(_inner.coupleDissolvesIn(time));
+  String coupleDissolvesIn(String time) => _transform(_inner.coupleDissolvesIn(time));
 
   @override
   String get coupleUndoEnd => _transform(_inner.coupleUndoEnd);
@@ -483,8 +462,7 @@ class CasedLocalizations extends AppLocalizations {
   String chatReplyingTo(String name) => _transform(_inner.chatReplyingTo(name));
 
   @override
-  String get chatMessageUnavailable =>
-      _transform(_inner.chatMessageUnavailable);
+  String get chatMessageUnavailable => _transform(_inner.chatMessageUnavailable);
 
   @override
   String chatSeen(String time) => _transform(_inner.chatSeen(time));
@@ -532,8 +510,7 @@ class CasedLocalizations extends AppLocalizations {
   String get profilePhotos => _transform(_inner.profilePhotos);
 
   @override
-  String profilePhotosHint(int max) =>
-      _transform(_inner.profilePhotosHint(max));
+  String profilePhotosHint(int max) => _transform(_inner.profilePhotosHint(max));
 
   @override
   String get profilePhotoView => _transform(_inner.profilePhotoView);
@@ -698,8 +675,7 @@ class CasedLocalizations extends AppLocalizations {
   String get profileSave => _transform(_inner.profileSave);
 
   @override
-  String profileMissing(String items) =>
-      _transform(_inner.profileMissing(items));
+  String profileMissing(String items) => _transform(_inner.profileMissing(items));
 
   @override
   String get profileMissingName => _transform(_inner.profileMissingName);
@@ -708,15 +684,13 @@ class CasedLocalizations extends AppLocalizations {
   String get profileMissingPhoto => _transform(_inner.profileMissingPhoto);
 
   @override
-  String get profileMissingBirthdate =>
-      _transform(_inner.profileMissingBirthdate);
+  String get profileMissingBirthdate => _transform(_inner.profileMissingBirthdate);
 
   @override
   String get profileMissingGender => _transform(_inner.profileMissingGender);
 
   @override
-  String get profileMissingInterest =>
-      _transform(_inner.profileMissingInterest);
+  String get profileMissingInterest => _transform(_inner.profileMissingInterest);
 
   @override
   String get promptsTitle => _transform(_inner.promptsTitle);
@@ -752,8 +726,7 @@ class CasedLocalizations extends AppLocalizations {
   String get promptWeekend => _transform(_inner.promptWeekend);
 
   @override
-  String get promptUnpopularOpinion =>
-      _transform(_inner.promptUnpopularOpinion);
+  String get promptUnpopularOpinion => _transform(_inner.promptUnpopularOpinion);
 
   @override
   String get promptLookingFor => _transform(_inner.promptLookingFor);
@@ -762,32 +735,25 @@ class CasedLocalizations extends AppLocalizations {
   String get notificationsTitle => _transform(_inner.notificationsTitle);
 
   @override
-  String get notificationsEmptyTitle =>
-      _transform(_inner.notificationsEmptyTitle);
+  String get notificationsEmptyTitle => _transform(_inner.notificationsEmptyTitle);
 
   @override
-  String get notificationsEmptyMessage =>
-      _transform(_inner.notificationsEmptyMessage);
+  String get notificationsEmptyMessage => _transform(_inner.notificationsEmptyMessage);
 
   @override
-  String notifRequestReceived(String name) =>
-      _transform(_inner.notifRequestReceived(name));
+  String notifRequestReceived(String name) => _transform(_inner.notifRequestReceived(name));
 
   @override
-  String notifRequestAccepted(String name) =>
-      _transform(_inner.notifRequestAccepted(name));
+  String notifRequestAccepted(String name) => _transform(_inner.notifRequestAccepted(name));
 
   @override
-  String notifRequestExpiring(String name) =>
-      _transform(_inner.notifRequestExpiring(name));
+  String notifRequestExpiring(String name) => _transform(_inner.notifRequestExpiring(name));
 
   @override
-  String notifDissolutionRequested(String name) =>
-      _transform(_inner.notifDissolutionRequested(name));
+  String notifDissolutionRequested(String name) => _transform(_inner.notifDissolutionRequested(name));
 
   @override
-  String notifDissolutionCancelled(String name) =>
-      _transform(_inner.notifDissolutionCancelled(name));
+  String notifDissolutionCancelled(String name) => _transform(_inner.notifDissolutionCancelled(name));
 
   @override
   String get notifPhotoRejected => _transform(_inner.notifPhotoRejected);
@@ -796,8 +762,7 @@ class CasedLocalizations extends AppLocalizations {
   String get notifBoostStarted => _transform(_inner.notifBoostStarted);
 
   @override
-  String notifCoupleDissolved(String name) =>
-      _transform(_inner.notifCoupleDissolved(name));
+  String notifCoupleDissolved(String name) => _transform(_inner.notifCoupleDissolved(name));
 
   @override
   String get safetyReportOrBlock => _transform(_inner.safetyReportOrBlock);
@@ -870,6 +835,36 @@ class CasedLocalizations extends AppLocalizations {
 
   @override
   String get themeDark => _transform(_inner.themeDark);
+
+  @override
+  String get themeCaribe => _transform(_inner.themeCaribe);
+
+  @override
+  String get themeCaribeHint => _transform(_inner.themeCaribeHint);
+
+  @override
+  String get themeCoral => _transform(_inner.themeCoral);
+
+  @override
+  String get themeCoralHint => _transform(_inner.themeCoralHint);
+
+  @override
+  String get themeMidnight => _transform(_inner.themeMidnight);
+
+  @override
+  String get themeMidnightHint => _transform(_inner.themeMidnightHint);
+
+  @override
+  String get themeLavender => _transform(_inner.themeLavender);
+
+  @override
+  String get themeLavenderHint => _transform(_inner.themeLavenderHint);
+
+  @override
+  String get themeGraphite => _transform(_inner.themeGraphite);
+
+  @override
+  String get themeGraphiteHint => _transform(_inner.themeGraphiteHint);
 
   @override
   String get themeFireflyHint => _transform(_inner.themeFireflyHint);
@@ -1070,8 +1065,7 @@ class CasedLocalizations extends AppLocalizations {
   String get insightsYouAccepted => _transform(_inner.insightsYouAccepted);
 
   @override
-  String insightsAcceptRate(int pct) =>
-      _transform(_inner.insightsAcceptRate(pct));
+  String insightsAcceptRate(int pct) => _transform(_inner.insightsAcceptRate(pct));
 
   @override
   String get insightsCouples => _transform(_inner.insightsCouples);
@@ -1170,20 +1164,16 @@ class CasedLocalizations extends AppLocalizations {
   String adminPose(String pose) => _transform(_inner.adminPose(pose));
 
   @override
-  String adminReportedBy(String name) =>
-      _transform(_inner.adminReportedBy(name));
+  String adminReportedBy(String name) => _transform(_inner.adminReportedBy(name));
 
   @override
-  String adminBanConfirm(String name) =>
-      _transform(_inner.adminBanConfirm(name));
+  String adminBanConfirm(String name) => _transform(_inner.adminBanConfirm(name));
 
   @override
-  String adminApproveAll(int count) =>
-      _transform(_inner.adminApproveAll(count));
+  String adminApproveAll(int count) => _transform(_inner.adminApproveAll(count));
 
   @override
-  String adminOpenReports(int count) =>
-      _transform(_inner.adminOpenReports(count));
+  String adminOpenReports(int count) => _transform(_inner.adminOpenReports(count));
 
   @override
   String get notifDailyPicks => _transform(_inner.notifDailyPicks);
@@ -1192,8 +1182,7 @@ class CasedLocalizations extends AppLocalizations {
   String notifNewNearby(int count) => _transform(_inner.notifNewNearby(count));
 
   @override
-  String notifDailyAnswer(String name) =>
-      _transform(_inner.notifDailyAnswer(name));
+  String notifDailyAnswer(String name) => _transform(_inner.notifDailyAnswer(name));
 
   @override
   String get dailyPicksButton => _transform(_inner.dailyPicksButton);
@@ -1217,12 +1206,10 @@ class CasedLocalizations extends AppLocalizations {
   String get dailyQuestionSend => _transform(_inner.dailyQuestionSend);
 
   @override
-  String dailyQuestionWaiting(String name) =>
-      _transform(_inner.dailyQuestionWaiting(name));
+  String dailyQuestionWaiting(String name) => _transform(_inner.dailyQuestionWaiting(name));
 
   @override
-  String dailyQuestionPartnerAnswered(String name) =>
-      _transform(_inner.dailyQuestionPartnerAnswered(name));
+  String dailyQuestionPartnerAnswered(String name) => _transform(_inner.dailyQuestionPartnerAnswered(name));
 
   @override
   String streakDays(int count) => _transform(_inner.streakDays(count));
@@ -1363,8 +1350,7 @@ class CasedLocalizations extends AppLocalizations {
   String get signOutEverywhere => _transform(_inner.signOutEverywhere);
 
   @override
-  String get signOutEverywhereMessage =>
-      _transform(_inner.signOutEverywhereMessage);
+  String get signOutEverywhereMessage => _transform(_inner.signOutEverywhereMessage);
 
   @override
   String get premiumTitle => _transform(_inner.premiumTitle);
@@ -1385,8 +1371,7 @@ class CasedLocalizations extends AppLocalizations {
   String get premiumComingSoon => _transform(_inner.premiumComingSoon);
 
   @override
-  String premiumPerkRequests(int count) =>
-      _transform(_inner.premiumPerkRequests(count));
+  String premiumPerkRequests(int count) => _transform(_inner.premiumPerkRequests(count));
 
   @override
   String get premiumPerkIncognito => _transform(_inner.premiumPerkIncognito);
@@ -1410,24 +1395,19 @@ class CasedLocalizations extends AppLocalizations {
   String get verificationCta => _transform(_inner.verificationCta);
 
   @override
-  String get verificationPendingShort =>
-      _transform(_inner.verificationPendingShort);
+  String get verificationPendingShort => _transform(_inner.verificationPendingShort);
 
   @override
-  String get verificationApprovedShort =>
-      _transform(_inner.verificationApprovedShort);
+  String get verificationApprovedShort => _transform(_inner.verificationApprovedShort);
 
   @override
-  String get verificationStatusApproved =>
-      _transform(_inner.verificationStatusApproved);
+  String get verificationStatusApproved => _transform(_inner.verificationStatusApproved);
 
   @override
-  String get verificationStatusPending =>
-      _transform(_inner.verificationStatusPending);
+  String get verificationStatusPending => _transform(_inner.verificationStatusPending);
 
   @override
-  String get verificationStatusRejected =>
-      _transform(_inner.verificationStatusRejected);
+  String get verificationStatusRejected => _transform(_inner.verificationStatusRejected);
 
   @override
   String get verificationTitle => _transform(_inner.verificationTitle);
@@ -1436,8 +1416,7 @@ class CasedLocalizations extends AppLocalizations {
   String get verificationIntro => _transform(_inner.verificationIntro);
 
   @override
-  String get verificationTakeSelfie =>
-      _transform(_inner.verificationTakeSelfie);
+  String get verificationTakeSelfie => _transform(_inner.verificationTakeSelfie);
 
   @override
   String get verificationPrivacy => _transform(_inner.verificationPrivacy);
@@ -1446,24 +1425,19 @@ class CasedLocalizations extends AppLocalizations {
   String get verificationSent => _transform(_inner.verificationSent);
 
   @override
-  String get verificationPendingTitle =>
-      _transform(_inner.verificationPendingTitle);
+  String get verificationPendingTitle => _transform(_inner.verificationPendingTitle);
 
   @override
-  String get verificationPendingMessage =>
-      _transform(_inner.verificationPendingMessage);
+  String get verificationPendingMessage => _transform(_inner.verificationPendingMessage);
 
   @override
-  String get verificationApprovedTitle =>
-      _transform(_inner.verificationApprovedTitle);
+  String get verificationApprovedTitle => _transform(_inner.verificationApprovedTitle);
 
   @override
-  String get verificationApprovedMessage =>
-      _transform(_inner.verificationApprovedMessage);
+  String get verificationApprovedMessage => _transform(_inner.verificationApprovedMessage);
 
   @override
-  String get verificationRejectedMessage =>
-      _transform(_inner.verificationRejectedMessage);
+  String get verificationRejectedMessage => _transform(_inner.verificationRejectedMessage);
 
   @override
   String get posePeace => _transform(_inner.posePeace);
@@ -1484,29 +1458,25 @@ class CasedLocalizations extends AppLocalizations {
   String get errorUpload => _transform(_inner.errorUpload);
 
   @override
-  String get errorInvalidCredentials =>
-      _transform(_inner.errorInvalidCredentials);
+  String get errorInvalidCredentials => _transform(_inner.errorInvalidCredentials);
 
   @override
   String get errorEmailTaken => _transform(_inner.errorEmailTaken);
 
   @override
-  String get errorEmailNotConfirmed =>
-      _transform(_inner.errorEmailNotConfirmed);
+  String get errorEmailNotConfirmed => _transform(_inner.errorEmailNotConfirmed);
 
   @override
   String get errorNotAuthenticated => _transform(_inner.errorNotAuthenticated);
 
   @override
-  String get errorProfileIncomplete =>
-      _transform(_inner.errorProfileIncomplete);
+  String get errorProfileIncomplete => _transform(_inner.errorProfileIncomplete);
 
   @override
   String get errorAlreadyPaired => _transform(_inner.errorAlreadyPaired);
 
   @override
-  String get errorTargetUnavailable =>
-      _transform(_inner.errorTargetUnavailable);
+  String get errorTargetUnavailable => _transform(_inner.errorTargetUnavailable);
 
   @override
   String get errorTargetPaired => _transform(_inner.errorTargetPaired);
@@ -1515,12 +1485,10 @@ class CasedLocalizations extends AppLocalizations {
   String get errorAlreadyRequested => _transform(_inner.errorAlreadyRequested);
 
   @override
-  String errorMaxActiveRequests(int max) =>
-      _transform(_inner.errorMaxActiveRequests(max));
+  String errorMaxActiveRequests(int max) => _transform(_inner.errorMaxActiveRequests(max));
 
   @override
-  String get errorRequestUnavailable =>
-      _transform(_inner.errorRequestUnavailable);
+  String get errorRequestUnavailable => _transform(_inner.errorRequestUnavailable);
 
   @override
   String get errorSomeonePaired => _transform(_inner.errorSomeonePaired);
@@ -1529,13 +1497,11 @@ class CasedLocalizations extends AppLocalizations {
   String get errorNotPaired => _transform(_inner.errorNotPaired);
 
   @override
-  String get errorNoDissolutionToCancel =>
-      _transform(_inner.errorNoDissolutionToCancel);
+  String get errorNoDissolutionToCancel => _transform(_inner.errorNoDissolutionToCancel);
 
   @override
   String get errorEditWindowClosed => _transform(_inner.errorEditWindowClosed);
 
   @override
-  String get errorVerificationPending =>
-      _transform(_inner.errorVerificationPending);
+  String get errorVerificationPending => _transform(_inner.errorVerificationPending);
 }

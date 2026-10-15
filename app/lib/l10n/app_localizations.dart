@@ -305,7 +305,7 @@ abstract class AppLocalizations {
   /// No description provided for @forgotSentMessage.
   ///
   /// In es, this message translates to:
-  /// **'Revisa {email}. Escribe el código de 6 dígitos o abre el enlace del correo.'**
+  /// **'Revisa {email}. Escribe el código o abre el enlace del correo.'**
   String forgotSentMessage(String email);
 
   /// No description provided for @forgotCode.
@@ -1747,6 +1747,66 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Cricket'**
   String get themeDark;
+
+  /// No description provided for @themeCaribe.
+  ///
+  /// In es, this message translates to:
+  /// **'Caribe'**
+  String get themeCaribe;
+
+  /// No description provided for @themeCaribeHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Turquesa'**
+  String get themeCaribeHint;
+
+  /// No description provided for @themeCoral.
+  ///
+  /// In es, this message translates to:
+  /// **'Coral'**
+  String get themeCoral;
+
+  /// No description provided for @themeCoralHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Durazno'**
+  String get themeCoralHint;
+
+  /// No description provided for @themeMidnight.
+  ///
+  /// In es, this message translates to:
+  /// **'Medianoche'**
+  String get themeMidnight;
+
+  /// No description provided for @themeMidnightHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Azul y oro'**
+  String get themeMidnightHint;
+
+  /// No description provided for @themeLavender.
+  ///
+  /// In es, this message translates to:
+  /// **'Lavanda'**
+  String get themeLavender;
+
+  /// No description provided for @themeLavenderHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Lila pastel'**
+  String get themeLavenderHint;
+
+  /// No description provided for @themeGraphite.
+  ///
+  /// In es, this message translates to:
+  /// **'Grafito'**
+  String get themeGraphite;
+
+  /// No description provided for @themeGraphiteHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Gris y rojo'**
+  String get themeGraphiteHint;
 
   /// No description provided for @themeFireflyHint.
   ///

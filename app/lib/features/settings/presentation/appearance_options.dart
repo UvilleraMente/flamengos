@@ -12,6 +12,11 @@ String themeName(AppLocalizations t, FlamTheme theme) => switch (theme) {
   FlamTheme.spicebug => t.themeSpicebug,
   FlamTheme.light => t.themeLight,
   FlamTheme.dark => t.themeDark,
+  FlamTheme.caribe => t.themeCaribe,
+  FlamTheme.coral => t.themeCoral,
+  FlamTheme.midnight => t.themeMidnight,
+  FlamTheme.lavender => t.themeLavender,
+  FlamTheme.graphite => t.themeGraphite,
 };
 
 String _themeHint(AppLocalizations t, FlamTheme theme) => switch (theme) {
@@ -19,6 +24,11 @@ String _themeHint(AppLocalizations t, FlamTheme theme) => switch (theme) {
   FlamTheme.spicebug => t.themeSpicebugHint,
   FlamTheme.light => t.themeLightHint,
   FlamTheme.dark => t.themeDarkHint,
+  FlamTheme.caribe => t.themeCaribeHint,
+  FlamTheme.coral => t.themeCoralHint,
+  FlamTheme.midnight => t.themeMidnightHint,
+  FlamTheme.lavender => t.themeLavenderHint,
+  FlamTheme.graphite => t.themeGraphiteHint,
 };
 
 String _caseName(AppLocalizations t, TextCase c) => switch (c) {
@@ -47,22 +57,30 @@ class AppearanceGroup extends ConsumerWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(14),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              for (final theme in FlamTheme.values) ...[
-                if (theme.index > 0) const SizedBox(width: 10),
-                Expanded(
-                  child: _ThemeCard(
-                    theme: theme,
-                    name: themeName(t, theme),
-                    hint: _themeHint(t, theme),
-                    selected: look.theme == theme,
-                    onTap: () => set(look.copyWith(theme: theme)),
-                  ),
-                ),
-              ],
-            ],
+          // 4 por fila en el teléfono; más si hay espacio.
+          child: LayoutBuilder(
+            builder: (context, box) {
+              const gap = 10.0;
+              final perRow = (box.maxWidth / 110).floor().clamp(4, 6);
+              final width = (box.maxWidth - gap * (perRow - 1)) / perRow;
+              return Wrap(
+                spacing: gap,
+                runSpacing: 14,
+                children: [
+                  for (final theme in FlamTheme.values)
+                    SizedBox(
+                      width: width,
+                      child: _ThemeCard(
+                        theme: theme,
+                        name: themeName(t, theme),
+                        hint: _themeHint(t, theme),
+                        selected: look.theme == theme,
+                        onTap: () => set(look.copyWith(theme: theme)),
+                      ),
+                    ),
+                ],
+              );
+            },
           ),
         ),
         SettingsTile(

@@ -22,6 +22,10 @@ class ForgotPasswordPage extends ConsumerStatefulWidget {
 }
 
 class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
+  // Supabase manda códigos de 6 a 10 dígitos (Auth → Email OTP length).
+  static const _minCode = 6;
+  static const _maxCode = 10;
+
   static const _resendAfter = 60;
 
   late final _email = TextEditingController(text: widget.initialEmail);
@@ -69,7 +73,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
 
   Future<void> _verify() async {
     final code = _code.text.trim();
-    if (code.length < 6) return;
+    if (code.length < _minCode) return;
     setState(() => _busy = true);
     try {
       await ref
@@ -151,22 +155,21 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
                         autofillHints: const [AutofillHints.oneTimeCode],
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(6),
+                          LengthLimitingTextInputFormatter(_maxCode),
                         ],
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                          fontSize: 26,
-                          letterSpacing: 10,
+                          fontSize: 24,
+                          letterSpacing: 6,
                           fontWeight: FontWeight.w700,
                         ),
                         decoration: InputDecoration(
                           labelText: t.forgotCode,
-                          hintText: '••••••',
+                          hintText: '••••••••',
                         ),
-                        onChanged: (v) {
-                          setState(() {});
-                          if (v.length == 6) _verify();
-                        },
+                        // Sin verificar solo: el largo depende de Supabase.
+                        onChanged: (_) => setState(() {}),
+                        onSubmitted: (_) => _verify(),
                       ),
                     ],
                     const SizedBox(height: 20),
@@ -176,7 +179,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
                       expand: true,
                       loading: _busy,
                       onPressed: _sent
-                          ? (_code.text.length == 6 ? _verify : null)
+                          ? (_code.text.length >= _minCode ? _verify : null)
                           : _send,
                     ),
                     if (_sent) ...[
