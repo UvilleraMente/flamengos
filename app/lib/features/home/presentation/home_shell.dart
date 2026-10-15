@@ -56,10 +56,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
         ? null
         : await ref.read(profileByIdProvider(n.actorId!).future);
     if (!mounted) return;
-    showInfo(
-      context,
-      '${n.emoji}  ${n.text(t, actor?.displayName ?? t.someone)}',
-    );
+    showInfo(context, n.text(t, actor?.displayName ?? t.someone));
   }
 
   @override

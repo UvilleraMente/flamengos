@@ -1070,6 +1070,18 @@ abstract class AppLocalizations {
   /// **'La primera es tu foto principal · hasta {max}'**
   String profilePhotosHint(int max);
 
+  /// No description provided for @profilePhotoView.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver foto'**
+  String get profilePhotoView;
+
+  /// No description provided for @profilePhotoMakeMain.
+  ///
+  /// In es, this message translates to:
+  /// **'Hacer principal'**
+  String get profilePhotoMakeMain;
+
   /// No description provided for @profileMainPhoto.
   ///
   /// In es, this message translates to:
@@ -1099,6 +1111,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Fecha de nacimiento'**
   String get profileBirthdate;
+
+  /// No description provided for @profileBirthdateShort.
+  ///
+  /// In es, this message translates to:
+  /// **'Nacimiento'**
+  String get profileBirthdateShort;
 
   /// No description provided for @profileAgeYears.
   ///
@@ -1147,6 +1165,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Puedes elegir varias opciones'**
   String get profileLookingForHint;
+
+  /// No description provided for @profileAboutMe.
+  ///
+  /// In es, this message translates to:
+  /// **'Sobre mí'**
+  String get profileAboutMe;
 
   /// No description provided for @profileAboutYou.
   ///

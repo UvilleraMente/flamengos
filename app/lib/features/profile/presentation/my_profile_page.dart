@@ -35,7 +35,13 @@ class MyProfilePage extends ConsumerWidget {
               children: [
                 GlassPill(
                   color: profile.isPaired ? FlamColors.pink : FlamColors.mint,
-                  leading: Text(profile.isPaired ? '💕' : '🦩'),
+                  leading: Icon(
+                    profile.isPaired
+                        ? Icons.favorite_rounded
+                        : Icons.person_rounded,
+                    size: 14,
+                    color: profile.isPaired ? FlamColors.pink : FlamColors.mint,
+                  ),
                   child: Text(
                     profile.isPaired ? t.statusPaired : t.statusSingle,
                   ),

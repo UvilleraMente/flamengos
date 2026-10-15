@@ -55,7 +55,17 @@ class FlamengosApp extends ConsumerWidget {
                   // Un solo fondo para toda la app: las páginas son transparentes.
                   ExcludeSemantics(
                     excluding: locked,
-                    child: FlamingoBackground(child: child!),
+                    // El fondo llega hasta abajo, pero el contenido nunca
+                    // queda detrás de los botones de Android ni de la barra
+                    // de inicio del iPhone.
+                    child: FlamingoBackground(
+                      child: SafeArea(
+                        top: false,
+                        left: false,
+                        right: false,
+                        child: child!,
+                      ),
+                    ),
                   ),
                   // Opaco a los toques: nada llega a la app de abajo.
                   if (locked)

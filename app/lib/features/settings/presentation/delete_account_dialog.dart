@@ -64,10 +64,20 @@ class _DeleteAccountDialogState extends ConsumerState<_DeleteAccountDialog> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text(
-          '🥀',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 44),
+        Center(
+          child: Container(
+            width: 68,
+            height: 68,
+            decoration: BoxDecoration(
+              color: FlamColors.danger.withValues(alpha: 0.12),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.delete_forever_rounded,
+              size: 32,
+              color: FlamColors.danger,
+            ),
+          ),
         ),
         const SizedBox(height: 12),
         Text(

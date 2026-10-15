@@ -19,13 +19,13 @@ extension NotificationText on AppNotification {
     NotificationType.coupleDissolved => t.notifCoupleDissolved(name),
   };
 
-  String get emoji => switch (type) {
-    NotificationType.requestReceived => '💌',
-    NotificationType.requestAccepted => '💕',
-    NotificationType.requestExpiring => '⏳',
-    NotificationType.dissolutionRequested => '💔',
-    NotificationType.dissolutionCancelled => '🩹',
-    NotificationType.coupleDissolved => '🕊️',
+  IconData get icon => switch (type) {
+    NotificationType.requestReceived => Icons.mail_rounded,
+    NotificationType.requestAccepted => Icons.favorite_rounded,
+    NotificationType.requestExpiring => Icons.hourglass_bottom_rounded,
+    NotificationType.dissolutionRequested => Icons.heart_broken_rounded,
+    NotificationType.dissolutionCancelled => Icons.healing_rounded,
+    NotificationType.coupleDissolved => Icons.waving_hand_rounded,
   };
 }
 
@@ -133,7 +133,15 @@ class _NotificationTile extends ConsumerWidget {
               Positioned(
                 right: -6,
                 bottom: -6,
-                child: Text(n.emoji, style: const TextStyle(fontSize: 18)),
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: FlamColors.pink,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: FlamColors.sheet, width: 2),
+                  ),
+                  child: Icon(n.icon, size: 12, color: FlamColors.onAccent),
+                ),
               ),
             ],
           ),

@@ -102,10 +102,22 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
-                      _sent ? '📬' : '🔑',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 52),
+                    Center(
+                      child: Container(
+                        width: 68,
+                        height: 68,
+                        decoration: BoxDecoration(
+                          color: FlamColors.pink.withValues(alpha: 0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          _sent
+                              ? Icons.mark_email_read_rounded
+                              : Icons.key_rounded,
+                          size: 32,
+                          color: FlamColors.pink,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 12),
                     Text(

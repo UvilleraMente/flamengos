@@ -564,6 +564,12 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get profilePhotoView => 'Ver foto';
+
+  @override
+  String get profilePhotoMakeMain => 'Hacer principal';
+
+  @override
   String get profileMainPhoto => 'Principal';
 
   @override
@@ -577,6 +583,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get profileBirthdate => 'Fecha de nacimiento';
+
+  @override
+  String get profileBirthdateShort => 'Nacimiento';
 
   @override
   String profileAgeYears(int age) {
@@ -604,6 +613,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get profileLookingForHint => 'Puedes elegir varias opciones';
+
+  @override
+  String get profileAboutMe => 'Sobre mí';
 
   @override
   String get profileAboutYou => 'Sobre ti';

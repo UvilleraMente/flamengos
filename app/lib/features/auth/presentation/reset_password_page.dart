@@ -70,10 +70,20 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text(
-                      '🔐',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 52),
+                    Center(
+                      child: Container(
+                        width: 68,
+                        height: 68,
+                        decoration: BoxDecoration(
+                          color: FlamColors.pink.withValues(alpha: 0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.lock_reset_rounded,
+                          size: 32,
+                          color: FlamColors.pink,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 12),
                     Text(
