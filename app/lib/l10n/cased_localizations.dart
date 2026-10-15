@@ -674,6 +674,9 @@ class CasedLocalizations extends AppLocalizations {
   String get profileIAm => _transform(_inner.profileIAm);
 
   @override
+  String get genderEveryone => _transform(_inner.genderEveryone);
+
+  @override
   String get profileLookingFor => _transform(_inner.profileLookingFor);
 
   @override
@@ -697,6 +700,9 @@ class CasedLocalizations extends AppLocalizations {
   @override
   String profileMissing(String items) =>
       _transform(_inner.profileMissing(items));
+
+  @override
+  String get profileMissingName => _transform(_inner.profileMissingName);
 
   @override
   String get profileMissingPhoto => _transform(_inner.profileMissingPhoto);

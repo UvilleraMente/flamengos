@@ -114,6 +114,7 @@ class _ProfileFormPageState extends ConsumerState<ProfileFormPage> {
     final t = context.l10n;
     final validForm = _form.currentState!.validate();
     final missing = [
+      if (_name.text.trim().length < 2) t.profileMissingName,
       if (_photos.isEmpty) t.profileMissingPhoto,
       if (_birthdate == null) t.profileMissingBirthdate,
       if (_gender == null) t.profileMissingGender,
@@ -322,6 +323,24 @@ class _ProfileFormPageState extends ConsumerState<ProfileFormPage> {
                   title: t.profileLookingFor,
                   footer: t.profileLookingForHint,
                   children: [
+                    _ValueRow(
+                      label: t.genderEveryone,
+                      onTap: () => setState(() {
+                        final all =
+                            _interestedIn.length == Gender.values.length;
+                        _interestedIn
+                          ..clear()
+                          ..addAll(all ? const {} : Gender.values);
+                      }),
+                      trailing: Icon(
+                        _interestedIn.length == Gender.values.length
+                            ? Icons.check_circle_rounded
+                            : Icons.circle_outlined,
+                        color: _interestedIn.length == Gender.values.length
+                            ? FlamColors.pink
+                            : FlamColors.textFaint,
+                      ),
+                    ),
                     for (final g in Gender.values)
                       _ValueRow(
                         label: g.plural(t),

@@ -11,6 +11,7 @@ class SearchFilters {
     this.center,
     this.centerLabel,
     this.mustTags = const {},
+    this.interestedIn = const {},
   });
 
   factory SearchFilters.of(Profile p) => SearchFilters(
@@ -20,6 +21,7 @@ class SearchFilters {
     center: p.searchCenter,
     centerLabel: p.searchLabel,
     mustTags: p.mustTags,
+    interestedIn: p.interestedIn,
   );
 
   static const minAge = 18;
@@ -39,6 +41,9 @@ class SearchFilters {
   /// Etiquetas que la otra persona debe tener.
   final Set<ProfileTag> mustTags;
 
+  /// A quién quiero ver (el mismo campo que "Busco" en el perfil).
+  final Set<Gender> interestedIn;
+
   SearchFilters copyWith({
     int? ageMin,
     int? ageMax,
@@ -46,6 +51,7 @@ class SearchFilters {
     LatLng? Function()? center,
     String? Function()? centerLabel,
     Set<ProfileTag>? mustTags,
+    Set<Gender>? interestedIn,
   }) => SearchFilters(
     ageMin: ageMin ?? this.ageMin,
     ageMax: ageMax ?? this.ageMax,
@@ -53,6 +59,7 @@ class SearchFilters {
     center: center != null ? center() : this.center,
     centerLabel: centerLabel != null ? centerLabel() : this.centerLabel,
     mustTags: mustTags ?? this.mustTags,
+    interestedIn: interestedIn ?? this.interestedIn,
   );
 
   Map<String, dynamic> toJson() => {
@@ -63,5 +70,8 @@ class SearchFilters {
     'search_lng': center?.longitude,
     'search_label': center == null ? null : centerLabel,
     'must_tags': [for (final tag in mustTags) tag.dbValue],
+    // Vacío no se guarda (el perfil exige al menos uno).
+    if (interestedIn.isNotEmpty)
+      'interested_in': [for (final g in interestedIn) g.name],
   };
 }

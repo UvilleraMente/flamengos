@@ -1376,6 +1376,12 @@ abstract class AppLocalizations {
   /// **'Soy'**
   String get profileIAm;
 
+  /// No description provided for @genderEveryone.
+  ///
+  /// In es, this message translates to:
+  /// **'Todos'**
+  String get genderEveryone;
+
   /// No description provided for @profileLookingFor.
   ///
   /// In es, this message translates to:
@@ -1423,6 +1429,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Falta {items}.'**
   String profileMissing(String items);
+
+  /// No description provided for @profileMissingName.
+  ///
+  /// In es, this message translates to:
+  /// **'tu nombre'**
+  String get profileMissingName;
 
   /// No description provided for @profileMissingPhoto.
   ///

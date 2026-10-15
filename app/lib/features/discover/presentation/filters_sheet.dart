@@ -9,6 +9,7 @@ import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../location/domain/place.dart';
 import '../../profile/domain/profile.dart';
+import '../../profile/presentation/profile_l10n.dart';
 import '../../profile/presentation/tag_chips.dart';
 import '../data/discover_repository.dart';
 import '../domain/search_filters.dart';
@@ -85,6 +86,32 @@ class _FiltersSheetState extends ConsumerState<_FiltersSheet> {
             Text(
               t.filtersTitle,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+            ),
+            const SizedBox(height: 16),
+            _Label(t.profileLookingFor),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                FlamChip(
+                  label: t.genderEveryone,
+                  selected: _f.interestedIn.length == Gender.values.length,
+                  onTap: () => setState(
+                    () => _f = _f.copyWith(interestedIn: {...Gender.values}),
+                  ),
+                ),
+                for (final g in Gender.values)
+                  FlamChip(
+                    label: g.plural(t),
+                    selected: _f.interestedIn.contains(g),
+                    onTap: () => setState(() {
+                      final next = {..._f.interestedIn};
+                      next.contains(g) ? next.remove(g) : next.add(g);
+                      _f = _f.copyWith(interestedIn: next);
+                    }),
+                  ),
+              ],
             ),
             const SizedBox(height: 20),
             _Label(
@@ -198,7 +225,7 @@ class _FiltersSheetState extends ConsumerState<_FiltersSheet> {
               size: FlamSize.large,
               expand: true,
               loading: _saving,
-              onPressed: _save,
+              onPressed: _f.interestedIn.isEmpty ? null : _save,
             ),
           ],
         ),

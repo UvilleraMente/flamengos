@@ -736,6 +736,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileIAm => 'I am';
 
   @override
+  String get genderEveryone => 'Everyone';
+
+  @override
   String get profileLookingFor => 'Looking for';
 
   @override
@@ -761,6 +764,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String profileMissing(String items) {
     return 'Missing $items.';
   }
+
+  @override
+  String get profileMissingName => 'your name';
 
   @override
   String get profileMissingPhoto => 'at least one photo';
