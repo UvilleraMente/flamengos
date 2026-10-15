@@ -19,3 +19,7 @@ supabase/.branches/
 
 # Sitio: la app web se copia aquí al desplegar
 site/public/app/
+
+# Caché del CLI de Firebase y copia de la app web generada al publicar
+site/.firebase/
+site/public/app/
