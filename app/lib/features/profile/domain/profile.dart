@@ -13,6 +13,47 @@ enum PromptKey {
   lookingFor,
 }
 
+/// Etiquetas de perfil. Deben coincidir con cfg_tags() en el SQL.
+enum ProfileTag {
+  christian,
+  catholic,
+  spiritual,
+  worker,
+  student,
+  entrepreneur,
+  sports,
+  gym,
+  gamer,
+  reader,
+  traveler,
+  foodie,
+  music,
+  dance,
+  pets,
+  nature,
+  beach,
+  homebody,
+  party,
+  family,
+  wantsKids('wants_kids'),
+  noSmoking('no_smoking'),
+  noDrinking('no_drinking'),
+  serious;
+
+  const ProfileTag([this._db]);
+
+  final String? _db;
+  String get dbValue => _db ?? name;
+
+  static const maxPerProfile = 5;
+  static const maxMustHave = 2;
+
+  static Set<ProfileTag> parse(Object? list) => {
+    for (final v in list as List? ?? const [])
+      ?values.where((t) => t.dbValue == v).firstOrNull,
+  };
+}
+
 class ProfilePrompt {
   const ProfilePrompt(this.key, this.answer);
 
@@ -29,8 +70,10 @@ class ProfilePrompt {
   Map<String, dynamic> toJson() => {'q': key.name, 'a': answer};
 }
 
-String photoUrl(String path) =>
-    Supabase.instance.client.storage.from('photos').getPublicUrl(path);
+/// Las cuentas de prueba usan fotos externas (URL completa).
+String photoUrl(String path) => path.startsWith('http')
+    ? path
+    : Supabase.instance.client.storage.from('photos').getPublicUrl(path);
 
 class Profile {
   Profile({
@@ -55,6 +98,10 @@ class Profile {
     this.founder = false,
     this.premiumUntil,
     this.incognito = false,
+    this.tags = const {},
+    this.mustTags = const {},
+    this.boostUntil,
+    this.sharedTags = 0,
   });
 
   factory Profile.fromJson(Map<String, dynamic> json) {
@@ -94,6 +141,12 @@ class Profile {
           ? null
           : DateTime.parse(json['premium_until'] as String),
       incognito: json['incognito'] as bool? ?? false,
+      tags: ProfileTag.parse(json['tags']),
+      mustTags: ProfileTag.parse(json['must_tags']),
+      boostUntil: json['boost_until'] == null
+          ? null
+          : DateTime.parse(json['boost_until'] as String),
+      sharedTags: json['shared_tags'] as int? ?? 0,
     );
   }
 
@@ -136,6 +189,19 @@ class Profile {
 
   /// Oculto en descubrir (solo cuenta si es premium).
   final bool incognito;
+
+  final Set<ProfileTag> tags;
+
+  /// Etiquetas que la otra persona debe tener (filtro de búsqueda).
+  final Set<ProfileTag> mustTags;
+
+  /// Impulso en Descubrir tras varios rechazos (solo en el perfil propio).
+  final DateTime? boostUntil;
+
+  /// Etiquetas en común conmigo (solo en resultados de descubrimiento).
+  final int sharedTags;
+
+  bool get boosted => boostUntil?.isAfter(DateTime.now()) ?? false;
 
   bool get isPremium =>
       founder || (premiumUntil?.isAfter(DateTime.now()) ?? false);

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
@@ -48,9 +49,18 @@ class ProfileRepository {
     params: {'p_lat': point.latitude, 'p_lng': point.longitude},
   );
 
-  Future<String> uploadPhoto(XFile file, {String bucket = 'photos'}) async {
-    final bytes = await file.readAsBytes();
-    final mime = file.mimeType ?? 'image/jpeg';
+  Future<String> uploadPhoto(XFile file, {String bucket = 'photos'}) async =>
+      uploadPhotoBytes(
+        await file.readAsBytes(),
+        mime: file.mimeType ?? 'image/jpeg',
+        bucket: bucket,
+      );
+
+  Future<String> uploadPhotoBytes(
+    Uint8List bytes, {
+    required String mime,
+    String bucket = 'photos',
+  }) async {
     final ext = switch (mime) {
       'image/png' => 'png',
       'image/webp' => 'webp',

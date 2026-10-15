@@ -74,6 +74,7 @@ void main() {
       'search_lat': null,
       'search_lng': null,
       'search_label': null,
+      'must_tags': <String>[],
     });
   });
 
@@ -163,5 +164,12 @@ void main() {
       expect(m.canEdit(sent.add(const Duration(seconds: 59))), isTrue);
       expect(m.canEdit(sent.add(const Duration(minutes: 1))), isFalse);
     });
+  });
+
+  test('etiquetas: lee las conocidas e ignora las desconocidas', () {
+    final tags = ProfileTag.parse(['christian', 'wants_kids', 'nueva']);
+    expect(tags, {ProfileTag.christian, ProfileTag.wantsKids});
+    expect(ProfileTag.wantsKids.dbValue, 'wants_kids');
+    expect(ProfileTag.gym.dbValue, 'gym');
   });
 }

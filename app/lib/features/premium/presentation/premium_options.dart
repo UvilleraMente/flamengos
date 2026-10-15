@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../app/env.dart';
+import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
@@ -52,6 +54,12 @@ class _PremiumGroupState extends ConsumerState<PremiumGroup> {
           color: _premiumColor,
           title: t.premiumPerksTitle,
           onTap: () => _showPerks(context, premium),
+        ),
+        SettingsTile(
+          icon: Icons.insights_rounded,
+          color: const Color(0xFF5856D6),
+          title: t.insightsTitle,
+          onTap: () => context.push(Routes.insights),
         ),
         SettingsTile(
           icon: Icons.visibility_off_rounded,

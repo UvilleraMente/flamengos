@@ -33,7 +33,10 @@ class Env {
   static const privacyUrl = '$websiteUrl/privacidad';
 
   /// Correo de soporte (vacío = se oculta el botón de contacto).
-  static const supportEmail = String.fromEnvironment('SUPPORT_EMAIL');
+  static const supportEmail = String.fromEnvironment(
+    'SUPPORT_EMAIL',
+    defaultValue: 'creativeminds.devs@gmail.com',
+  );
 
   /// Deben coincidir con max_active_requests() en el SQL.
   static const maxActiveRequests = 3;

@@ -44,6 +44,9 @@ String? _serverCode(BuildContext context, AppLocalizations t, String code) =>
       'no_dissolution_to_cancel' => t.errorNoDissolutionToCancel,
       'verification_pending' => t.errorVerificationPending,
       'edit_window_closed' => t.errorEditWindowClosed,
+      'not_admin' => t.errorNotAdmin,
+      'premium_required' => t.errorPremiumRequired,
+      'photo_not_found' => t.errorGeneric,
       'message_not_found' || 'message_invalid' => t.errorGeneric,
       _ => null,
     };

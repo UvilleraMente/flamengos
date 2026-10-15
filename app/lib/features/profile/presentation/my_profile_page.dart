@@ -9,7 +9,18 @@ import '../../../shared/widgets/widgets.dart';
 import '../../verification/data/verification_repository.dart';
 import '../../verification/domain/verification.dart';
 import '../data/profile_repository.dart';
+import '../domain/profile.dart';
 import 'profile_sheet.dart';
+
+/// El consejo más útil para mejorar el perfil, o null si ya está completo.
+/// (La verificación tiene su propio aviso arriba.)
+String? profileTip(AppLocalizations t, Profile p) {
+  if (p.photos.length < 3) return t.tipPhotos;
+  if (p.bio.trim().isEmpty) return t.tipBio;
+  if (p.tags.isEmpty) return t.tipTags;
+  if (p.prompts.isEmpty) return t.tipPrompts;
+  return null;
+}
 
 class MyProfilePage extends ConsumerWidget {
   const MyProfilePage({super.key});
@@ -95,6 +106,32 @@ class MyProfilePage extends ConsumerWidget {
                                         ),
                                       ),
                                     ),
+                                    const Icon(Icons.chevron_right_rounded),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        if (profileTip(t, profile) case final tip?)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 12),
+                            child: GestureDetector(
+                              onTap: () => context.push(Routes.editProfile),
+                              child: Glass(
+                                padding: const EdgeInsets.fromLTRB(
+                                  14,
+                                  10,
+                                  10,
+                                  10,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.tips_and_updates_rounded,
+                                      color: FlamColors.pink,
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Expanded(child: Text(tip)),
                                     const Icon(Icons.chevron_right_rounded),
                                   ],
                                 ),

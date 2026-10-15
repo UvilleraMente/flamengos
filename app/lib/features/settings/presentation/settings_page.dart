@@ -8,6 +8,7 @@ import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/widgets/widgets.dart';
+import '../../admin/data/admin_repository.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../premium/presentation/premium_options.dart';
 import '../../profile/data/profile_repository.dart';
@@ -74,6 +75,19 @@ class SettingsPage extends ConsumerWidget {
                       ),
                     ],
                   ),
+                ),
+                gap,
+              ],
+              if (ref.watch(isAdminProvider).value ?? false) ...[
+                SettingsGroup(
+                  children: [
+                    SettingsTile(
+                      icon: Icons.admin_panel_settings_rounded,
+                      color: const Color(0xFF1C1C1E),
+                      title: t.adminTitle,
+                      onTap: () => context.push(Routes.admin),
+                    ),
+                  ],
                 ),
                 gap,
               ],

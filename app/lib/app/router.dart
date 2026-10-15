@@ -10,6 +10,8 @@ import '../features/auth/presentation/login_page.dart';
 import '../features/auth/presentation/reset_password_page.dart';
 import '../features/auth/presentation/splash_page.dart';
 import '../features/help/presentation/help_page.dart';
+import '../features/premium/presentation/insights_page.dart';
+import '../features/admin/presentation/admin_page.dart';
 import '../features/home/presentation/home_shell.dart';
 import '../features/location/presentation/location_picker_page.dart';
 import '../features/profile/data/profile_repository.dart';
@@ -30,6 +32,8 @@ abstract final class Routes {
   static const blocked = '/settings/blocked';
   static const verification = '/verification';
   static const help = '/help';
+  static const insights = '/insights';
+  static const admin = '/admin';
 
   /// Devuelve un `Place` con `context.push<Place>(Routes.pickLocation, extra: LatLng?)`.
   static const pickLocation = '/location';
@@ -96,6 +100,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(path: Routes.settings, builder: (_, _) => const SettingsPage()),
       GoRoute(path: Routes.help, builder: (_, _) => const HelpPage()),
+      GoRoute(path: Routes.insights, builder: (_, _) => const InsightsPage()),
+      GoRoute(path: Routes.admin, builder: (_, _) => const AdminPage()),
       GoRoute(
         path: Routes.blocked,
         builder: (_, _) => const BlockedUsersPage(),

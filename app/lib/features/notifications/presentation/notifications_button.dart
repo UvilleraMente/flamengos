@@ -17,6 +17,8 @@ extension NotificationText on AppNotification {
     NotificationType.dissolutionRequested => t.notifDissolutionRequested(name),
     NotificationType.dissolutionCancelled => t.notifDissolutionCancelled(name),
     NotificationType.coupleDissolved => t.notifCoupleDissolved(name),
+    NotificationType.photoRejected => t.notifPhotoRejected,
+    NotificationType.boostStarted => t.notifBoostStarted,
   };
 
   IconData get icon => switch (type) {
@@ -26,6 +28,8 @@ extension NotificationText on AppNotification {
     NotificationType.dissolutionRequested => Icons.heart_broken_rounded,
     NotificationType.dissolutionCancelled => Icons.healing_rounded,
     NotificationType.coupleDissolved => Icons.waving_hand_rounded,
+    NotificationType.photoRejected => Icons.hide_image_rounded,
+    NotificationType.boostStarted => Icons.bolt_rounded,
   };
 }
 

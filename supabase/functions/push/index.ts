@@ -20,25 +20,31 @@ type NotificationType =
   | "request_expiring"
   | "dissolution_requested"
   | "dissolution_cancelled"
-  | "couple_dissolved";
+  | "couple_dissolved"
+  | "photo_rejected"
+  | "boost_started";
 
 // Mismos textos que la app (lib/l10n/app_*.arb → notif*).
 const texts: Record<Locale, Record<NotificationType, (name: string) => string>> = {
   es: {
-    request_received: (n) => `${n} te pidió pareja 💌`,
-    request_accepted: (n) => `${n} aceptó ser tu pareja 💕`,
-    request_expiring: (n) => `La solicitud de ${n} expira pronto ⏳`,
-    dissolution_requested: (n) => `${n} quiere terminar la pareja 💔`,
-    dissolution_cancelled: (n) => `${n} se arrepintió: siguen juntos 🩹`,
-    couple_dissolved: (n) => `Tu pareja con ${n} terminó 🕊️`,
+    request_received: (n) => `${n} te pidió pareja`,
+    request_accepted: (n) => `${n} aceptó ser tu pareja`,
+    request_expiring: (n) => `La solicitud de ${n} expira pronto`,
+    dissolution_requested: (n) => `${n} quiere terminar la pareja`,
+    dissolution_cancelled: (n) => `${n} se arrepintió: siguen juntos`,
+    couple_dissolved: (n) => `Tu pareja con ${n} terminó`,
+    photo_rejected: () => "Quitamos una de tus fotos porque no cumple las normas",
+    boost_started: () => "Tu perfil tiene un impulso de 24 h: saldrás primero en Descubrir",
   },
   en: {
-    request_received: (n) => `${n} asked you to pair 💌`,
-    request_accepted: (n) => `${n} accepted to be your pair 💕`,
-    request_expiring: (n) => `${n}'s request expires soon ⏳`,
-    dissolution_requested: (n) => `${n} wants to end the pair 💔`,
-    dissolution_cancelled: (n) => `${n} changed their mind: you're still together 🩹`,
-    couple_dissolved: (n) => `Your pair with ${n} ended 🕊️`,
+    request_received: (n) => `${n} asked you to pair`,
+    request_accepted: (n) => `${n} accepted to be your pair`,
+    request_expiring: (n) => `${n}'s request expires soon`,
+    dissolution_requested: (n) => `${n} wants to end the pair`,
+    dissolution_cancelled: (n) => `${n} changed their mind: you're still together`,
+    couple_dissolved: (n) => `Your pair with ${n} ended`,
+    photo_rejected: () => "We removed one of your photos because it breaks the rules",
+    boost_started: () => "Your profile has a 24 h boost: you'll show up first in Discover",
   },
 };
 const someone: Record<Locale, string> = { es: "Alguien", en: "Someone" };
@@ -187,7 +193,7 @@ async function handle(req: Request): Promise<Response> {
       if (!text) return "error";
       const result = await send(
         token,
-        "Flamengos 🦩",
+        "Flamengos",
         text(actor?.display_name ?? someone[lang]),
         n.type,
       );

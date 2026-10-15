@@ -129,7 +129,9 @@ class _ProfileCardState extends State<ProfileCard> {
                         color: FlamColors.onPhoto,
                       ),
                     ),
-                    if (p.city.isNotEmpty || distance != null) ...[
+                    if (p.city.isNotEmpty ||
+                        distance != null ||
+                        p.sharedTags > 0) ...[
                       const SizedBox(height: 8),
                       Wrap(
                         spacing: 6,
@@ -142,6 +144,14 @@ class _ProfileCardState extends State<ProfileCard> {
                                 size: 15,
                               ),
                               child: Text(p.city),
+                            ),
+                          if (p.sharedTags > 0)
+                            GlassPill(
+                              leading: const Icon(
+                                Icons.local_offer_rounded,
+                                size: 14,
+                              ),
+                              child: Text(t.tagsShared(p.sharedTags)),
                             ),
                           if (distance != null)
                             GlassPill(

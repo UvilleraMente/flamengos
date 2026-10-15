@@ -6,7 +6,10 @@ import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../notifications/presentation/notifications_button.dart';
+import '../../../core/supabase/supabase_providers.dart';
+import '../../premium/data/insights.dart';
 import '../../premium/data/premium.dart';
+import '../../premium/presentation/insights_page.dart';
 import '../../profile/data/profile_repository.dart';
 import '../../profile/domain/profile.dart';
 import '../../profile/presentation/profile_sheet.dart';
@@ -216,13 +219,69 @@ class _CoupleHeader extends ConsumerWidget {
       action: t.coupleEndAction,
       destructive: true,
     );
-    if (!ok) return;
+    if (!ok || !context.mounted) return;
+    final reason = await _askEndReason(context);
+    // Se leen antes: si la pareja se disuelve al instante, esta vista se va.
+    final repo = ref.read(coupleRepositoryProvider);
+    final db = ref.read(supabaseProvider);
     try {
-      await ref.read(coupleRepositoryProvider).requestDissolution();
+      await repo.requestDissolution();
+      if (reason != null) {
+        await submitMatchFeedback(db, couple.id, reason).catchError((_) {});
+      }
     } catch (e) {
       if (context.mounted) showError(context, e);
     }
   }
+}
+
+/// Encuesta privada: por qué termina (alimenta las estadísticas premium).
+Future<EndReason?> _askEndReason(BuildContext context) {
+  final t = context.l10n;
+  return showModalBottomSheet<EndReason>(
+    context: context,
+    showDragHandle: true,
+    isScrollControlled: true,
+    builder: (sheet) => SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              t.endSurveyTitle,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              t.endSurveyMessage,
+              style: TextStyle(color: FlamColors.textMuted),
+            ),
+            const SizedBox(height: 14),
+            SettingsGroupCard(
+              children: [
+                for (final r in EndReason.values)
+                  ListTile(
+                    title: Text(endReasonLabel(t, r)),
+                    trailing: Icon(
+                      Icons.chevron_right_rounded,
+                      color: FlamColors.textFaint,
+                    ),
+                    onTap: () => Navigator.pop(sheet, r),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: () => Navigator.pop(sheet),
+              child: Text(t.endSurveySkip),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }
 
 class _DissolutionBanner extends ConsumerWidget {

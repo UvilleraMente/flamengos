@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../safety/presentation/report_sheet.dart';
+import '../data/profile_repository.dart';
 import '../domain/profile.dart';
 import 'profile_l10n.dart';
+import 'tag_chips.dart';
 
 /// Perfil completo de otra persona: fotos, preguntas, acciones y reporte.
 ///
@@ -29,16 +32,17 @@ Future<bool> showProfileSheet(
   return blocked ?? false;
 }
 
-class _ProfileSheet extends StatelessWidget {
+class _ProfileSheet extends ConsumerWidget {
   const _ProfileSheet({required this.profile, required this.actions});
 
   final Profile profile;
   final List<Widget> actions;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final t = context.l10n;
     final p = profile;
+    final myTags = ref.watch(myProfileProvider).value?.tags ?? const {};
     final isMe = Supabase.instance.client.auth.currentUser?.id == p.id;
     final urls = p.photoUrls;
     void open(int i) => showPhotoViewer(context, urls, initial: i);
@@ -62,6 +66,16 @@ class _ProfileSheet extends StatelessWidget {
           _Hero(profile: p, onTap: urls.isEmpty ? null : () => open(0)),
           gap,
           _Facts(profile: p),
+          if (p.tags.isNotEmpty) ...[
+            gap,
+            Glass(
+              padding: const EdgeInsets.all(14),
+              child: TagWrap(
+                tags: p.tags,
+                highlight: isMe ? const {} : myTags.intersection(p.tags),
+              ),
+            ),
+          ],
           if (p.bio.isNotEmpty) ...[
             gap,
             Glass(

@@ -210,6 +210,8 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
               onPressed: () => _shareLocation(me),
             ),
           )
+        : me.boosted
+        ? _Banner(icon: Icons.bolt_rounded, text: t.discoverBoosted)
         : full
         ? _Banner(
             icon: Icons.hourglass_top_rounded,

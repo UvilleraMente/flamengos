@@ -560,6 +560,12 @@ abstract class AppLocalizations {
   /// **'Buscar de nuevo'**
   String get discoverSearchAgain;
 
+  /// No description provided for @discoverBoosted.
+  ///
+  /// In es, this message translates to:
+  /// **'Tienes un impulso: por 24 h saldrás primero para los demás. Mejora tu perfil para aprovecharlo.'**
+  String get discoverBoosted;
+
   /// No description provided for @discoverLimitReached.
   ///
   /// In es, this message translates to:
@@ -1034,6 +1040,30 @@ abstract class AppLocalizations {
   /// **'Editar perfil'**
   String get myProfileEdit;
 
+  /// No description provided for @tipPhotos.
+  ///
+  /// In es, this message translates to:
+  /// **'Sube al menos 3 fotos: los perfiles con más fotos reciben más solicitudes.'**
+  String get tipPhotos;
+
+  /// No description provided for @tipBio.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe algo sobre ti: es lo primero que leen.'**
+  String get tipBio;
+
+  /// No description provided for @tipPrompts.
+  ///
+  /// In es, this message translates to:
+  /// **'Responde una pregunta: dan de qué hablar.'**
+  String get tipPrompts;
+
+  /// No description provided for @tipTags.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige tus etiquetas para aparecer primero a quien comparte tus gustos.'**
+  String get tipTags;
+
   /// No description provided for @myProfilePreview.
   ///
   /// In es, this message translates to:
@@ -1081,6 +1111,198 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Hacer principal'**
   String get profilePhotoMakeMain;
+
+  /// No description provided for @photoCropTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ajusta tu foto'**
+  String get photoCropTitle;
+
+  /// No description provided for @photoCropHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Mueve y amplía con dos dedos para encuadrarla.'**
+  String get photoCropHint;
+
+  /// No description provided for @photoCropUse.
+  ///
+  /// In es, this message translates to:
+  /// **'Usar foto'**
+  String get photoCropUse;
+
+  /// No description provided for @tagChristian.
+  ///
+  /// In es, this message translates to:
+  /// **'Fe cristiana'**
+  String get tagChristian;
+
+  /// No description provided for @tagCatholic.
+  ///
+  /// In es, this message translates to:
+  /// **'Fe católica'**
+  String get tagCatholic;
+
+  /// No description provided for @tagSpiritual.
+  ///
+  /// In es, this message translates to:
+  /// **'Espiritual'**
+  String get tagSpiritual;
+
+  /// No description provided for @tagWorker.
+  ///
+  /// In es, this message translates to:
+  /// **'Trabaja'**
+  String get tagWorker;
+
+  /// No description provided for @tagStudent.
+  ///
+  /// In es, this message translates to:
+  /// **'Estudia'**
+  String get tagStudent;
+
+  /// No description provided for @tagEntrepreneur.
+  ///
+  /// In es, this message translates to:
+  /// **'Emprende'**
+  String get tagEntrepreneur;
+
+  /// No description provided for @tagSports.
+  ///
+  /// In es, this message translates to:
+  /// **'Deportes'**
+  String get tagSports;
+
+  /// No description provided for @tagGym.
+  ///
+  /// In es, this message translates to:
+  /// **'Gimnasio'**
+  String get tagGym;
+
+  /// No description provided for @tagGamer.
+  ///
+  /// In es, this message translates to:
+  /// **'Videojuegos'**
+  String get tagGamer;
+
+  /// No description provided for @tagReader.
+  ///
+  /// In es, this message translates to:
+  /// **'Lectura'**
+  String get tagReader;
+
+  /// No description provided for @tagTraveler.
+  ///
+  /// In es, this message translates to:
+  /// **'Viajes'**
+  String get tagTraveler;
+
+  /// No description provided for @tagFoodie.
+  ///
+  /// In es, this message translates to:
+  /// **'Buena comida'**
+  String get tagFoodie;
+
+  /// No description provided for @tagMusic.
+  ///
+  /// In es, this message translates to:
+  /// **'Música'**
+  String get tagMusic;
+
+  /// No description provided for @tagDance.
+  ///
+  /// In es, this message translates to:
+  /// **'Baile'**
+  String get tagDance;
+
+  /// No description provided for @tagPets.
+  ///
+  /// In es, this message translates to:
+  /// **'Mascotas'**
+  String get tagPets;
+
+  /// No description provided for @tagNature.
+  ///
+  /// In es, this message translates to:
+  /// **'Naturaleza'**
+  String get tagNature;
+
+  /// No description provided for @tagBeach.
+  ///
+  /// In es, this message translates to:
+  /// **'Playa'**
+  String get tagBeach;
+
+  /// No description provided for @tagHomebody.
+  ///
+  /// In es, this message translates to:
+  /// **'Planes en casa'**
+  String get tagHomebody;
+
+  /// No description provided for @tagParty.
+  ///
+  /// In es, this message translates to:
+  /// **'Fiesta'**
+  String get tagParty;
+
+  /// No description provided for @tagFamily.
+  ///
+  /// In es, this message translates to:
+  /// **'Familia'**
+  String get tagFamily;
+
+  /// No description provided for @tagWantsKids.
+  ///
+  /// In es, this message translates to:
+  /// **'Quiere hijos'**
+  String get tagWantsKids;
+
+  /// No description provided for @tagNoSmoking.
+  ///
+  /// In es, this message translates to:
+  /// **'No fuma'**
+  String get tagNoSmoking;
+
+  /// No description provided for @tagNoDrinking.
+  ///
+  /// In es, this message translates to:
+  /// **'No bebe'**
+  String get tagNoDrinking;
+
+  /// No description provided for @tagSerious.
+  ///
+  /// In es, this message translates to:
+  /// **'Relación seria'**
+  String get tagSerious;
+
+  /// No description provided for @tagsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Etiquetas'**
+  String get tagsTitle;
+
+  /// No description provided for @tagsHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige hasta {max}. Te mostramos primero a quien comparte las tuyas.'**
+  String tagsHint(int max);
+
+  /// No description provided for @tagsMustTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Imprescindibles'**
+  String get tagsMustTitle;
+
+  /// No description provided for @tagsMustHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Solo verás a quien tenga estas etiquetas (hasta {max}).'**
+  String tagsMustHint(int max);
+
+  /// No description provided for @tagsShared.
+  ///
+  /// In es, this message translates to:
+  /// **'{count, plural, =1{1 en común} other{{count} en común}}'**
+  String tagsShared(int count);
 
   /// No description provided for @profileMainPhoto.
   ///
@@ -1351,6 +1573,18 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'{name} se arrepintió: siguen juntos'**
   String notifDissolutionCancelled(String name);
+
+  /// No description provided for @notifPhotoRejected.
+  ///
+  /// In es, this message translates to:
+  /// **'Quitamos una de tus fotos porque no cumple las normas.'**
+  String get notifPhotoRejected;
+
+  /// No description provided for @notifBoostStarted.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu perfil tiene un impulso de 24 h: saldrás primero en Descubrir.'**
+  String get notifBoostStarted;
 
   /// No description provided for @notifCoupleDissolved.
   ///
@@ -1819,6 +2053,306 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Cuenta'**
   String get settingsAccount;
+
+  /// No description provided for @insightsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Mis estadísticas'**
+  String get insightsTitle;
+
+  /// No description provided for @insightsLocked.
+  ///
+  /// In es, this message translates to:
+  /// **'Con Premium ves tu tiempo en la app, tus conexiones, cuánto duraron tus parejas y por qué terminaron.'**
+  String get insightsLocked;
+
+  /// No description provided for @insightsTime.
+  ///
+  /// In es, this message translates to:
+  /// **'Tiempo en la app'**
+  String get insightsTime;
+
+  /// No description provided for @insightsToday.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy'**
+  String get insightsToday;
+
+  /// No description provided for @insights7d.
+  ///
+  /// In es, this message translates to:
+  /// **'7 días'**
+  String get insights7d;
+
+  /// No description provided for @insights30d.
+  ///
+  /// In es, this message translates to:
+  /// **'30 días'**
+  String get insights30d;
+
+  /// No description provided for @insightsConnections.
+  ///
+  /// In es, this message translates to:
+  /// **'Conexiones'**
+  String get insightsConnections;
+
+  /// No description provided for @insightsSent.
+  ///
+  /// In es, this message translates to:
+  /// **'Enviadas'**
+  String get insightsSent;
+
+  /// No description provided for @insightsReceived.
+  ///
+  /// In es, this message translates to:
+  /// **'Recibidas'**
+  String get insightsReceived;
+
+  /// No description provided for @insightsAccepted.
+  ///
+  /// In es, this message translates to:
+  /// **'Te aceptaron'**
+  String get insightsAccepted;
+
+  /// No description provided for @insightsDeclined.
+  ///
+  /// In es, this message translates to:
+  /// **'Rechazadas'**
+  String get insightsDeclined;
+
+  /// No description provided for @insightsExpired.
+  ///
+  /// In es, this message translates to:
+  /// **'Expiraron'**
+  String get insightsExpired;
+
+  /// No description provided for @insightsYouAccepted.
+  ///
+  /// In es, this message translates to:
+  /// **'Aceptaste'**
+  String get insightsYouAccepted;
+
+  /// No description provided for @insightsAcceptRate.
+  ///
+  /// In es, this message translates to:
+  /// **'Te aceptan el {pct}% de las solicitudes que se resuelven.'**
+  String insightsAcceptRate(int pct);
+
+  /// No description provided for @insightsCouples.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas'**
+  String get insightsCouples;
+
+  /// No description provided for @insightsAverage.
+  ///
+  /// In es, this message translates to:
+  /// **'Promedio'**
+  String get insightsAverage;
+
+  /// No description provided for @insightsLongest.
+  ///
+  /// In es, this message translates to:
+  /// **'La más larga'**
+  String get insightsLongest;
+
+  /// No description provided for @insightsWhyEnded.
+  ///
+  /// In es, this message translates to:
+  /// **'Por qué terminaron'**
+  String get insightsWhyEnded;
+
+  /// No description provided for @insightsHistory.
+  ///
+  /// In es, this message translates to:
+  /// **'Historial'**
+  String get insightsHistory;
+
+  /// No description provided for @insightsOngoing.
+  ///
+  /// In es, this message translates to:
+  /// **'en curso'**
+  String get insightsOngoing;
+
+  /// No description provided for @insightsEmptyCouples.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no has tenido pareja en Flamengos.'**
+  String get insightsEmptyCouples;
+
+  /// No description provided for @durMinutes.
+  ///
+  /// In es, this message translates to:
+  /// **'{n} min'**
+  String durMinutes(int n);
+
+  /// No description provided for @durHours.
+  ///
+  /// In es, this message translates to:
+  /// **'{n} h'**
+  String durHours(int n);
+
+  /// No description provided for @durDays.
+  ///
+  /// In es, this message translates to:
+  /// **'{n, plural, =1{1 día} other{{n} días}}'**
+  String durDays(int n);
+
+  /// No description provided for @endNoChemistry.
+  ///
+  /// In es, this message translates to:
+  /// **'No hubo química'**
+  String get endNoChemistry;
+
+  /// No description provided for @endDifferentGoals.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscábamos cosas distintas'**
+  String get endDifferentGoals;
+
+  /// No description provided for @endDistance.
+  ///
+  /// In es, this message translates to:
+  /// **'La distancia'**
+  String get endDistance;
+
+  /// No description provided for @endCommunication.
+  ///
+  /// In es, this message translates to:
+  /// **'Falta de comunicación'**
+  String get endCommunication;
+
+  /// No description provided for @endMetSomeone.
+  ///
+  /// In es, this message translates to:
+  /// **'Conocí a alguien más'**
+  String get endMetSomeone;
+
+  /// No description provided for @endDisrespect.
+  ///
+  /// In es, this message translates to:
+  /// **'Falta de respeto'**
+  String get endDisrespect;
+
+  /// No description provided for @endOther.
+  ///
+  /// In es, this message translates to:
+  /// **'Otra razón'**
+  String get endOther;
+
+  /// No description provided for @endSurveyTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Por qué terminan?'**
+  String get endSurveyTitle;
+
+  /// No description provided for @endSurveyMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Es privado: solo tú lo verás en tus estadísticas.'**
+  String get endSurveyMessage;
+
+  /// No description provided for @endSurveySkip.
+  ///
+  /// In es, this message translates to:
+  /// **'Prefiero no decirlo'**
+  String get endSurveySkip;
+
+  /// No description provided for @adminTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Administración'**
+  String get adminTitle;
+
+  /// No description provided for @adminVerifications.
+  ///
+  /// In es, this message translates to:
+  /// **'Verificaciones'**
+  String get adminVerifications;
+
+  /// No description provided for @adminPhotos.
+  ///
+  /// In es, this message translates to:
+  /// **'Fotos'**
+  String get adminPhotos;
+
+  /// No description provided for @adminReports.
+  ///
+  /// In es, this message translates to:
+  /// **'Reportes'**
+  String get adminReports;
+
+  /// No description provided for @adminApprove.
+  ///
+  /// In es, this message translates to:
+  /// **'Aprobar'**
+  String get adminApprove;
+
+  /// No description provided for @adminReject.
+  ///
+  /// In es, this message translates to:
+  /// **'Rechazar'**
+  String get adminReject;
+
+  /// No description provided for @adminDismiss.
+  ///
+  /// In es, this message translates to:
+  /// **'Descartar'**
+  String get adminDismiss;
+
+  /// No description provided for @adminBan.
+  ///
+  /// In es, this message translates to:
+  /// **'Bloquear cuenta'**
+  String get adminBan;
+
+  /// No description provided for @adminEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Nada pendiente'**
+  String get adminEmpty;
+
+  /// No description provided for @errorNotAdmin.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta sección es solo para administradores.'**
+  String get errorNotAdmin;
+
+  /// No description provided for @errorPremiumRequired.
+  ///
+  /// In es, this message translates to:
+  /// **'Esto es parte de Premium.'**
+  String get errorPremiumRequired;
+
+  /// No description provided for @adminPose.
+  ///
+  /// In es, this message translates to:
+  /// **'Pose pedida: {pose}'**
+  String adminPose(String pose);
+
+  /// No description provided for @adminReportedBy.
+  ///
+  /// In es, this message translates to:
+  /// **'Reportado por {name}'**
+  String adminReportedBy(String name);
+
+  /// No description provided for @adminBanConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'{name} no podrá entrar más, saldrá de Descubrir y se terminará su pareja. ¿Seguro?'**
+  String adminBanConfirm(String name);
+
+  /// No description provided for @adminApproveAll.
+  ///
+  /// In es, this message translates to:
+  /// **'Aprobar todas ({count})'**
+  String adminApproveAll(int count);
+
+  /// No description provided for @adminOpenReports.
+  ///
+  /// In es, this message translates to:
+  /// **'{count, plural, =1{1 reporte abierto} other{{count} reportes abiertos}}'**
+  String adminOpenReports(int count);
 
   /// No description provided for @premiumTitle.
   ///

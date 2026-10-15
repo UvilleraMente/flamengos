@@ -13,8 +13,10 @@ import '../../location/presentation/share_location.dart';
 import '../../auth/data/auth_repository.dart';
 import '../data/profile_repository.dart';
 import '../domain/profile.dart';
+import 'photo_crop_page.dart';
 import 'profile_l10n.dart';
 import 'prompts_editor.dart';
+import 'tag_chips.dart';
 
 const _maxPhotos = 6;
 
@@ -38,6 +40,7 @@ class _ProfileFormPageState extends ConsumerState<ProfileFormPage> {
   late final Set<Gender> _interestedIn = {...?widget.initial?.interestedIn};
   late final List<String> _photos = [...?widget.initial?.photos];
   late List<ProfilePrompt> _prompts = [...?widget.initial?.prompts];
+  late Set<ProfileTag> _tags = {...?widget.initial?.tags};
 
   /// Ubicación nueva por guardar (se envía al servidor al guardar).
   LatLng? _newLocation;
@@ -86,13 +89,19 @@ class _ProfileFormPageState extends ConsumerState<ProfileFormPage> {
   Future<void> _addPhoto() async {
     final file = await ImagePicker().pickImage(
       source: ImageSource.gallery,
-      maxWidth: 1440,
-      imageQuality: 85,
+      maxWidth: 2000,
+      imageQuality: 90,
     );
     if (file == null) return;
+    final bytes = await file.readAsBytes();
+    if (!mounted) return;
+    final cropped = await cropPhoto(context, bytes);
+    if (cropped == null || !mounted) return;
     setState(() => _uploading = true);
     try {
-      final path = await ref.read(profileRepositoryProvider).uploadPhoto(file);
+      final path = await ref
+          .read(profileRepositoryProvider)
+          .uploadPhotoBytes(cropped, mime: imageMimeType(cropped));
       setState(() => _photos.add(path));
     } catch (e) {
       if (mounted) showError(context, e);
@@ -125,6 +134,7 @@ class _ProfileFormPageState extends ConsumerState<ProfileFormPage> {
       'bio': _bio.text.trim(),
       'photos': _photos,
       'prompts': [for (final p in _prompts) p.toJson()],
+      'tags': [for (final tag in _tags) tag.dbValue],
     };
 
     setState(() => _saving = true);
@@ -376,6 +386,21 @@ class _ProfileFormPageState extends ConsumerState<ProfileFormPage> {
                         maxLines: 6,
                         maxLength: 500,
                         textCapitalization: TextCapitalization.sentences,
+                      ),
+                    ),
+                  ],
+                ),
+                gap,
+                SettingsGroup(
+                  title: t.tagsTitle,
+                  footer: t.tagsHint(ProfileTag.maxPerProfile),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: TagPicker(
+                        selected: _tags,
+                        max: ProfileTag.maxPerProfile,
+                        onChanged: (v) => setState(() => _tags = v),
                       ),
                     ),
                   ],

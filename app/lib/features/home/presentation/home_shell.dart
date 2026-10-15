@@ -8,6 +8,7 @@ import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../couple/data/couple_presence.dart';
+import '../../premium/data/insights.dart';
 import '../../couple/presentation/couple_page.dart';
 import '../../discover/presentation/discover_page.dart';
 import '../../notifications/data/notifications_repository.dart';
@@ -68,6 +69,8 @@ class _HomeShellState extends ConsumerState<HomeShell> {
       myProfileProvider.select((p) => p.value?.currentMatchId),
     );
     if (matchId != null) ref.listen(couplePresenceProvider(matchId), (_, _) {});
+    // Tiempo en la app (estadísticas premium).
+    ref.listen(usageTrackerProvider, (_, _) {});
 
     ref.listen(myProfileProvider.select((p) => p.value?.currentMatchId), (
       before,

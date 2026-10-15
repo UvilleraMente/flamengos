@@ -265,6 +265,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get discoverSearchAgain => 'Buscar de nuevo';
 
   @override
+  String get discoverBoosted =>
+      'Tienes un impulso: por 24 h saldrás primero para los demás. Mejora tu perfil para aprovecharlo.';
+
+  @override
   String discoverLimitReached(int max) {
     return 'Tienes $max solicitudes esperando. Espera respuesta o cancela una para enviar otra.';
   }
@@ -543,6 +547,20 @@ class AppLocalizationsEs extends AppLocalizations {
   String get myProfileEdit => 'Editar perfil';
 
   @override
+  String get tipPhotos =>
+      'Sube al menos 3 fotos: los perfiles con más fotos reciben más solicitudes.';
+
+  @override
+  String get tipBio => 'Escribe algo sobre ti: es lo primero que leen.';
+
+  @override
+  String get tipPrompts => 'Responde una pregunta: dan de qué hablar.';
+
+  @override
+  String get tipTags =>
+      'Elige tus etiquetas para aparecer primero a quien comparte tus gustos.';
+
+  @override
   String get myProfilePreview => 'Ver como lo ven otros';
 
   @override
@@ -568,6 +586,114 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get profilePhotoMakeMain => 'Hacer principal';
+
+  @override
+  String get photoCropTitle => 'Ajusta tu foto';
+
+  @override
+  String get photoCropHint => 'Mueve y amplía con dos dedos para encuadrarla.';
+
+  @override
+  String get photoCropUse => 'Usar foto';
+
+  @override
+  String get tagChristian => 'Fe cristiana';
+
+  @override
+  String get tagCatholic => 'Fe católica';
+
+  @override
+  String get tagSpiritual => 'Espiritual';
+
+  @override
+  String get tagWorker => 'Trabaja';
+
+  @override
+  String get tagStudent => 'Estudia';
+
+  @override
+  String get tagEntrepreneur => 'Emprende';
+
+  @override
+  String get tagSports => 'Deportes';
+
+  @override
+  String get tagGym => 'Gimnasio';
+
+  @override
+  String get tagGamer => 'Videojuegos';
+
+  @override
+  String get tagReader => 'Lectura';
+
+  @override
+  String get tagTraveler => 'Viajes';
+
+  @override
+  String get tagFoodie => 'Buena comida';
+
+  @override
+  String get tagMusic => 'Música';
+
+  @override
+  String get tagDance => 'Baile';
+
+  @override
+  String get tagPets => 'Mascotas';
+
+  @override
+  String get tagNature => 'Naturaleza';
+
+  @override
+  String get tagBeach => 'Playa';
+
+  @override
+  String get tagHomebody => 'Planes en casa';
+
+  @override
+  String get tagParty => 'Fiesta';
+
+  @override
+  String get tagFamily => 'Familia';
+
+  @override
+  String get tagWantsKids => 'Quiere hijos';
+
+  @override
+  String get tagNoSmoking => 'No fuma';
+
+  @override
+  String get tagNoDrinking => 'No bebe';
+
+  @override
+  String get tagSerious => 'Relación seria';
+
+  @override
+  String get tagsTitle => 'Etiquetas';
+
+  @override
+  String tagsHint(int max) {
+    return 'Elige hasta $max. Te mostramos primero a quien comparte las tuyas.';
+  }
+
+  @override
+  String get tagsMustTitle => 'Imprescindibles';
+
+  @override
+  String tagsMustHint(int max) {
+    return 'Solo verás a quien tenga estas etiquetas (hasta $max).';
+  }
+
+  @override
+  String tagsShared(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count en común',
+      one: '1 en común',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get profileMainPhoto => 'Principal';
@@ -723,6 +849,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String notifDissolutionCancelled(String name) {
     return '$name se arrepintió: siguen juntos';
   }
+
+  @override
+  String get notifPhotoRejected =>
+      'Quitamos una de tus fotos porque no cumple las normas.';
+
+  @override
+  String get notifBoostStarted =>
+      'Tu perfil tiene un impulso de 24 h: saldrás primero en Descubrir.';
 
   @override
   String notifCoupleDissolved(String name) {
@@ -977,6 +1111,188 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get settingsAccount => 'Cuenta';
+
+  @override
+  String get insightsTitle => 'Mis estadísticas';
+
+  @override
+  String get insightsLocked =>
+      'Con Premium ves tu tiempo en la app, tus conexiones, cuánto duraron tus parejas y por qué terminaron.';
+
+  @override
+  String get insightsTime => 'Tiempo en la app';
+
+  @override
+  String get insightsToday => 'Hoy';
+
+  @override
+  String get insights7d => '7 días';
+
+  @override
+  String get insights30d => '30 días';
+
+  @override
+  String get insightsConnections => 'Conexiones';
+
+  @override
+  String get insightsSent => 'Enviadas';
+
+  @override
+  String get insightsReceived => 'Recibidas';
+
+  @override
+  String get insightsAccepted => 'Te aceptaron';
+
+  @override
+  String get insightsDeclined => 'Rechazadas';
+
+  @override
+  String get insightsExpired => 'Expiraron';
+
+  @override
+  String get insightsYouAccepted => 'Aceptaste';
+
+  @override
+  String insightsAcceptRate(int pct) {
+    return 'Te aceptan el $pct% de las solicitudes que se resuelven.';
+  }
+
+  @override
+  String get insightsCouples => 'Parejas';
+
+  @override
+  String get insightsAverage => 'Promedio';
+
+  @override
+  String get insightsLongest => 'La más larga';
+
+  @override
+  String get insightsWhyEnded => 'Por qué terminaron';
+
+  @override
+  String get insightsHistory => 'Historial';
+
+  @override
+  String get insightsOngoing => 'en curso';
+
+  @override
+  String get insightsEmptyCouples => 'Aún no has tenido pareja en Flamengos.';
+
+  @override
+  String durMinutes(int n) {
+    return '$n min';
+  }
+
+  @override
+  String durHours(int n) {
+    return '$n h';
+  }
+
+  @override
+  String durDays(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n días',
+      one: '1 día',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get endNoChemistry => 'No hubo química';
+
+  @override
+  String get endDifferentGoals => 'Buscábamos cosas distintas';
+
+  @override
+  String get endDistance => 'La distancia';
+
+  @override
+  String get endCommunication => 'Falta de comunicación';
+
+  @override
+  String get endMetSomeone => 'Conocí a alguien más';
+
+  @override
+  String get endDisrespect => 'Falta de respeto';
+
+  @override
+  String get endOther => 'Otra razón';
+
+  @override
+  String get endSurveyTitle => '¿Por qué terminan?';
+
+  @override
+  String get endSurveyMessage =>
+      'Es privado: solo tú lo verás en tus estadísticas.';
+
+  @override
+  String get endSurveySkip => 'Prefiero no decirlo';
+
+  @override
+  String get adminTitle => 'Administración';
+
+  @override
+  String get adminVerifications => 'Verificaciones';
+
+  @override
+  String get adminPhotos => 'Fotos';
+
+  @override
+  String get adminReports => 'Reportes';
+
+  @override
+  String get adminApprove => 'Aprobar';
+
+  @override
+  String get adminReject => 'Rechazar';
+
+  @override
+  String get adminDismiss => 'Descartar';
+
+  @override
+  String get adminBan => 'Bloquear cuenta';
+
+  @override
+  String get adminEmpty => 'Nada pendiente';
+
+  @override
+  String get errorNotAdmin => 'Esta sección es solo para administradores.';
+
+  @override
+  String get errorPremiumRequired => 'Esto es parte de Premium.';
+
+  @override
+  String adminPose(String pose) {
+    return 'Pose pedida: $pose';
+  }
+
+  @override
+  String adminReportedBy(String name) {
+    return 'Reportado por $name';
+  }
+
+  @override
+  String adminBanConfirm(String name) {
+    return '$name no podrá entrar más, saldrá de Descubrir y se terminará su pareja. ¿Seguro?';
+  }
+
+  @override
+  String adminApproveAll(int count) {
+    return 'Aprobar todas ($count)';
+  }
+
+  @override
+  String adminOpenReports(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count reportes abiertos',
+      one: '1 reporte abierto',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get premiumTitle => 'Premium';

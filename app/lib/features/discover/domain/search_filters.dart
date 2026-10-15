@@ -10,6 +10,7 @@ class SearchFilters {
     required this.maxDistanceKm,
     this.center,
     this.centerLabel,
+    this.mustTags = const {},
   });
 
   factory SearchFilters.of(Profile p) => SearchFilters(
@@ -18,6 +19,7 @@ class SearchFilters {
     maxDistanceKm: p.maxDistanceKm,
     center: p.searchCenter,
     centerLabel: p.searchLabel,
+    mustTags: p.mustTags,
   );
 
   static const minAge = 18;
@@ -34,18 +36,23 @@ class SearchFilters {
   final LatLng? center;
   final String? centerLabel;
 
+  /// Etiquetas que la otra persona debe tener.
+  final Set<ProfileTag> mustTags;
+
   SearchFilters copyWith({
     int? ageMin,
     int? ageMax,
     int? Function()? maxDistanceKm,
     LatLng? Function()? center,
     String? Function()? centerLabel,
+    Set<ProfileTag>? mustTags,
   }) => SearchFilters(
     ageMin: ageMin ?? this.ageMin,
     ageMax: ageMax ?? this.ageMax,
     maxDistanceKm: maxDistanceKm != null ? maxDistanceKm() : this.maxDistanceKm,
     center: center != null ? center() : this.center,
     centerLabel: centerLabel != null ? centerLabel() : this.centerLabel,
+    mustTags: mustTags ?? this.mustTags,
   );
 
   Map<String, dynamic> toJson() => {
@@ -55,5 +62,6 @@ class SearchFilters {
     'search_lat': center?.latitude,
     'search_lng': center?.longitude,
     'search_label': center == null ? null : centerLabel,
+    'must_tags': [for (final tag in mustTags) tag.dbValue],
   };
 }

@@ -9,6 +9,7 @@ import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../location/domain/place.dart';
 import '../../profile/domain/profile.dart';
+import '../../profile/presentation/tag_chips.dart';
 import '../data/discover_repository.dart';
 import '../domain/search_filters.dart';
 
@@ -178,6 +179,19 @@ class _FiltersSheetState extends ConsumerState<_FiltersSheet> {
                 style: TextStyle(color: FlamColors.textMuted),
               ),
             ],
+            const SizedBox(height: 20),
+            _Label(t.tagsMustTitle),
+            const SizedBox(height: 4),
+            Text(
+              t.tagsMustHint(ProfileTag.maxMustHave),
+              style: TextStyle(color: FlamColors.textMuted, fontSize: 13),
+            ),
+            const SizedBox(height: 10),
+            TagPicker(
+              selected: _f.mustTags,
+              max: ProfileTag.maxMustHave,
+              onChanged: (v) => setState(() => _f = _f.copyWith(mustTags: v)),
+            ),
             const SizedBox(height: 28),
             FlamButton(
               label: t.filtersApply,

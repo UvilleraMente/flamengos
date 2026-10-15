@@ -5,7 +5,9 @@ enum NotificationType {
   requestExpiring('request_expiring'),
   dissolutionRequested('dissolution_requested'),
   dissolutionCancelled('dissolution_cancelled'),
-  coupleDissolved('couple_dissolved');
+  coupleDissolved('couple_dissolved'),
+  photoRejected('photo_rejected'),
+  boostStarted('boost_started');
 
   const NotificationType(this.dbValue);
   final String dbValue;

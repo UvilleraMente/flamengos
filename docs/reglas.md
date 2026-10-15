@@ -89,3 +89,21 @@ Cuando B acepta la solicitud de A, en una sola transacción:
   - Ver si la pareja está **escribiendo** o **en línea**.
 - Si el premium vence, las solicitudes que ya tenía siguen vivas hasta expirar, pero no puede enviar más hasta bajar de 3.
 - Implementación: `supabase/migrations/0005_premium.sql` (`is_premium`, `max_active_requests`, `chat_reads`).
+
+## Etiquetas e impulso
+
+- Cada perfil elige hasta **5 etiquetas** (fe, trabajo, gustos, valores).
+- En los filtros se pueden marcar hasta **2 imprescindibles**: solo aparece quien las tenga.
+- Descubrir ordena: perfiles con impulso → más etiquetas en común → más cerca.
+- **Impulso:** si en 7 días a alguien le rechazan o le expiran 3 solicitudes y no le aceptan ninguna, su perfil sale primero durante **24 h** (como mucho una vez cada 3 días). Nadie más ve que tiene impulso. La app le muestra consejos para mejorar su perfil.
+
+## Moderación
+
+- Cada foto nueva entra a una cola que un admin revisa (Ajustes → Administración). Rechazarla la quita del perfil y avisa a la persona.
+- Con **3 reportes abiertos de personas distintas**, el perfil se oculta de Descubrir hasta que un admin lo revise.
+- Un admin puede bloquear una cuenta: no puede volver a entrar, sale de Descubrir, se anulan sus solicitudes y se termina su pareja.
+
+## Estadísticas (premium)
+
+- Tiempo en la app (hoy, 7 y 30 días), solicitudes enviadas/recibidas/aceptadas, parejas, cuánto duraron y por qué terminaron.
+- Al terminar una pareja se pregunta el motivo (opcional y privado: solo lo ve quien responde).
