@@ -47,7 +47,19 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
-const serviceAccount = JSON.parse(Deno.env.get("FIREBASE_SERVICE_ACCOUNT") ?? "{}");
+
+// Se lee al primer uso: si el secreto falta o está mal, la función responde
+// con un error claro en vez de caerse al arrancar.
+let _serviceAccount: { client_email: string; private_key: string; project_id: string } | null =
+  null;
+function serviceAccount() {
+  if (!_serviceAccount) {
+    const raw = Deno.env.get("FIREBASE_SERVICE_ACCOUNT");
+    if (!raw) throw new Error("Falta el secreto FIREBASE_SERVICE_ACCOUNT");
+    _serviceAccount = JSON.parse(raw);
+  }
+  return _serviceAccount!;
+}
 
 // ---------- OAuth para FCM (JWT firmado con la cuenta de servicio) ----------
 
@@ -72,7 +84,7 @@ async function accessToken(): Promise<string> {
   const now = Math.floor(Date.now() / 1000);
   const unsigned = `${b64url(JSON.stringify({ alg: "RS256", typ: "JWT" }))}.${
     b64url(JSON.stringify({
-      iss: serviceAccount.client_email,
+      iss: serviceAccount().client_email,
       scope: "https://www.googleapis.com/auth/firebase.messaging",
       aud: "https://oauth2.googleapis.com/token",
       iat: now,
@@ -81,7 +93,7 @@ async function accessToken(): Promise<string> {
   }`;
   const key = await crypto.subtle.importKey(
     "pkcs8",
-    pemToDer(serviceAccount.private_key),
+    pemToDer(serviceAccount().private_key),
     { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
     false,
     ["sign"],
@@ -108,7 +120,7 @@ async function accessToken(): Promise<string> {
 
 async function send(token: string, title: string, body: string, type: string) {
   const res = await fetch(
-    `https://fcm.googleapis.com/v1/projects/${serviceAccount.project_id}/messages:send`,
+    `https://fcm.googleapis.com/v1/projects/${serviceAccount().project_id}/messages:send`,
     {
       method: "POST",
       headers: {
@@ -136,6 +148,15 @@ async function send(token: string, title: string, body: string, type: string) {
 }
 
 Deno.serve(async (req) => {
+  try {
+    return await handle(req);
+  } catch (e) {
+    console.error(e);
+    return Response.json({ error: String(e) }, { status: 500 });
+  }
+});
+
+async function handle(req: Request): Promise<Response> {
   const { notification_id } = await req.json().catch(() => ({}));
   if (typeof notification_id !== "number") {
     return new Response("notification_id requerido", { status: 400 });
@@ -178,4 +199,4 @@ Deno.serve(async (req) => {
   );
 
   return Response.json({ results });
-});
+}
