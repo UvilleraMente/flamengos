@@ -23,6 +23,13 @@ final messagesProvider = StreamProvider.autoDispose
           ref.watch(coupleRepositoryProvider).watchMessages(matchId),
     );
 
+/// Hasta cuándo leyó cada quien el chat (userId → fecha). La fila del otro
+/// solo llega si eres premium (RLS en chat_reads).
+final chatReadsProvider = StreamProvider.autoDispose
+    .family<Map<String, DateTime>, String>(
+      (ref, matchId) => ref.watch(coupleRepositoryProvider).watchReads(matchId),
+    );
+
 class CoupleRepository {
   CoupleRepository(this._db);
 
@@ -48,4 +55,18 @@ class CoupleRepository {
   Future<void> sendMessage(String matchId, String body) => _db
       .from('messages')
       .insert({'match_id': matchId, 'sender_id': _db.myId, 'body': body});
+
+  Future<void> markRead(String matchId) =>
+      _db.rpc('mark_chat_read', params: {'p_match': matchId});
+
+  Stream<Map<String, DateTime>> watchReads(String matchId) => _db
+      .from('chat_reads')
+      .stream(primaryKey: ['match_id', 'user_id'])
+      .eq('match_id', matchId)
+      .map(
+        (rows) => {
+          for (final r in rows)
+            r['user_id'] as String: DateTime.parse(r['last_read_at'] as String),
+        },
+      );
 }

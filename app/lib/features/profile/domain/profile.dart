@@ -52,6 +52,9 @@ class Profile {
     this.searchCenter,
     this.searchLabel,
     this.distanceKm,
+    this.founder = false,
+    this.premiumUntil,
+    this.incognito = false,
   });
 
   factory Profile.fromJson(Map<String, dynamic> json) {
@@ -86,6 +89,11 @@ class Profile {
       searchCenter: point('search_lat', 'search_lng'),
       searchLabel: json['search_label'] as String?,
       distanceKm: (json['distance_km'] as num?)?.toDouble(),
+      founder: json['founder'] as bool? ?? false,
+      premiumUntil: json['premium_until'] == null
+          ? null
+          : DateTime.parse(json['premium_until'] as String),
+      incognito: json['incognito'] as bool? ?? false,
     );
   }
 
@@ -119,6 +127,18 @@ class Profile {
 
   /// Distancia al centro de búsqueda (solo en resultados de descubrimiento).
   final double? distanceKm;
+
+  /// Una de las primeras 100 cuentas: premium para siempre.
+  final bool founder;
+
+  /// Fin de la prueba o suscripción premium (null si no tiene).
+  final DateTime? premiumUntil;
+
+  /// Oculto en descubrir (solo cuenta si es premium).
+  final bool incognito;
+
+  bool get isPremium =>
+      founder || (premiumUntil?.isAfter(DateTime.now()) ?? false);
 
   bool get isPaired => currentMatchId != null;
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../app/env.dart';
 import '../../../core/errors.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
@@ -9,6 +8,7 @@ import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../location/presentation/share_location.dart';
 import '../../notifications/presentation/notifications_button.dart';
+import '../../premium/data/premium.dart';
 import '../../profile/data/profile_repository.dart';
 import '../../profile/domain/profile.dart';
 import '../../profile/presentation/profile_sheet.dart';
@@ -135,7 +135,8 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
     final t = context.l10n;
     final me = ref.watch(myProfileProvider).value;
     final active = ref.watch(liveOutgoingCountProvider);
-    final full = active >= Env.maxActiveRequests;
+    final limit = ref.watch(requestLimitProvider);
+    final full = active >= limit;
 
     return Scaffold(
       body: Column(
@@ -150,7 +151,7 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
                   child: GlassPill(
                     color: full ? FlamColors.coral : null,
                     leading: const Text('🦩'),
-                    child: Text('$active/${Env.maxActiveRequests}'),
+                    child: Text('$active/$limit'),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -210,7 +211,7 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
         : full
         ? _Banner(
             icon: Icons.hourglass_top_rounded,
-            text: t.discoverLimitReached(Env.maxActiveRequests),
+            text: t.discoverLimitReached(ref.read(requestLimitProvider)),
           )
         : null;
 

@@ -35,6 +35,7 @@ class Env {
   /// Correo de soporte (vacío = se oculta el botón de contacto).
   static const supportEmail = String.fromEnvironment('SUPPORT_EMAIL');
 
-  /// Debe coincidir con cfg_max_active_requests() en el SQL.
+  /// Deben coincidir con max_active_requests() en el SQL.
   static const maxActiveRequests = 3;
+  static const premiumMaxActiveRequests = 5;
 }

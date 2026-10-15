@@ -76,4 +76,16 @@ Cuando B acepta la solicitud de A, en una sola transacción:
 |---------------------------|---------------|---------------------------------------|
 | `TTL_SOLICITUD`           | 48 h          | Rango 24–72 h                         |
 | `TTL_DISOLUCION`          | 12 h          |                                       |
-| `MAX_SOLICITUDES_ACTIVAS` | 3             | Por confirmar — evita el "spam" de solicitudes |
+| `MAX_SOLICITUDES_ACTIVAS` | 3 (premium: 5) | Evita el "spam" de solicitudes |
+
+## Premium
+
+- Las **primeras 100 cuentas** (al crear el perfil) son **fundadoras**: premium para siempre.
+- Las demás reciben **3 días de prueba** premium.
+- Beneficios:
+  - **5 solicitudes activas** en vez de 3.
+  - **Modo incógnito:** no aparece en Descubrir; solo lo ve quien recibe su solicitud.
+  - **Confirmaciones de lectura** ("Visto 10:42").
+  - Ver si la pareja está **escribiendo** o **en línea**.
+- Si el premium vence, las solicitudes que ya tenía siguen vivas hasta expirar, pero no puede enviar más hasta bajar de 3.
+- Implementación: `supabase/migrations/0005_premium.sql` (`is_premium`, `max_active_requests`, `chat_reads`).

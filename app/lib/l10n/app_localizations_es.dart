@@ -494,6 +494,20 @@ class AppLocalizationsEs extends AppLocalizations {
   String get chatSend => 'Enviar';
 
   @override
+  String chatSeen(String time) {
+    return 'Visto $time';
+  }
+
+  @override
+  String get chatSent => 'Enviado';
+
+  @override
+  String get chatTyping => 'escribiendo…';
+
+  @override
+  String get coupleOnline => 'En línea';
+
+  @override
   String get myProfileTitle => 'Mi perfil';
 
   @override
@@ -862,6 +876,46 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get settingsAccount => 'Cuenta';
+
+  @override
+  String get premiumTitle => 'Premium';
+
+  @override
+  String get premiumFounder => 'Fundador: premium para siempre 🦩';
+
+  @override
+  String premiumUntil(String date) {
+    return 'Premium hasta el $date';
+  }
+
+  @override
+  String get premiumFree => 'Cuenta gratis';
+
+  @override
+  String get premiumComingSoon =>
+      'Muy pronto podrás activar Premium desde aquí.';
+
+  @override
+  String premiumPerkRequests(int count) {
+    return '$count solicitudes activas a la vez';
+  }
+
+  @override
+  String get premiumPerkIncognito => 'Modo incógnito';
+
+  @override
+  String get premiumPerkSeen => 'Saber cuándo leen tus mensajes';
+
+  @override
+  String get premiumPerkTyping =>
+      'Ver si tu pareja está escribiendo o en línea';
+
+  @override
+  String get premiumIncognitoHint =>
+      'No apareces en Descubrir. Solo te ve quien recibe tu solicitud.';
+
+  @override
+  String get premiumOnly => 'Solo con Premium';
 
   @override
   String get verifiedBadge => 'Perfil verificado';

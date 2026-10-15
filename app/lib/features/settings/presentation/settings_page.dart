@@ -7,6 +7,7 @@ import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../auth/data/auth_repository.dart';
+import '../../premium/presentation/premium_options.dart';
 import '../../profile/data/profile_repository.dart';
 import '../../verification/presentation/verification_page.dart';
 import 'appearance_options.dart';
@@ -32,6 +33,11 @@ class SettingsPage extends ConsumerWidget {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 32),
             children: [
+              GlassSection(
+                title: t.premiumTitle,
+                child: const PremiumOptions(),
+              ),
+              gap,
               GlassSection(
                 title: t.settingsAppearance,
                 child: const AppearanceOptions(),

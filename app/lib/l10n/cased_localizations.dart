@@ -456,6 +456,18 @@ class CasedLocalizations extends AppLocalizations {
   String get chatSend => _transform(_inner.chatSend);
 
   @override
+  String chatSeen(String time) => _transform(_inner.chatSeen(time));
+
+  @override
+  String get chatSent => _transform(_inner.chatSent);
+
+  @override
+  String get chatTyping => _transform(_inner.chatTyping);
+
+  @override
+  String get coupleOnline => _transform(_inner.coupleOnline);
+
+  @override
   String get myProfileTitle => _transform(_inner.myProfileTitle);
 
   @override
@@ -797,6 +809,40 @@ class CasedLocalizations extends AppLocalizations {
 
   @override
   String get settingsAccount => _transform(_inner.settingsAccount);
+
+  @override
+  String get premiumTitle => _transform(_inner.premiumTitle);
+
+  @override
+  String get premiumFounder => _transform(_inner.premiumFounder);
+
+  @override
+  String premiumUntil(String date) => _transform(_inner.premiumUntil(date));
+
+  @override
+  String get premiumFree => _transform(_inner.premiumFree);
+
+  @override
+  String get premiumComingSoon => _transform(_inner.premiumComingSoon);
+
+  @override
+  String premiumPerkRequests(int count) =>
+      _transform(_inner.premiumPerkRequests(count));
+
+  @override
+  String get premiumPerkIncognito => _transform(_inner.premiumPerkIncognito);
+
+  @override
+  String get premiumPerkSeen => _transform(_inner.premiumPerkSeen);
+
+  @override
+  String get premiumPerkTyping => _transform(_inner.premiumPerkTyping);
+
+  @override
+  String get premiumIncognitoHint => _transform(_inner.premiumIncognitoHint);
+
+  @override
+  String get premiumOnly => _transform(_inner.premiumOnly);
 
   @override
   String get verifiedBadge => _transform(_inner.verifiedBadge);

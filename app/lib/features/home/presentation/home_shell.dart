@@ -7,6 +7,7 @@ import '../../../core/l10n/locale_controller.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
+import '../../couple/data/couple_presence.dart';
 import '../../couple/presentation/couple_page.dart';
 import '../../discover/presentation/discover_page.dart';
 import '../../notifications/data/notifications_repository.dart';
@@ -64,6 +65,12 @@ class _HomeShellState extends ConsumerState<HomeShell> {
   @override
   Widget build(BuildContext context) {
     final t = context.l10n;
+
+    // Con pareja, mantiene la presencia ("en línea") mientras la app esté abierta.
+    final matchId = ref.watch(
+      myProfileProvider.select((p) => p.value?.currentMatchId),
+    );
+    if (matchId != null) ref.listen(couplePresenceProvider(matchId), (_, _) {});
 
     ref.listen(myProfileProvider.select((p) => p.value?.currentMatchId), (
       before,

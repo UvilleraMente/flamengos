@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../app/env.dart';
 import '../../../core/errors.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../notifications/presentation/notifications_button.dart';
+import '../../premium/data/premium.dart';
 import '../../profile/data/profile_repository.dart';
 import '../../profile/domain/profile.dart';
 import '../../profile/presentation/profile_sheet.dart';
@@ -47,7 +47,13 @@ class _RequestsPageState extends ConsumerState<RequestsPage> {
               child: GlassSegmented(
                 segments: [
                   (true, t.requestsReceivedTab(inCount)),
-                  (false, t.requestsSentTab(outCount, Env.maxActiveRequests)),
+                  (
+                    false,
+                    t.requestsSentTab(
+                      outCount,
+                      ref.watch(requestLimitProvider),
+                    ),
+                  ),
                 ],
                 value: _incoming,
                 onChanged: (v) => setState(() => _incoming = v),
@@ -96,7 +102,9 @@ class _RequestsPageState extends ConsumerState<RequestsPage> {
           : EmptyState(
               emoji: '🕊️',
               title: t.requestsSentEmptyTitle,
-              message: t.requestsSentEmptyMessage(Env.maxActiveRequests),
+              message: t.requestsSentEmptyMessage(
+                ref.watch(requestLimitProvider),
+              ),
             );
     }
     return Align(

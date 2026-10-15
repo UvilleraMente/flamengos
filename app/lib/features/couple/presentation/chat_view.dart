@@ -5,7 +5,9 @@ import 'package:intl/intl.dart';
 import '../../../core/errors.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
+import '../../premium/data/premium.dart';
 import '../domain/couple.dart';
+import '../data/couple_presence.dart';
 import '../data/couple_repository.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
@@ -24,6 +26,34 @@ class _ChatViewState extends ConsumerState<ChatView> {
   final _input = TextEditingController();
   bool _sending = false;
 
+  /// Último mensaje del otro que ya marcamos como leído.
+  DateTime? _readUpTo;
+
+  @override
+  void initState() {
+    super.initState();
+    _input.addListener(
+      () => ref
+          .read(couplePresenceProvider(widget.matchId).notifier)
+          .onTyping(_input.text),
+    );
+    ref.listenManual(
+      messagesProvider(widget.matchId),
+      (_, next) => _markRead(next.value),
+      fireImmediately: true,
+    );
+  }
+
+  void _markRead(List<ChatMessage>? messages) {
+    final last = messages?.where((m) => m.senderId != widget.me).lastOrNull;
+    if (last == null) return;
+    final upTo = _readUpTo;
+    if (upTo != null && !last.createdAt.isAfter(upTo)) return;
+    _readUpTo = last.createdAt;
+    // Si falla, se reintenta con el próximo mensaje.
+    ref.read(coupleRepositoryProvider).markRead(widget.matchId).ignore();
+  }
+
   @override
   void dispose() {
     _input.dispose();
@@ -39,6 +69,7 @@ class _ChatViewState extends ConsumerState<ChatView> {
           .read(coupleRepositoryProvider)
           .sendMessage(widget.matchId, body);
       _input.clear();
+      ref.read(couplePresenceProvider(widget.matchId).notifier).stopTyping();
     } catch (e) {
       if (mounted) showError(context, e);
     } finally {
@@ -49,6 +80,22 @@ class _ChatViewState extends ConsumerState<ChatView> {
   @override
   Widget build(BuildContext context) {
     final messages = ref.watch(messagesProvider(widget.matchId));
+    final premium = ref.watch(isPremiumProvider);
+    // Solo premium: el servidor no envía la lectura del otro a cuentas gratis.
+    final partnerReadAt = premium
+        ? ref
+              .watch(chatReadsProvider(widget.matchId))
+              .value
+              ?.entries
+              .where((e) => e.key != widget.me)
+              .firstOrNull
+              ?.value
+        : null;
+    final typing =
+        premium && ref.watch(couplePresenceProvider(widget.matchId)).typing;
+    // El aviso de lectura va bajo mi último mensaje.
+    final lastMine =
+        messages.value?.lastIndexWhere((m) => m.senderId == widget.me) ?? -1;
 
     return Column(
       children: [
@@ -60,7 +107,7 @@ class _ChatViewState extends ConsumerState<ChatView> {
               title: context.l10n.chatLoadError,
               message: describeError(context, e),
             ),
-            data: (list) => list.isEmpty
+            data: (list) => list.isEmpty && !typing
                 ? EmptyState(
                     emoji: '💬',
                     title: context.l10n.chatEmptyTitle,
@@ -69,8 +116,12 @@ class _ChatViewState extends ConsumerState<ChatView> {
                 : ListView.builder(
                     reverse: true,
                     padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-                    itemCount: list.length,
+                    itemCount: list.length + (typing ? 1 : 0),
                     itemBuilder: (_, i) {
+                      if (typing) {
+                        if (i == 0) return const _TypingBubble();
+                        i--;
+                      }
                       final index = list.length - 1 - i;
                       final m = list[index];
                       final next = index + 1 < list.length
@@ -81,6 +132,16 @@ class _ChatViewState extends ConsumerState<ChatView> {
                         mine: m.senderId == widget.me,
                         // Agrupa mensajes seguidos del mismo autor.
                         tail: next == null || next.senderId != m.senderId,
+                        receipt: premium && index == lastMine
+                            ? partnerReadAt != null &&
+                                      !partnerReadAt.isBefore(m.createdAt)
+                                  ? context.l10n.chatSeen(
+                                      DateFormat.Hm(
+                                        context.localeTag,
+                                      ).format(partnerReadAt.toLocal()),
+                                    )
+                                  : context.l10n.chatSent
+                            : null,
                       );
                     },
                   ),
@@ -148,21 +209,25 @@ class _Bubble extends StatelessWidget {
     required this.message,
     required this.mine,
     required this.tail,
+    this.receipt,
   });
 
   final ChatMessage message;
   final bool mine;
   final bool tail;
 
+  /// "Visto 10:42" / "Enviado" bajo mi último mensaje (solo premium).
+  final String? receipt;
+
   @override
   Widget build(BuildContext context) {
     const r = Radius.circular(FlamRadius.lg);
     const small = Radius.circular(6);
-    return Align(
+    final bubble = Align(
       alignment: mine ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         constraints: const BoxConstraints(maxWidth: 320),
-        margin: EdgeInsets.only(bottom: tail ? 10 : 3),
+        margin: EdgeInsets.only(bottom: receipt != null ? 2 : (tail ? 10 : 3)),
         padding: const EdgeInsets.fromLTRB(14, 9, 14, 7),
         decoration: BoxDecoration(
           gradient: mine ? FlamGradients.primary : FlamGradients.glass,
@@ -199,5 +264,44 @@ class _Bubble extends StatelessWidget {
         ),
       ),
     );
+    if (receipt == null) return bubble;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        bubble,
+        Padding(
+          padding: const EdgeInsets.only(right: 6, bottom: 10),
+          child: Text(
+            receipt!,
+            style: TextStyle(fontSize: 11.5, color: FlamColors.textMuted),
+          ),
+        ),
+      ],
+    );
   }
+}
+
+class _TypingBubble extends StatelessWidget {
+  const _TypingBubble();
+
+  @override
+  Widget build(BuildContext context) => Align(
+    alignment: Alignment.centerLeft,
+    child: Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+      decoration: BoxDecoration(
+        gradient: FlamGradients.glass,
+        border: Border.all(color: FlamColors.glassBorder),
+        borderRadius: BorderRadius.circular(FlamRadius.lg),
+      ),
+      child: Text(
+        context.l10n.chatTyping,
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+          color: FlamColors.textMuted,
+        ),
+      ),
+    ),
+  );
 }

@@ -6,11 +6,13 @@ import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../notifications/presentation/notifications_button.dart';
+import '../../premium/data/premium.dart';
 import '../../profile/data/profile_repository.dart';
 import '../../profile/domain/profile.dart';
 import '../../profile/presentation/profile_sheet.dart';
 import '../../requests/data/requests_repository.dart';
 import '../../safety/presentation/report_sheet.dart';
+import '../data/couple_presence.dart';
 import '../data/couple_repository.dart';
 import '../domain/couple.dart';
 import 'chat_view.dart';
@@ -78,6 +80,9 @@ class _CoupleHeader extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final t = context.l10n;
     final days = DateTime.now().difference(couple.createdAt).inDays;
+    final online =
+        ref.watch(isPremiumProvider) &&
+        ref.watch(couplePresenceProvider(couple.id)).online;
 
     return Glass(
       padding: const EdgeInsets.fromLTRB(12, 10, 4, 10),
@@ -126,6 +131,27 @@ class _CoupleHeader extends ConsumerWidget {
                     ],
                   ],
                 ),
+                if (online)
+                  Row(
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const BoxDecoration(
+                          color: FlamColors.mint,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        t.coupleOnline,
+                        style: const TextStyle(
+                          color: FlamColors.mint,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
                 Text(
                   t.coupleTogetherSince(days),
                   style: TextStyle(color: FlamColors.textMuted),

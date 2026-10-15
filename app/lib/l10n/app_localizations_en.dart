@@ -493,6 +493,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatSend => 'Send';
 
   @override
+  String chatSeen(String time) {
+    return 'Seen $time';
+  }
+
+  @override
+  String get chatSent => 'Sent';
+
+  @override
+  String get chatTyping => 'typing…';
+
+  @override
+  String get coupleOnline => 'Online';
+
+  @override
   String get myProfileTitle => 'My profile';
 
   @override
@@ -861,6 +875,45 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsAccount => 'Account';
+
+  @override
+  String get premiumTitle => 'Premium';
+
+  @override
+  String get premiumFounder => 'Founder: premium forever 🦩';
+
+  @override
+  String premiumUntil(String date) {
+    return 'Premium until $date';
+  }
+
+  @override
+  String get premiumFree => 'Free account';
+
+  @override
+  String get premiumComingSoon =>
+      'You will be able to get Premium here very soon.';
+
+  @override
+  String premiumPerkRequests(int count) {
+    return '$count active requests at a time';
+  }
+
+  @override
+  String get premiumPerkIncognito => 'Incognito mode';
+
+  @override
+  String get premiumPerkSeen => 'Know when your messages are read';
+
+  @override
+  String get premiumPerkTyping => 'See when your partner is typing or online';
+
+  @override
+  String get premiumIncognitoHint =>
+      'You are hidden from Discover. Only people you send a request to can see you.';
+
+  @override
+  String get premiumOnly => 'Premium only';
 
   @override
   String get verifiedBadge => 'Verified profile';

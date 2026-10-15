@@ -944,6 +944,30 @@ abstract class AppLocalizations {
   /// **'Enviar'**
   String get chatSend;
 
+  /// No description provided for @chatSeen.
+  ///
+  /// In es, this message translates to:
+  /// **'Visto {time}'**
+  String chatSeen(String time);
+
+  /// No description provided for @chatSent.
+  ///
+  /// In es, this message translates to:
+  /// **'Enviado'**
+  String get chatSent;
+
+  /// No description provided for @chatTyping.
+  ///
+  /// In es, this message translates to:
+  /// **'escribiendo…'**
+  String get chatTyping;
+
+  /// No description provided for @coupleOnline.
+  ///
+  /// In es, this message translates to:
+  /// **'En línea'**
+  String get coupleOnline;
+
   /// No description provided for @myProfileTitle.
   ///
   /// In es, this message translates to:
@@ -1603,6 +1627,72 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Cuenta'**
   String get settingsAccount;
+
+  /// No description provided for @premiumTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Premium'**
+  String get premiumTitle;
+
+  /// No description provided for @premiumFounder.
+  ///
+  /// In es, this message translates to:
+  /// **'Fundador: premium para siempre 🦩'**
+  String get premiumFounder;
+
+  /// No description provided for @premiumUntil.
+  ///
+  /// In es, this message translates to:
+  /// **'Premium hasta el {date}'**
+  String premiumUntil(String date);
+
+  /// No description provided for @premiumFree.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuenta gratis'**
+  String get premiumFree;
+
+  /// No description provided for @premiumComingSoon.
+  ///
+  /// In es, this message translates to:
+  /// **'Muy pronto podrás activar Premium desde aquí.'**
+  String get premiumComingSoon;
+
+  /// No description provided for @premiumPerkRequests.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} solicitudes activas a la vez'**
+  String premiumPerkRequests(int count);
+
+  /// No description provided for @premiumPerkIncognito.
+  ///
+  /// In es, this message translates to:
+  /// **'Modo incógnito'**
+  String get premiumPerkIncognito;
+
+  /// No description provided for @premiumPerkSeen.
+  ///
+  /// In es, this message translates to:
+  /// **'Saber cuándo leen tus mensajes'**
+  String get premiumPerkSeen;
+
+  /// No description provided for @premiumPerkTyping.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver si tu pareja está escribiendo o en línea'**
+  String get premiumPerkTyping;
+
+  /// No description provided for @premiumIncognitoHint.
+  ///
+  /// In es, this message translates to:
+  /// **'No apareces en Descubrir. Solo te ve quien recibe tu solicitud.'**
+  String get premiumIncognitoHint;
+
+  /// No description provided for @premiumOnly.
+  ///
+  /// In es, this message translates to:
+  /// **'Solo con Premium'**
+  String get premiumOnly;
 
   /// No description provided for @verifiedBadge.
   ///

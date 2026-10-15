@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../app/env.dart';
+import '../features/premium/data/premium.dart';
 import 'l10n/l10n.dart';
 
 /// Convierte cualquier error en un texto para el usuario, en su idioma.
@@ -10,7 +11,7 @@ String describeError(BuildContext context, Object error) {
   final t = context.l10n;
   return switch (error) {
     PostgrestException(:final message) =>
-      _serverCode(t, message) ?? t.errorGeneric,
+      _serverCode(context, t, message) ?? t.errorGeneric,
     AuthException(:final message) => switch (message) {
       'Invalid login credentials' => t.errorInvalidCredentials,
       'User already registered' => t.errorEmailTaken,
@@ -22,19 +23,25 @@ String describeError(BuildContext context, Object error) {
   };
 }
 
-String? _serverCode(AppLocalizations t, String code) => switch (code) {
-  'not_authenticated' => t.errorNotAuthenticated,
-  'cannot_request_self' || 'cannot_block_self' => t.errorGeneric,
-  'profile_incomplete' => t.errorProfileIncomplete,
-  'already_paired' => t.errorAlreadyPaired,
-  'target_not_found' || 'target_unavailable' => t.errorTargetUnavailable,
-  'target_paired' => t.errorTargetPaired,
-  'already_requested' => t.errorAlreadyRequested,
-  'max_active_requests' => t.errorMaxActiveRequests(Env.maxActiveRequests),
-  'request_not_found' || 'request_unavailable' => t.errorRequestUnavailable,
-  'someone_paired' => t.errorSomeonePaired,
-  'not_paired' => t.errorNotPaired,
-  'no_dissolution_to_cancel' => t.errorNoDissolutionToCancel,
-  'verification_pending' => t.errorVerificationPending,
-  _ => null,
-};
+String? _serverCode(BuildContext context, AppLocalizations t, String code) =>
+    switch (code) {
+      'not_authenticated' => t.errorNotAuthenticated,
+      'cannot_request_self' || 'cannot_block_self' => t.errorGeneric,
+      'profile_incomplete' => t.errorProfileIncomplete,
+      'already_paired' => t.errorAlreadyPaired,
+      'target_not_found' || 'target_unavailable' => t.errorTargetUnavailable,
+      'target_paired' => t.errorTargetPaired,
+      'already_requested' => t.errorAlreadyRequested,
+      'max_active_requests' => t.errorMaxActiveRequests(
+        ProviderScope.containerOf(
+          context,
+          listen: false,
+        ).read(requestLimitProvider),
+      ),
+      'request_not_found' || 'request_unavailable' => t.errorRequestUnavailable,
+      'someone_paired' => t.errorSomeonePaired,
+      'not_paired' => t.errorNotPaired,
+      'no_dissolution_to_cancel' => t.errorNoDissolutionToCancel,
+      'verification_pending' => t.errorVerificationPending,
+      _ => null,
+    };
