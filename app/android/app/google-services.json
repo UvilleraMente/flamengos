@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "618098821671",
+    "project_id": "flamengos-app",
+    "storage_bucket": "flamengos-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618098821671:android:27ba093b81aa26356a5c02",
+        "android_client_info": {
+          "package_name": "com.flamengos.flamengos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD8EdpaqPB1_XCb5T4mAzmqZl81948EBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

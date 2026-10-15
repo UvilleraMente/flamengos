@@ -5,9 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
+import '../../notifications/data/push_service.dart';
 
 final authRepositoryProvider = Provider(
-  (ref) => AuthRepository(ref.watch(supabaseProvider)),
+  (ref) => AuthRepository(
+    ref.watch(supabaseProvider),
+    ref.watch(pushServiceProvider),
+  ),
 );
 
 /// true mientras el usuario entró con un enlace/código de recuperación y
@@ -38,9 +42,10 @@ class PasswordRecoveryController extends Notifier<bool> {
 }
 
 class AuthRepository {
-  AuthRepository(this._db);
+  AuthRepository(this._db, this._push);
 
   final SupabaseClient _db;
+  final PushService _push;
 
   /// A dónde vuelve el enlace del correo: la misma web, o la app por deep link.
   static String get redirectUrl =>
@@ -59,7 +64,11 @@ class AuthRepository {
     return res.session != null;
   }
 
-  Future<void> signOut() => _db.auth.signOut();
+  /// Primero desconecta las notificaciones push de este dispositivo.
+  Future<void> signOut() async {
+    await _push.unregister();
+    await _db.auth.signOut();
+  }
 
   /// Envía el correo de recuperación (enlace + código de 6 dígitos).
   Future<void> sendPasswordReset(String email) =>
@@ -85,6 +94,7 @@ class AuthRepository {
         ]);
       }
     }
+    await _push.unregister();
     await _db.rpc('delete_my_account');
     // El usuario ya no existe en el servidor; limpiamos la sesión local.
     await _db.auth.signOut(scope: SignOutScope.local).catchError((_) {});

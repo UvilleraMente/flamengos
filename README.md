@@ -53,6 +53,25 @@ para evitar carreras.
    **Authentication → Emails → SMTP Settings** (Resend, SendGrid, Brevo…).
 6. *(Opcional)* **Database → Extensions**: verifica que `pg_cron` esté activo.
 
+### Notificaciones push (Firebase `flamengos-app`)
+
+Flujo: `notifications` (insert) → trigger `notifications_push` → Edge Function
+[`push`](supabase/functions/push/index.ts) → Firebase Cloud Messaging.
+
+1. Firebase → ⚙️ Configuración del proyecto → **Cuentas de servicio** →
+   *Generar nueva clave privada*. Guarda el JSON **fuera del repo**.
+2. Desplegar la función y guardar el secreto (una vez):
+   ```bash
+   npx supabase login
+   npx supabase functions deploy push --no-verify-jwt --project-ref rwtaqddyfgeyueiqkjfr
+   npx supabase secrets set --project-ref rwtaqddyfgeyueiqkjfr FIREBASE_SERVICE_ACCOUNT="$(cat ruta/al/archivo.json)"
+   ```
+3. Ejecutar `supabase/migrations/0004_push.sql`.
+4. **Web** (opcional): Cloud Messaging → *Certificados push web* → generar par
+   de claves y correr con `--dart-define=FIREBASE_VAPID_KEY=...`.
+5. **iOS**: requiere cuenta Apple Developer y subir la clave APNs en
+   Cloud Messaging → *Configuración de apps de Apple*.
+
 ### Moderación (admin, desde el SQL Editor)
 
 ```sql

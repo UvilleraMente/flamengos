@@ -9,8 +9,9 @@ Thumbs.db
 *.keystore
 *.jks
 key.properties
-google-services.json
-GoogleService-Info.plist
+# Cuentas de servicio de Firebase/Google (estas SÍ son secretas)
+*service-account*.json
+*-firebase-adminsdk-*.json
 
 # Supabase CLI (si se usa en el futuro)
 supabase/.temp/

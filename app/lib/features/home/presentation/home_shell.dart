@@ -3,12 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/l10n/l10n.dart';
+import '../../../core/l10n/locale_controller.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../couple/presentation/couple_page.dart';
 import '../../discover/presentation/discover_page.dart';
 import '../../notifications/data/notifications_repository.dart';
+import '../../notifications/data/push_service.dart';
 import '../../notifications/domain/app_notification.dart';
 import '../../notifications/presentation/notifications_button.dart';
 import '../../profile/data/profile_repository.dart';
@@ -34,6 +36,16 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     super.initState();
     // Por si pg_cron no está activo: limpia expiraciones al abrir la app.
     ref.read(requestsRepositoryProvider).housekeeping().ignore();
+    // Push: aquí ya existe el perfil (el token se guarda ligado a él).
+    WidgetsBinding.instance.addPostFrameCallback((_) => _registerPush());
+  }
+
+  void _registerPush() {
+    if (!mounted) return;
+    ref
+        .read(pushServiceProvider)
+        .register(locale: Localizations.localeOf(context).languageCode)
+        .ignore();
   }
 
   /// Muestra un aviso en la app cuando llega una notificación nueva.
@@ -60,6 +72,11 @@ class _HomeShellState extends ConsumerState<HomeShell> {
       if (before == now) return;
       setState(() => _tab = 0);
       if (before == null && now != null) _celebrate();
+    });
+
+    // Si cambia el idioma, las notificaciones push llegan en el nuevo.
+    ref.listen(localeProvider, (_, _) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _registerPush());
     });
 
     ref.listen(notificationsProvider, (before, now) {

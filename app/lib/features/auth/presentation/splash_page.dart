@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/errors.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../profile/data/profile_repository.dart';
+import '../data/auth_repository.dart';
 
 class SplashPage extends ConsumerWidget {
   const SplashPage({super.key});
@@ -30,7 +30,7 @@ class SplashPage extends ConsumerWidget {
                   FlamButton(
                     label: t.actionSignOut,
                     variant: FlamVariant.ghost,
-                    onPressed: () => Supabase.instance.client.auth.signOut(),
+                    onPressed: () => ref.read(authRepositoryProvider).signOut(),
                   ),
                 ],
               ),

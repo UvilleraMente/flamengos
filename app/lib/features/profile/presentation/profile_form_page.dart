@@ -4,13 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../location/presentation/share_location.dart';
+import '../../auth/data/auth_repository.dart';
 import '../data/profile_repository.dart';
 import '../domain/profile.dart';
 import 'profile_l10n.dart';
@@ -160,7 +160,7 @@ class _ProfileFormPageState extends ConsumerState<ProfileFormPage> {
         actions: [
           if (_isNew)
             TextButton(
-              onPressed: () => Supabase.instance.client.auth.signOut(),
+              onPressed: () => ref.read(authRepositoryProvider).signOut(),
               child: Text(t.actionSignOut),
             ),
         ],
