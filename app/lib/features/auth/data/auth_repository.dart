@@ -66,9 +66,12 @@ class AuthRepository {
   }
 
   /// Primero desconecta las notificaciones push de este dispositivo.
-  Future<void> signOut() async {
+  /// [everywhere] cierra también la sesión en los demás dispositivos.
+  Future<void> signOut({bool everywhere = false}) async {
     await _push.unregister();
-    await _db.auth.signOut();
+    await _db.auth.signOut(
+      scope: everywhere ? SignOutScope.global : SignOutScope.local,
+    );
   }
 
   /// Envía el correo de recuperación (enlace + código de 6 dígitos).

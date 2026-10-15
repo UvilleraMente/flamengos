@@ -7,6 +7,8 @@ import '../../../core/l10n/locale_controller.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
+import '../../../core/security/inactivity.dart';
+import '../../auth/data/auth_repository.dart';
 import '../../couple/data/couple_presence.dart';
 import '../../premium/data/insights.dart';
 import '../../couple/presentation/couple_page.dart';
@@ -38,6 +40,10 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     super.initState();
     // Por si pg_cron no está activo: limpia expiraciones al abrir la app.
     ref.read(requestsRepositoryProvider).housekeeping().ignore();
+    // Seguridad: 30 días sin abrir la app → cerrar sesión.
+    checkInactivity().then((expired) {
+      if (expired && mounted) ref.read(authRepositoryProvider).signOut();
+    });
     // Push: aquí ya existe el perfil (el token se guarda ligado a él).
     WidgetsBinding.instance.addPostFrameCallback((_) => _registerPush());
   }

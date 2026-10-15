@@ -1457,6 +1457,55 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dailyQuestion29 => '¿Qué significa para ti una relación sana?';
 
   @override
+  String get rulesTitle => 'Así funciona Flamengos';
+
+  @override
+  String get rulesSubtitle =>
+      'Antes de empezar, lee las reglas. Son las que hacen distinta a esta app.';
+
+  @override
+  String get rulesExclusiveTitle => 'Una sola pareja';
+
+  @override
+  String get rulesExclusiveBody =>
+      'Cuando aceptas a alguien (o te acepta), quedan en exclusiva: mientras la pareja esté activa no podrás pedir ni aceptar a nadie más, y todas sus demás solicitudes se anulan.';
+
+  @override
+  String get rulesLeaveTitle => 'Siempre puedes salir';
+
+  @override
+  String get rulesLeaveBody =>
+      'Terminar toma 12 horas y puedes arrepentirte antes. Si los dos quieren terminar, es inmediato.';
+
+  @override
+  String get rulesRequestsTitle => 'Solicitudes con tiempo';
+
+  @override
+  String get rulesRequestsBody =>
+      'Puedes tener hasta 3 solicitudes a la vez (5 con Premium) y cada una expira en 48 horas.';
+
+  @override
+  String get rulesRespectTitle => 'Respeto y seguridad';
+
+  @override
+  String get rulesRespectBody =>
+      'Solo mayores de 18, con fotos reales. Revisamos fotos y reportes, y puedes bloquear a quien quieras.';
+
+  @override
+  String get rulesAgree =>
+      'Tengo 18 años o más, entiendo la exclusividad y acepto los Términos y la Política de privacidad.';
+
+  @override
+  String get rulesAccept => 'Aceptar y continuar';
+
+  @override
+  String get signOutEverywhere => 'Cerrar sesión en todos los dispositivos';
+
+  @override
+  String get signOutEverywhereMessage =>
+      'Se cerrará tu sesión aquí y en cualquier otro teléfono o navegador donde hayas entrado.';
+
+  @override
   String get premiumTitle => 'Premium';
 
   @override

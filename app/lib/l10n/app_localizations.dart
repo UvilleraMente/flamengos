@@ -2624,6 +2624,90 @@ abstract class AppLocalizations {
   /// **'¿Qué significa para ti una relación sana?'**
   String get dailyQuestion29;
 
+  /// No description provided for @rulesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Así funciona Flamengos'**
+  String get rulesTitle;
+
+  /// No description provided for @rulesSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Antes de empezar, lee las reglas. Son las que hacen distinta a esta app.'**
+  String get rulesSubtitle;
+
+  /// No description provided for @rulesExclusiveTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Una sola pareja'**
+  String get rulesExclusiveTitle;
+
+  /// No description provided for @rulesExclusiveBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando aceptas a alguien (o te acepta), quedan en exclusiva: mientras la pareja esté activa no podrás pedir ni aceptar a nadie más, y todas sus demás solicitudes se anulan.'**
+  String get rulesExclusiveBody;
+
+  /// No description provided for @rulesLeaveTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Siempre puedes salir'**
+  String get rulesLeaveTitle;
+
+  /// No description provided for @rulesLeaveBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Terminar toma 12 horas y puedes arrepentirte antes. Si los dos quieren terminar, es inmediato.'**
+  String get rulesLeaveBody;
+
+  /// No description provided for @rulesRequestsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Solicitudes con tiempo'**
+  String get rulesRequestsTitle;
+
+  /// No description provided for @rulesRequestsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Puedes tener hasta 3 solicitudes a la vez (5 con Premium) y cada una expira en 48 horas.'**
+  String get rulesRequestsBody;
+
+  /// No description provided for @rulesRespectTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Respeto y seguridad'**
+  String get rulesRespectTitle;
+
+  /// No description provided for @rulesRespectBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Solo mayores de 18, con fotos reales. Revisamos fotos y reportes, y puedes bloquear a quien quieras.'**
+  String get rulesRespectBody;
+
+  /// No description provided for @rulesAgree.
+  ///
+  /// In es, this message translates to:
+  /// **'Tengo 18 años o más, entiendo la exclusividad y acepto los Términos y la Política de privacidad.'**
+  String get rulesAgree;
+
+  /// No description provided for @rulesAccept.
+  ///
+  /// In es, this message translates to:
+  /// **'Aceptar y continuar'**
+  String get rulesAccept;
+
+  /// No description provided for @signOutEverywhere.
+  ///
+  /// In es, this message translates to:
+  /// **'Cerrar sesión en todos los dispositivos'**
+  String get signOutEverywhere;
+
+  /// No description provided for @signOutEverywhereMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Se cerrará tu sesión aquí y en cualquier otro teléfono o navegador donde hayas entrado.'**
+  String get signOutEverywhereMessage;
+
   /// No description provided for @premiumTitle.
   ///
   /// In es, this message translates to:

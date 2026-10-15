@@ -1318,6 +1318,49 @@ class CasedLocalizations extends AppLocalizations {
   String get dailyQuestion29 => _transform(_inner.dailyQuestion29);
 
   @override
+  String get rulesTitle => _transform(_inner.rulesTitle);
+
+  @override
+  String get rulesSubtitle => _transform(_inner.rulesSubtitle);
+
+  @override
+  String get rulesExclusiveTitle => _transform(_inner.rulesExclusiveTitle);
+
+  @override
+  String get rulesExclusiveBody => _transform(_inner.rulesExclusiveBody);
+
+  @override
+  String get rulesLeaveTitle => _transform(_inner.rulesLeaveTitle);
+
+  @override
+  String get rulesLeaveBody => _transform(_inner.rulesLeaveBody);
+
+  @override
+  String get rulesRequestsTitle => _transform(_inner.rulesRequestsTitle);
+
+  @override
+  String get rulesRequestsBody => _transform(_inner.rulesRequestsBody);
+
+  @override
+  String get rulesRespectTitle => _transform(_inner.rulesRespectTitle);
+
+  @override
+  String get rulesRespectBody => _transform(_inner.rulesRespectBody);
+
+  @override
+  String get rulesAgree => _transform(_inner.rulesAgree);
+
+  @override
+  String get rulesAccept => _transform(_inner.rulesAccept);
+
+  @override
+  String get signOutEverywhere => _transform(_inner.signOutEverywhere);
+
+  @override
+  String get signOutEverywhereMessage =>
+      _transform(_inner.signOutEverywhereMessage);
+
+  @override
   String get premiumTitle => _transform(_inner.premiumTitle);
 
   @override

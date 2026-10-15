@@ -32,6 +32,10 @@ class Env {
   static const termsUrl = '$websiteUrl/terminos';
   static const privacyUrl = '$websiteUrl/privacidad';
 
+  /// Versión de los términos y la privacidad. Al cambiarla, la app vuelve a
+  /// pedir que se acepten (ver terms_acceptances en el SQL).
+  static const termsVersion = '2026-10-16';
+
   /// Correo de soporte (vacío = se oculta el botón de contacto).
   static const supportEmail = String.fromEnvironment(
     'SUPPORT_EMAIL',

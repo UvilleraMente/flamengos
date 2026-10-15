@@ -7,6 +7,7 @@ import '../../../app/env.dart';
 import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
+import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../admin/data/admin_repository.dart';
 import '../../auth/data/auth_repository.dart';
@@ -152,6 +153,25 @@ class SettingsPage extends ConsumerWidget {
                     title: t.actionSignOut,
                     // El router lleva al login.
                     onTap: () => ref.read(authRepositoryProvider).signOut(),
+                  ),
+                  SettingsTile(
+                    icon: Icons.devices_rounded,
+                    color: const Color(0xFF8E8E93),
+                    title: t.signOutEverywhere,
+                    onTap: () async {
+                      final ok = await confirm(
+                        context,
+                        icon: Icons.devices_rounded,
+                        title: t.signOutEverywhere,
+                        message: t.signOutEverywhereMessage,
+                        action: t.actionSignOut,
+                      );
+                      if (ok) {
+                        await ref
+                            .read(authRepositoryProvider)
+                            .signOut(everywhere: true);
+                      }
+                    },
                   ),
                   SettingsTile(
                     icon: Icons.delete_forever_rounded,

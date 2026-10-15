@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<defs><linearGradient id="ga" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF6A9C"/><stop offset="1" stop-color="#FF9A7A"/></linearGradient></defs>
+<rect width="1024" height="1024" fill="url(#ga)"/>
+<g fill="none" stroke="#fff" stroke-width="62" stroke-linecap="round">
+<path d="M512 812 C 330 690, 190 540, 225 405 C 255 290, 410 250, 470 370"/>
+<path d="M512 812 C 694 690, 834 540, 799 405 C 769 290, 614 250, 554 370"/>
+</g>
+<circle cx="462" cy="372" r="46" fill="#fff"/><circle cx="562" cy="372" r="46" fill="#fff"/>
+<path d="M486 395 C 500 430, 506 465, 500 500 C 488 470, 474 440, 466 412 Z" fill="#FFD3E0"/>
+<path d="M538 395 C 524 430, 518 465, 524 500 C 536 470, 550 440, 558 412 Z" fill="#FFD3E0"/>
+<path d="M500 500 C 496 482, 490 466, 484 452 L 503 458 Z" fill="#2B1630"/>
+<path d="M524 500 C 528 482, 534 466, 540 452 L 521 458 Z" fill="#2B1630"/>
+<circle cx="452" cy="360" r="9" fill="#2B1630"/><circle cx="572" cy="360" r="9" fill="#2B1630"/>
+</svg>

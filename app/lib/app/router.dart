@@ -12,6 +12,8 @@ import '../features/auth/presentation/splash_page.dart';
 import '../features/help/presentation/help_page.dart';
 import '../features/premium/presentation/insights_page.dart';
 import '../features/admin/presentation/admin_page.dart';
+import '../features/consent/data/terms_repository.dart';
+import '../features/consent/presentation/consent_page.dart';
 import '../features/home/presentation/home_shell.dart';
 import '../features/location/presentation/location_picker_page.dart';
 import '../features/profile/data/profile_repository.dart';
@@ -34,6 +36,7 @@ abstract final class Routes {
   static const help = '/help';
   static const insights = '/insights';
   static const admin = '/admin';
+  static const consent = '/rules';
 
   /// Devuelve un `Place` con `context.push<Place>(Routes.pickLocation, extra: LatLng?)`.
   static const pickLocation = '/location';
@@ -44,6 +47,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   ref.listen(currentUserIdProvider, (_, _) => refresh.value++);
   ref.listen(myProfileProvider, (_, _) => refresh.value++);
   ref.listen(passwordRecoveryProvider, (_, _) => refresh.value++);
+  ref.listen(termsAcceptedProvider, (_, _) => refresh.value++);
   ref.onDispose(refresh.dispose);
 
   return GoRouter(
@@ -63,6 +67,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         return goTo(Routes.resetPassword);
       }
 
+      // Antes de todo, aceptar las reglas y los términos vigentes.
+      final terms = ref.read(termsAcceptedProvider);
+      if (terms.isLoading && !terms.hasValue) return goTo(Routes.splash);
+      if (terms.value == false) return goTo(Routes.consent);
+
       final profile = ref.read(myProfileProvider);
       if (profile.isLoading || profile.hasError) return goTo(Routes.splash);
       if (profile.value == null) return goTo(Routes.onboarding);
@@ -73,6 +82,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         Routes.resetPassword,
         Routes.splash,
         Routes.onboarding,
+        Routes.consent,
       };
       return gates.contains(here) ? Routes.home : null;
     },
@@ -102,6 +112,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: Routes.help, builder: (_, _) => const HelpPage()),
       GoRoute(path: Routes.insights, builder: (_, _) => const InsightsPage()),
       GoRoute(path: Routes.admin, builder: (_, _) => const AdminPage()),
+      GoRoute(path: Routes.consent, builder: (_, _) => const ConsentPage()),
       GoRoute(
         path: Routes.blocked,
         builder: (_, _) => const BlockedUsersPage(),
