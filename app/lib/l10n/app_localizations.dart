@@ -1658,6 +1658,48 @@ abstract class AppLocalizations {
   /// **'Verificación'**
   String get settingsVerification;
 
+  /// No description provided for @lockTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Flamengos está bloqueado'**
+  String get lockTitle;
+
+  /// No description provided for @lockMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Usa tu huella, tu rostro o el PIN del teléfono para entrar.'**
+  String get lockMessage;
+
+  /// No description provided for @lockUnlock.
+  ///
+  /// In es, this message translates to:
+  /// **'Desbloquear'**
+  String get lockUnlock;
+
+  /// No description provided for @lockReason.
+  ///
+  /// In es, this message translates to:
+  /// **'Desbloquea Flamengos'**
+  String get lockReason;
+
+  /// No description provided for @lockSetting.
+  ///
+  /// In es, this message translates to:
+  /// **'Bloqueo con huella o rostro'**
+  String get lockSetting;
+
+  /// No description provided for @lockSettingHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Se pide al abrir la app.'**
+  String get lockSettingHint;
+
+  /// No description provided for @lockUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'Este teléfono no tiene huella, rostro ni PIN configurado.'**
+  String get lockUnavailable;
+
   /// No description provided for @settingsSafety.
   ///
   /// In es, this message translates to:

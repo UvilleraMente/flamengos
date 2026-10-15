@@ -893,6 +893,29 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsVerification => 'Verificación';
 
   @override
+  String get lockTitle => 'Flamengos está bloqueado';
+
+  @override
+  String get lockMessage =>
+      'Usa tu huella, tu rostro o el PIN del teléfono para entrar.';
+
+  @override
+  String get lockUnlock => 'Desbloquear';
+
+  @override
+  String get lockReason => 'Desbloquea Flamengos';
+
+  @override
+  String get lockSetting => 'Bloqueo con huella o rostro';
+
+  @override
+  String get lockSettingHint => 'Se pide al abrir la app.';
+
+  @override
+  String get lockUnavailable =>
+      'Este teléfono no tiene huella, rostro ni PIN configurado.';
+
+  @override
   String get settingsSafety => 'Seguridad';
 
   @override

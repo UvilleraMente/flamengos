@@ -49,7 +49,7 @@ class CoupleRepository {
       .from('messages')
       .stream(primaryKey: ['id'])
       .eq('match_id', matchId)
-      .order('created_at')
+      .order('created_at', ascending: true)
       .map((rows) => rows.map(ChatMessage.fromJson).toList());
 
   Future<void> sendMessage(String matchId, String body) => _db

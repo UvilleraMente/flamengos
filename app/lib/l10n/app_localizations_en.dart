@@ -892,6 +892,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsVerification => 'Verification';
 
   @override
+  String get lockTitle => 'Flamengos is locked';
+
+  @override
+  String get lockMessage =>
+      'Use your fingerprint, face or phone PIN to get in.';
+
+  @override
+  String get lockUnlock => 'Unlock';
+
+  @override
+  String get lockReason => 'Unlock Flamengos';
+
+  @override
+  String get lockSetting => 'Fingerprint or face lock';
+
+  @override
+  String get lockSettingHint => 'Asked when you open the app.';
+
+  @override
+  String get lockUnavailable =>
+      'This phone has no fingerprint, face or PIN set up.';
+
+  @override
   String get settingsSafety => 'Safety';
 
   @override

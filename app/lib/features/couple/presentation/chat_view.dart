@@ -40,11 +40,9 @@ class _ChatViewState extends ConsumerState<ChatView> {
     );
     ref.listenManual(messagesProvider(widget.matchId), (before, next) {
       _markRead(next.value);
-      // Al llegar un mensaje mío (recién enviado), baja hasta verlo.
+      // Al llegar un mensaje nuevo (mío o de mi pareja), baja hasta verlo.
       final last = next.value?.lastOrNull;
-      if (last != null &&
-          last.senderId == widget.me &&
-          last.id != before?.value?.lastOrNull?.id) {
+      if (last != null && last.id != before?.value?.lastOrNull?.id) {
         _scrollToBottom();
       }
     }, fireImmediately: true);
