@@ -55,33 +55,43 @@ class AppearanceGroup extends ConsumerWidget {
     return SettingsGroup(
       title: t.settingsAppearance,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(14),
-          // 4 por fila en el teléfono; más si hay espacio.
-          child: LayoutBuilder(
-            builder: (context, box) {
-              const gap = 10.0;
-              final perRow = (box.maxWidth / 110).floor().clamp(4, 6);
-              final width = (box.maxWidth - gap * (perRow - 1)) / perRow;
-              return Wrap(
-                spacing: gap,
-                runSpacing: 14,
-                children: [
-                  for (final theme in FlamTheme.values)
-                    SizedBox(
-                      width: width,
-                      child: _ThemeCard(
-                        theme: theme,
-                        name: themeName(t, theme),
-                        hint: _themeHint(t, theme),
-                        selected: look.theme == theme,
-                        onTap: () => set(look.copyWith(theme: theme)),
-                      ),
+        // Una sola fila que se desliza; se ve un poco del siguiente para
+        // que se note que hay más.
+        LayoutBuilder(
+          builder: (context, box) {
+            const gap = 10.0;
+            final width = ((box.maxWidth - 28) / 3.6).clamp(80.0, 110.0);
+            // Abre con el tema actual a la vista.
+            final selected = FlamTheme.values.indexOf(look.theme);
+            final offset = (selected * (width + gap) - width).clamp(
+              0.0,
+              double.infinity,
+            );
+            return SizedBox(
+              // Padding + miniatura (72) + nombre + descripción.
+              height: 146,
+              child: ListView.separated(
+                controller: ScrollController(initialScrollOffset: offset),
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.fromLTRB(14, 14, 14, 10),
+                itemCount: FlamTheme.values.length,
+                separatorBuilder: (_, _) => const SizedBox(width: gap),
+                itemBuilder: (_, i) {
+                  final theme = FlamTheme.values[i];
+                  return SizedBox(
+                    width: width,
+                    child: _ThemeCard(
+                      theme: theme,
+                      name: themeName(t, theme),
+                      hint: _themeHint(t, theme),
+                      selected: look.theme == theme,
+                      onTap: () => set(look.copyWith(theme: theme)),
                     ),
-                ],
-              );
-            },
-          ),
+                  );
+                },
+              ),
+            );
+          },
         ),
         SettingsTile(
           icon: Icons.text_fields_rounded,
