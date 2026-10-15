@@ -19,6 +19,11 @@ extension NotificationText on AppNotification {
     NotificationType.coupleDissolved => t.notifCoupleDissolved(name),
     NotificationType.photoRejected => t.notifPhotoRejected,
     NotificationType.boostStarted => t.notifBoostStarted,
+    NotificationType.dailyPicks => t.notifDailyPicks,
+    NotificationType.newNearby => t.notifNewNearby(
+      (data['count'] as num?)?.toInt() ?? 1,
+    ),
+    NotificationType.dailyAnswer => t.notifDailyAnswer(name),
   };
 
   IconData get icon => switch (type) {
@@ -30,6 +35,9 @@ extension NotificationText on AppNotification {
     NotificationType.coupleDissolved => Icons.waving_hand_rounded,
     NotificationType.photoRejected => Icons.hide_image_rounded,
     NotificationType.boostStarted => Icons.bolt_rounded,
+    NotificationType.dailyPicks => Icons.wb_sunny_rounded,
+    NotificationType.newNearby => Icons.person_add_alt_1_rounded,
+    NotificationType.dailyAnswer => Icons.question_answer_rounded,
   };
 }
 

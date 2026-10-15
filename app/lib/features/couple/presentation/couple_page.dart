@@ -18,7 +18,11 @@ import '../../safety/presentation/report_sheet.dart';
 import '../data/couple_presence.dart';
 import '../data/couple_repository.dart';
 import '../domain/couple.dart';
+import '../../notifications/data/notifications_repository.dart';
+import '../../notifications/domain/app_notification.dart';
+import '../data/couple_daily.dart';
 import 'chat_view.dart';
+import 'daily_question_card.dart';
 import 'couple_distance.dart';
 
 /// Pantalla de la pareja: quiénes son, estado de disolución y chat.
@@ -35,6 +39,23 @@ class CouplePage extends ConsumerWidget {
     final partner = ref
         .watch(profileByIdProvider(couple.partnerOf(me.id)))
         .value;
+
+    // Pregunta del día y racha: se refrescan cuando la pareja responde y
+    // cuando hoy empieza a contar (los dos escribieron).
+    final daily = coupleDailyProvider(couple.id);
+    ref.listen(notificationsProvider, (before, now) {
+      final latest = now.value?.firstOrNull;
+      if (latest?.type == NotificationType.dailyAnswer &&
+          latest?.id != before?.value?.firstOrNull?.id) {
+        ref.invalidate(daily);
+      }
+    });
+    ref.listen(messagesProvider(couple.id), (before, now) {
+      final grew = (now.value?.length ?? 0) > (before?.value?.length ?? 0);
+      if (grew && !(ref.read(daily).value?.todayActive ?? true)) {
+        ref.invalidate(daily);
+      }
+    });
 
     return Scaffold(
       body: Column(
@@ -59,6 +80,14 @@ class CouplePage extends ConsumerWidget {
                   )
                 : const SizedBox(width: double.infinity),
           ),
+          if (couple.status != CoupleStatus.dissolved)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+              child: DailyQuestionCard(
+                matchId: couple.id,
+                partnerName: partner?.displayName ?? context.l10n.someone,
+              ),
+            ),
           Expanded(
             child: ChatView(
               matchId: couple.id,
@@ -176,7 +205,14 @@ class _CoupleHeader extends ConsumerWidget {
                   style: TextStyle(color: FlamColors.textMuted),
                 ),
                 const SizedBox(height: 4),
-                CoupleDistancePill(me: me, partner: partner),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [
+                    CoupleDistancePill(me: me, partner: partner),
+                    StreakPill(matchId: couple.id),
+                  ],
+                ),
               ],
             ),
           ),

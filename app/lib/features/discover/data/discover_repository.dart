@@ -22,6 +22,14 @@ class DiscoverRepository {
         .toList();
   }
 
+  /// Los 3 "flamengos del día" (se escogen una vez al día en el servidor).
+  Future<List<Profile>> dailyPicks() async {
+    final rows = await _db.rpc('my_daily_picks') as List;
+    return rows
+        .map((r) => Profile.fromJson(r as Map<String, dynamic>))
+        .toList();
+  }
+
   Future<void> pass(String targetId) =>
       _db.rpc('pass_profile', params: {'p_target': targetId});
 

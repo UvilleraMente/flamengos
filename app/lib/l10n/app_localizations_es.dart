@@ -1295,6 +1295,168 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get notifDailyPicks => 'Tus flamengos del día están listos.';
+
+  @override
+  String notifNewNearby(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Hay $count personas nuevas cerca que comparten tus gustos.',
+      one: 'Hay 1 persona nueva cerca que comparte tus gustos.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String notifDailyAnswer(String name) {
+    return '$name respondió la pregunta del día.';
+  }
+
+  @override
+  String get dailyPicksButton => 'Del día';
+
+  @override
+  String get dailyPicksTitle => 'Flamengos del día';
+
+  @override
+  String get dailyPicksSubtitle =>
+      'Escogidos para ti por lo que tienen en común. Mañana hay nuevos.';
+
+  @override
+  String get dailyPicksEmpty =>
+      'Hoy no hay sugerencias. Prueba ampliar tus filtros.';
+
+  @override
+  String get dailyQuestionTitle => 'Pregunta del día';
+
+  @override
+  String get dailyQuestionHint => 'Tu respuesta…';
+
+  @override
+  String get dailyQuestionSend => 'Responder';
+
+  @override
+  String dailyQuestionWaiting(String name) {
+    return '$name aún no responde.';
+  }
+
+  @override
+  String dailyQuestionPartnerAnswered(String name) {
+    return '$name ya respondió. Responde para ver qué dijo.';
+  }
+
+  @override
+  String streakDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count días de racha',
+      one: '1 día de racha',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get streakHint =>
+      'La racha sube cada día que los dos se escriben o responden la pregunta del día.';
+
+  @override
+  String get streakTodayPending =>
+      'Hoy aún no cuenta: falta que los dos se escriban.';
+
+  @override
+  String get dailyQuestion0 => '¿Cuál fue el mejor momento de tu semana?';
+
+  @override
+  String get dailyQuestion1 => '¿Qué canción te recuerda a nosotros?';
+
+  @override
+  String get dailyQuestion2 => 'Si pudiéramos viajar mañana, ¿a dónde iríamos?';
+
+  @override
+  String get dailyQuestion3 => '¿Qué es lo primero que notaste de mí?';
+
+  @override
+  String get dailyQuestion4 => '¿Cuál es tu comida favorita para compartir?';
+
+  @override
+  String get dailyQuestion5 => '¿Qué te hace sentir amor?';
+
+  @override
+  String get dailyQuestion6 => 'Describe tu domingo perfecto.';
+
+  @override
+  String get dailyQuestion7 => '¿Qué meta tienes para este año?';
+
+  @override
+  String get dailyQuestion8 => '¿Qué película veríamos juntos esta noche?';
+
+  @override
+  String get dailyQuestion9 => '¿Qué recuerdo de tu infancia te hace sonreír?';
+
+  @override
+  String get dailyQuestion10 => '¿Qué valoras más en una pareja?';
+
+  @override
+  String get dailyQuestion11 => '¿Playa o montaña? ¿Por qué?';
+
+  @override
+  String get dailyQuestion12 =>
+      '¿Qué te gustaría que hiciéramos juntos por primera vez?';
+
+  @override
+  String get dailyQuestion13 => '¿Qué te ha tenido pensando últimamente?';
+
+  @override
+  String get dailyQuestion14 => '¿Qué tradición familiar te gustaría mantener?';
+
+  @override
+  String get dailyQuestion15 => '¿Cuál es tu lenguaje del amor?';
+
+  @override
+  String get dailyQuestion16 => 'Si ganaras la lotería, ¿qué harías primero?';
+
+  @override
+  String get dailyQuestion17 => '¿Qué es algo que poca gente sabe de ti?';
+
+  @override
+  String get dailyQuestion18 => '¿Cómo sería nuestra cita ideal?';
+
+  @override
+  String get dailyQuestion19 => '¿Qué te hizo reír hoy?';
+
+  @override
+  String get dailyQuestion20 => '¿Qué libro, serie o podcast me recomiendas?';
+
+  @override
+  String get dailyQuestion21 => '¿Dónde te ves en cinco años?';
+
+  @override
+  String get dailyQuestion22 => '¿Qué detalle pequeño te alegra el día?';
+
+  @override
+  String get dailyQuestion23 => '¿Cuál es tu plato dominicano favorito?';
+
+  @override
+  String get dailyQuestion24 => '¿Qué cualidad mía te gusta más?';
+
+  @override
+  String get dailyQuestion25 => '¿Qué harías en un día sin teléfono?';
+
+  @override
+  String get dailyQuestion26 => '¿Cuál ha sido tu mejor viaje?';
+
+  @override
+  String get dailyQuestion27 => '¿Qué te gustaría aprender este año?';
+
+  @override
+  String get dailyQuestion28 => 'Si fueras un animal, ¿cuál serías?';
+
+  @override
+  String get dailyQuestion29 => '¿Qué significa para ti una relación sana?';
+
+  @override
   String get premiumTitle => 'Premium';
 
   @override

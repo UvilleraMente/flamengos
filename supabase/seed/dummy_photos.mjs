@@ -33,14 +33,22 @@ async function run() {
     const email = `dummy${String(i + 1).padStart(2, "0")}@flamengos.test`;
     const { token, uid } = await signIn(email);
     const auth = { apikey: KEY, Authorization: `Bearer ${token}` };
-    const path = `${uid}/dummy.jpg`;
+    const path = `${uid}/dummy-${Date.now()}.jpg`;
 
     if (remove) {
-      await fetch(`${URL_}/storage/v1/object/photos`, {
-        method: "DELETE",
-        headers: { ...auth, "Content-Type": "application/json" },
-        body: JSON.stringify({ prefixes: [path] }),
+      // Sus fotos están en el perfil (la carpeta {uid}/ es solo suya).
+      const res = await fetch(`${URL_}/rest/v1/profiles?id=eq.${uid}&select=photos`, {
+        headers: auth,
       });
+      const [{ photos = [] } = {}] = await res.json();
+      const own = photos.filter((p) => p.startsWith(`${uid}/`));
+      if (own.length) {
+        await fetch(`${URL_}/storage/v1/object/photos`, {
+          method: "DELETE",
+          headers: { ...auth, "Content-Type": "application/json" },
+          body: JSON.stringify({ prefixes: own }),
+        });
+      }
       console.log(`${email}: foto borrada`);
       continue;
     }
@@ -51,7 +59,7 @@ async function run() {
 
     const up = await fetch(`${URL_}/storage/v1/object/photos/${path}`, {
       method: "POST",
-      headers: { ...auth, "Content-Type": "image/jpeg", "x-upsert": "true" },
+      headers: { ...auth, "Content-Type": "image/jpeg" },
       body: bytes,
     });
     if (!up.ok) throw new Error(`${email} subir: ${up.status} ${await up.text()}`);

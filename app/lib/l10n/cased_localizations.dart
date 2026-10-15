@@ -1180,6 +1180,144 @@ class CasedLocalizations extends AppLocalizations {
       _transform(_inner.adminOpenReports(count));
 
   @override
+  String get notifDailyPicks => _transform(_inner.notifDailyPicks);
+
+  @override
+  String notifNewNearby(int count) => _transform(_inner.notifNewNearby(count));
+
+  @override
+  String notifDailyAnswer(String name) =>
+      _transform(_inner.notifDailyAnswer(name));
+
+  @override
+  String get dailyPicksButton => _transform(_inner.dailyPicksButton);
+
+  @override
+  String get dailyPicksTitle => _transform(_inner.dailyPicksTitle);
+
+  @override
+  String get dailyPicksSubtitle => _transform(_inner.dailyPicksSubtitle);
+
+  @override
+  String get dailyPicksEmpty => _transform(_inner.dailyPicksEmpty);
+
+  @override
+  String get dailyQuestionTitle => _transform(_inner.dailyQuestionTitle);
+
+  @override
+  String get dailyQuestionHint => _transform(_inner.dailyQuestionHint);
+
+  @override
+  String get dailyQuestionSend => _transform(_inner.dailyQuestionSend);
+
+  @override
+  String dailyQuestionWaiting(String name) =>
+      _transform(_inner.dailyQuestionWaiting(name));
+
+  @override
+  String dailyQuestionPartnerAnswered(String name) =>
+      _transform(_inner.dailyQuestionPartnerAnswered(name));
+
+  @override
+  String streakDays(int count) => _transform(_inner.streakDays(count));
+
+  @override
+  String get streakHint => _transform(_inner.streakHint);
+
+  @override
+  String get streakTodayPending => _transform(_inner.streakTodayPending);
+
+  @override
+  String get dailyQuestion0 => _transform(_inner.dailyQuestion0);
+
+  @override
+  String get dailyQuestion1 => _transform(_inner.dailyQuestion1);
+
+  @override
+  String get dailyQuestion2 => _transform(_inner.dailyQuestion2);
+
+  @override
+  String get dailyQuestion3 => _transform(_inner.dailyQuestion3);
+
+  @override
+  String get dailyQuestion4 => _transform(_inner.dailyQuestion4);
+
+  @override
+  String get dailyQuestion5 => _transform(_inner.dailyQuestion5);
+
+  @override
+  String get dailyQuestion6 => _transform(_inner.dailyQuestion6);
+
+  @override
+  String get dailyQuestion7 => _transform(_inner.dailyQuestion7);
+
+  @override
+  String get dailyQuestion8 => _transform(_inner.dailyQuestion8);
+
+  @override
+  String get dailyQuestion9 => _transform(_inner.dailyQuestion9);
+
+  @override
+  String get dailyQuestion10 => _transform(_inner.dailyQuestion10);
+
+  @override
+  String get dailyQuestion11 => _transform(_inner.dailyQuestion11);
+
+  @override
+  String get dailyQuestion12 => _transform(_inner.dailyQuestion12);
+
+  @override
+  String get dailyQuestion13 => _transform(_inner.dailyQuestion13);
+
+  @override
+  String get dailyQuestion14 => _transform(_inner.dailyQuestion14);
+
+  @override
+  String get dailyQuestion15 => _transform(_inner.dailyQuestion15);
+
+  @override
+  String get dailyQuestion16 => _transform(_inner.dailyQuestion16);
+
+  @override
+  String get dailyQuestion17 => _transform(_inner.dailyQuestion17);
+
+  @override
+  String get dailyQuestion18 => _transform(_inner.dailyQuestion18);
+
+  @override
+  String get dailyQuestion19 => _transform(_inner.dailyQuestion19);
+
+  @override
+  String get dailyQuestion20 => _transform(_inner.dailyQuestion20);
+
+  @override
+  String get dailyQuestion21 => _transform(_inner.dailyQuestion21);
+
+  @override
+  String get dailyQuestion22 => _transform(_inner.dailyQuestion22);
+
+  @override
+  String get dailyQuestion23 => _transform(_inner.dailyQuestion23);
+
+  @override
+  String get dailyQuestion24 => _transform(_inner.dailyQuestion24);
+
+  @override
+  String get dailyQuestion25 => _transform(_inner.dailyQuestion25);
+
+  @override
+  String get dailyQuestion26 => _transform(_inner.dailyQuestion26);
+
+  @override
+  String get dailyQuestion27 => _transform(_inner.dailyQuestion27);
+
+  @override
+  String get dailyQuestion28 => _transform(_inner.dailyQuestion28);
+
+  @override
+  String get dailyQuestion29 => _transform(_inner.dailyQuestion29);
+
+  @override
   String get premiumTitle => _transform(_inner.premiumTitle);
 
   @override

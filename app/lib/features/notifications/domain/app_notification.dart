@@ -7,7 +7,10 @@ enum NotificationType {
   dissolutionCancelled('dissolution_cancelled'),
   coupleDissolved('couple_dissolved'),
   photoRejected('photo_rejected'),
-  boostStarted('boost_started');
+  boostStarted('boost_started'),
+  dailyPicks('daily_picks'),
+  newNearby('new_nearby'),
+  dailyAnswer('daily_answer');
 
   const NotificationType(this.dbValue);
   final String dbValue;
@@ -23,6 +26,7 @@ class AppNotification {
     required this.actorId,
     required this.createdAt,
     required this.readAt,
+    this.data = const {},
   });
 
   static AppNotification? tryParse(Map<String, dynamic> json) {
@@ -36,6 +40,7 @@ class AppNotification {
       readAt: json['read_at'] == null
           ? null
           : DateTime.parse(json['read_at'] as String),
+      data: json['data'] as Map<String, dynamic>? ?? const {},
     );
   }
 
@@ -44,6 +49,9 @@ class AppNotification {
   final String? actorId;
   final DateTime createdAt;
   final DateTime? readAt;
+
+  /// Datos extra (p. ej. {"count": 4} en new_nearby).
+  final Map<String, dynamic> data;
 
   bool get isUnread => readAt == null;
 }

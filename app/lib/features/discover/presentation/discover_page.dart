@@ -75,7 +75,8 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
 
   void _remove(Profile p) {
     if (!mounted) return;
-    setState(() => _queue?.remove(p));
+    // Por id: el mismo perfil puede venir de otra lista (p. ej. los del día).
+    setState(() => _queue?.removeWhere((q) => q.id == p.id));
     precacheProfilePhotos(context, _queue!.skip(1).take(1));
   }
 
@@ -95,6 +96,93 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
 
   Future<void> _openFilters(Profile me) async {
     if (await showFiltersSheet(context, me)) _load();
+  }
+
+  Future<void> _openDailyPicks() async {
+    final t = context.l10n;
+    final canLike =
+        ref.read(liveOutgoingCountProvider) < ref.read(requestLimitProvider);
+    final picked = await showModalBottomSheet<Profile>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheet) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                t.dailyPicksTitle,
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                t.dailyPicksSubtitle,
+                style: TextStyle(color: FlamColors.textMuted),
+              ),
+              const SizedBox(height: 14),
+              FutureBuilder(
+                future: ref.read(discoverRepositoryProvider).dailyPicks(),
+                builder: (_, snap) {
+                  if (!snap.hasData && !snap.hasError) {
+                    return const Padding(
+                      padding: EdgeInsets.all(24),
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  }
+                  final picks = snap.data ?? const <Profile>[];
+                  if (picks.isEmpty) {
+                    return Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        snap.hasError
+                            ? describeError(context, snap.error!)
+                            : t.dailyPicksEmpty,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: FlamColors.textMuted),
+                      ),
+                    );
+                  }
+                  return SettingsGroupCard(
+                    children: [
+                      for (final p in picks)
+                        ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
+                          leading: Avatar(p, radius: 26),
+                          title: Text(
+                            '${p.displayName}, ${p.age}',
+                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                          subtitle: Text(
+                            [
+                              if (p.sharedTags > 0) t.tagsShared(p.sharedTags),
+                              if (p.distanceKm case final km?)
+                                t.distanceAway(km.round().clamp(1, 99999)),
+                            ].join(' · '),
+                          ),
+                          trailing: Icon(
+                            Icons.chevron_right_rounded,
+                            color: FlamColors.textFaint,
+                          ),
+                          onTap: () => Navigator.pop(sheet, p),
+                        ),
+                    ],
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    if (picked != null && mounted) await _openFromMap(picked, canLike);
   }
 
   /// Desde el mapa: abre el perfil con acciones de pedir pareja / pasar.
@@ -169,6 +257,7 @@ class _DiscoverPageState extends ConsumerState<DiscoverPage> {
               showMap: _showMap,
               onToggleMap: () => setState(() => _showMap = !_showMap),
               onFilters: () => _openFilters(me),
+              onDailyPicks: _openDailyPicks,
             ),
           Expanded(
             child: Center(
@@ -330,12 +419,14 @@ class _Toolbar extends StatelessWidget {
     required this.showMap,
     required this.onToggleMap,
     required this.onFilters,
+    required this.onDailyPicks,
   });
 
   final Profile me;
   final bool showMap;
   final VoidCallback onToggleMap;
   final VoidCallback onFilters;
+  final VoidCallback onDailyPicks;
 
   @override
   Widget build(BuildContext context) {
@@ -385,6 +476,13 @@ class _Toolbar extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            const SizedBox(width: 8),
+            FlamIconButton(
+              icon: const Icon(Icons.wb_sunny_rounded),
+              size: 44,
+              tooltip: t.dailyPicksTitle,
+              onPressed: onDailyPicks,
             ),
             const SizedBox(width: 8),
             FlamIconButton(

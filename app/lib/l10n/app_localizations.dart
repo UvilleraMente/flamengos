@@ -2354,6 +2354,276 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{1 reporte abierto} other{{count} reportes abiertos}}'**
   String adminOpenReports(int count);
 
+  /// No description provided for @notifDailyPicks.
+  ///
+  /// In es, this message translates to:
+  /// **'Tus flamengos del día están listos.'**
+  String get notifDailyPicks;
+
+  /// No description provided for @notifNewNearby.
+  ///
+  /// In es, this message translates to:
+  /// **'{count, plural, =1{Hay 1 persona nueva cerca que comparte tus gustos.} other{Hay {count} personas nuevas cerca que comparten tus gustos.}}'**
+  String notifNewNearby(int count);
+
+  /// No description provided for @notifDailyAnswer.
+  ///
+  /// In es, this message translates to:
+  /// **'{name} respondió la pregunta del día.'**
+  String notifDailyAnswer(String name);
+
+  /// No description provided for @dailyPicksButton.
+  ///
+  /// In es, this message translates to:
+  /// **'Del día'**
+  String get dailyPicksButton;
+
+  /// No description provided for @dailyPicksTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Flamengos del día'**
+  String get dailyPicksTitle;
+
+  /// No description provided for @dailyPicksSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Escogidos para ti por lo que tienen en común. Mañana hay nuevos.'**
+  String get dailyPicksSubtitle;
+
+  /// No description provided for @dailyPicksEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy no hay sugerencias. Prueba ampliar tus filtros.'**
+  String get dailyPicksEmpty;
+
+  /// No description provided for @dailyQuestionTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Pregunta del día'**
+  String get dailyQuestionTitle;
+
+  /// No description provided for @dailyQuestionHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu respuesta…'**
+  String get dailyQuestionHint;
+
+  /// No description provided for @dailyQuestionSend.
+  ///
+  /// In es, this message translates to:
+  /// **'Responder'**
+  String get dailyQuestionSend;
+
+  /// No description provided for @dailyQuestionWaiting.
+  ///
+  /// In es, this message translates to:
+  /// **'{name} aún no responde.'**
+  String dailyQuestionWaiting(String name);
+
+  /// No description provided for @dailyQuestionPartnerAnswered.
+  ///
+  /// In es, this message translates to:
+  /// **'{name} ya respondió. Responde para ver qué dijo.'**
+  String dailyQuestionPartnerAnswered(String name);
+
+  /// No description provided for @streakDays.
+  ///
+  /// In es, this message translates to:
+  /// **'{count, plural, =1{1 día de racha} other{{count} días de racha}}'**
+  String streakDays(int count);
+
+  /// No description provided for @streakHint.
+  ///
+  /// In es, this message translates to:
+  /// **'La racha sube cada día que los dos se escriben o responden la pregunta del día.'**
+  String get streakHint;
+
+  /// No description provided for @streakTodayPending.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy aún no cuenta: falta que los dos se escriban.'**
+  String get streakTodayPending;
+
+  /// No description provided for @dailyQuestion0.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cuál fue el mejor momento de tu semana?'**
+  String get dailyQuestion0;
+
+  /// No description provided for @dailyQuestion1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué canción te recuerda a nosotros?'**
+  String get dailyQuestion1;
+
+  /// No description provided for @dailyQuestion2.
+  ///
+  /// In es, this message translates to:
+  /// **'Si pudiéramos viajar mañana, ¿a dónde iríamos?'**
+  String get dailyQuestion2;
+
+  /// No description provided for @dailyQuestion3.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué es lo primero que notaste de mí?'**
+  String get dailyQuestion3;
+
+  /// No description provided for @dailyQuestion4.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cuál es tu comida favorita para compartir?'**
+  String get dailyQuestion4;
+
+  /// No description provided for @dailyQuestion5.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué te hace sentir amor?'**
+  String get dailyQuestion5;
+
+  /// No description provided for @dailyQuestion6.
+  ///
+  /// In es, this message translates to:
+  /// **'Describe tu domingo perfecto.'**
+  String get dailyQuestion6;
+
+  /// No description provided for @dailyQuestion7.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué meta tienes para este año?'**
+  String get dailyQuestion7;
+
+  /// No description provided for @dailyQuestion8.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué película veríamos juntos esta noche?'**
+  String get dailyQuestion8;
+
+  /// No description provided for @dailyQuestion9.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué recuerdo de tu infancia te hace sonreír?'**
+  String get dailyQuestion9;
+
+  /// No description provided for @dailyQuestion10.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué valoras más en una pareja?'**
+  String get dailyQuestion10;
+
+  /// No description provided for @dailyQuestion11.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Playa o montaña? ¿Por qué?'**
+  String get dailyQuestion11;
+
+  /// No description provided for @dailyQuestion12.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué te gustaría que hiciéramos juntos por primera vez?'**
+  String get dailyQuestion12;
+
+  /// No description provided for @dailyQuestion13.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué te ha tenido pensando últimamente?'**
+  String get dailyQuestion13;
+
+  /// No description provided for @dailyQuestion14.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué tradición familiar te gustaría mantener?'**
+  String get dailyQuestion14;
+
+  /// No description provided for @dailyQuestion15.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cuál es tu lenguaje del amor?'**
+  String get dailyQuestion15;
+
+  /// No description provided for @dailyQuestion16.
+  ///
+  /// In es, this message translates to:
+  /// **'Si ganaras la lotería, ¿qué harías primero?'**
+  String get dailyQuestion16;
+
+  /// No description provided for @dailyQuestion17.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué es algo que poca gente sabe de ti?'**
+  String get dailyQuestion17;
+
+  /// No description provided for @dailyQuestion18.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cómo sería nuestra cita ideal?'**
+  String get dailyQuestion18;
+
+  /// No description provided for @dailyQuestion19.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué te hizo reír hoy?'**
+  String get dailyQuestion19;
+
+  /// No description provided for @dailyQuestion20.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué libro, serie o podcast me recomiendas?'**
+  String get dailyQuestion20;
+
+  /// No description provided for @dailyQuestion21.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Dónde te ves en cinco años?'**
+  String get dailyQuestion21;
+
+  /// No description provided for @dailyQuestion22.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué detalle pequeño te alegra el día?'**
+  String get dailyQuestion22;
+
+  /// No description provided for @dailyQuestion23.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cuál es tu plato dominicano favorito?'**
+  String get dailyQuestion23;
+
+  /// No description provided for @dailyQuestion24.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué cualidad mía te gusta más?'**
+  String get dailyQuestion24;
+
+  /// No description provided for @dailyQuestion25.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué harías en un día sin teléfono?'**
+  String get dailyQuestion25;
+
+  /// No description provided for @dailyQuestion26.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cuál ha sido tu mejor viaje?'**
+  String get dailyQuestion26;
+
+  /// No description provided for @dailyQuestion27.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué te gustaría aprender este año?'**
+  String get dailyQuestion27;
+
+  /// No description provided for @dailyQuestion28.
+  ///
+  /// In es, this message translates to:
+  /// **'Si fueras un animal, ¿cuál serías?'**
+  String get dailyQuestion28;
+
+  /// No description provided for @dailyQuestion29.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué significa para ti una relación sana?'**
+  String get dailyQuestion29;
+
   /// No description provided for @premiumTitle.
   ///
   /// In es, this message translates to:

@@ -22,10 +22,14 @@ type NotificationType =
   | "dissolution_cancelled"
   | "couple_dissolved"
   | "photo_rejected"
-  | "boost_started";
+  | "boost_started"
+  | "daily_picks"
+  | "new_nearby"
+  | "daily_answer";
 
 // Mismos textos que la app (lib/l10n/app_*.arb → notif*).
-const texts: Record<Locale, Record<NotificationType, (name: string) => string>> = {
+type Data = { count?: number } | null;
+const texts: Record<Locale, Record<NotificationType, (name: string, data: Data) => string>> = {
   es: {
     request_received: (n) => `${n} te pidió pareja`,
     request_accepted: (n) => `${n} aceptó ser tu pareja`,
@@ -35,6 +39,9 @@ const texts: Record<Locale, Record<NotificationType, (name: string) => string>> 
     couple_dissolved: (n) => `Tu pareja con ${n} terminó`,
     photo_rejected: () => "Quitamos una de tus fotos porque no cumple las normas",
     boost_started: () => "Tu perfil tiene un impulso de 24 h: saldrás primero en Descubrir",
+    daily_picks: () => "Tus flamengos del día están listos",
+    new_nearby: (_, d) => `Hay ${d?.count ?? "nuevas"} personas nuevas cerca que comparten tus gustos`,
+    daily_answer: (n) => `${n} respondió la pregunta del día`,
   },
   en: {
     request_received: (n) => `${n} asked you to pair`,
@@ -45,6 +52,9 @@ const texts: Record<Locale, Record<NotificationType, (name: string) => string>> 
     couple_dissolved: (n) => `Your pair with ${n} ended`,
     photo_rejected: () => "We removed one of your photos because it breaks the rules",
     boost_started: () => "Your profile has a 24 h boost: you'll show up first in Discover",
+    daily_picks: () => "Your daily flamingos are ready",
+    new_nearby: (_, d) => `${d?.count ?? "Some"} new people nearby share your interests`,
+    daily_answer: (n) => `${n} answered today's question`,
   },
 };
 const someone: Record<Locale, string> = { es: "Alguien", en: "Someone" };
@@ -175,7 +185,7 @@ async function handle(req: Request): Promise<Response> {
     .eq("id", notification_id)
     .is("pushed_at", null)
     .gt("created_at", new Date(Date.now() - 10 * 60_000).toISOString())
-    .select("user_id, type, actor_id")
+    .select("user_id, type, actor_id, data")
     .maybeSingle();
   if (!n) return new Response("skip");
 
@@ -194,7 +204,7 @@ async function handle(req: Request): Promise<Response> {
       const result = await send(
         token,
         "Flamengos",
-        text(actor?.display_name ?? someone[lang]),
+        text(actor?.display_name ?? someone[lang], n.data as Data),
         n.type,
       );
       if (result === "stale") {
