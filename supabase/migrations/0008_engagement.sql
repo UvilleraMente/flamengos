@@ -136,11 +136,11 @@ $$;
 -- plpgsql (no sql): así no se valida al crearla, porque 'daily_picks' se
 -- agrega al enum en esta misma transacción.
 create function public.notify_daily_picks() returns void
-  language plpgsql security definer set search_path = public as $
+  language plpgsql security definer set search_path = public as $$
 begin
   insert into notifications (user_id, type)
   select s.uid, 'daily_picks' from _active_singles() as s(uid);
-end $;
+end $$;
 
 -- ---------------------------------------------------------------------
 -- 2 y 3. Pregunta del día y racha
