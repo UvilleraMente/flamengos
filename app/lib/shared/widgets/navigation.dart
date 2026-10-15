@@ -100,7 +100,7 @@ class _NavButton extends StatelessWidget {
                 backgroundColor: FlamColors.coral,
                 child: Icon(
                   item.icon,
-                  color: selected ? FlamColors.text : FlamColors.textMuted,
+                  color: selected ? FlamColors.onAccent : FlamColors.textMuted,
                 ),
               ),
               AnimatedSize(
@@ -114,7 +114,10 @@ class _NavButton extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.fade,
                           softWrap: false,
-                          style: const TextStyle(fontWeight: FontWeight.w700),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: FlamColors.onAccent,
+                          ),
                         ),
                       )
                     : const SizedBox.shrink(),
@@ -169,7 +172,7 @@ class GlassSegmented<T> extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: v == value
-                          ? FlamColors.text
+                          ? FlamColors.onAccent
                           : FlamColors.textMuted,
                     ),
                   ),

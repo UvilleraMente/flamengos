@@ -45,7 +45,7 @@ class _ProfileCardState extends State<ProfileCard> {
           fit: StackFit.expand,
           children: [
             if (urls.isEmpty)
-              const ColoredBox(
+              ColoredBox(
                 color: FlamColors.plum,
                 child: Center(
                   child: Text('🦩', style: TextStyle(fontSize: 96)),
@@ -119,7 +119,11 @@ class _ProfileCardState extends State<ProfileCard> {
                             ),
                         ],
                       ),
-                      style: const TextStyle(fontSize: 32, height: 1.1),
+                      style: const TextStyle(
+                        fontSize: 32,
+                        height: 1.1,
+                        color: FlamColors.onPhoto,
+                      ),
                     ),
                     if (p.city.isNotEmpty || distance != null) ...[
                       const SizedBox(height: 8),
@@ -156,9 +160,9 @@ class _ProfileCardState extends State<ProfileCard> {
                         p.bio,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 15,
-                          color: FlamColors.textMuted,
+                          color: FlamColors.onPhotoMuted,
                           height: 1.35,
                         ),
                       ),

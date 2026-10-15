@@ -178,7 +178,7 @@ class _ProfileFormPageState extends ConsumerState<ProfileFormPage> {
                     padding: const EdgeInsets.only(bottom: 14),
                     child: Text(
                       t.profileCreateIntro,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: FlamColors.textMuted,
                         fontSize: 15,
                       ),
@@ -409,7 +409,7 @@ class _PhotoGrid extends StatelessWidget {
                           const SizedBox(height: 6),
                           Text(
                             t.actionAdd,
-                            style: const TextStyle(color: FlamColors.textMuted),
+                            style: TextStyle(color: FlamColors.textMuted),
                           ),
                         ],
                       ),

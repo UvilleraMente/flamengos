@@ -9,6 +9,7 @@ import '../../../shared/widgets/widgets.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../profile/data/profile_repository.dart';
 import '../../verification/presentation/verification_page.dart';
+import 'appearance_options.dart';
 import 'delete_account_dialog.dart';
 import 'language_picker.dart';
 
@@ -31,6 +32,11 @@ class SettingsPage extends ConsumerWidget {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 32),
             children: [
+              GlassSection(
+                title: t.settingsAppearance,
+                child: const AppearanceOptions(),
+              ),
+              gap,
               GlassSection(
                 title: t.settingsLanguage,
                 child: const LanguageOptions(),
@@ -56,12 +62,21 @@ class SettingsPage extends ConsumerWidget {
               GlassSection(
                 title: t.settingsSafety,
                 child: _Row(
-                  leading: const Icon(
-                    Icons.block_rounded,
-                    color: FlamColors.blush,
-                  ),
+                  leading: Icon(Icons.block_rounded, color: FlamColors.blush),
                   title: t.blockedTitle,
                   onTap: () => context.push(Routes.blocked),
+                ),
+              ),
+              gap,
+              GlassSection(
+                title: t.helpTitle,
+                child: _Row(
+                  leading: Icon(
+                    Icons.help_outline_rounded,
+                    color: FlamColors.blush,
+                  ),
+                  title: t.helpSubtitle,
+                  onTap: () => context.push(Routes.help),
                 ),
               ),
               gap,
@@ -128,7 +143,7 @@ class _Row extends StatelessWidget {
             ),
           ),
           if (trailing != null) ...[trailing!, const SizedBox(width: 6)],
-          const Icon(Icons.chevron_right_rounded, color: FlamColors.textMuted),
+          Icon(Icons.chevron_right_rounded, color: FlamColors.textMuted),
         ],
       ),
     ),

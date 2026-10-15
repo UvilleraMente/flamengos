@@ -362,7 +362,7 @@ class _Toolbar extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.tune_rounded,
                         size: 18,
                         color: FlamColors.blush,
@@ -411,10 +411,7 @@ class _Banner extends StatelessWidget {
         Icon(icon, color: FlamColors.blush),
         const SizedBox(width: 10),
         Expanded(
-          child: Text(
-            text,
-            style: const TextStyle(color: FlamColors.textMuted),
-          ),
+          child: Text(text, style: TextStyle(color: FlamColors.textMuted)),
         ),
         if (action != null) ...[const SizedBox(width: 8), action!],
       ],

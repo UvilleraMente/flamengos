@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../app/env.dart';
 import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
@@ -76,7 +78,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     Text(
                       t.tagline,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         color: FlamColors.textMuted,
                       ),
@@ -179,10 +181,23 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     Text(
                       t.authAgeNotice,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: FlamColors.textFaint,
                         fontSize: 13,
                       ),
+                    ),
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      children: [
+                        TextButton(
+                          onPressed: () => launchUrl(Uri.parse(Env.termsUrl)),
+                          child: Text(t.legalTerms),
+                        ),
+                        TextButton(
+                          onPressed: () => launchUrl(Uri.parse(Env.privacyUrl)),
+                          child: Text(t.legalPrivacy),
+                        ),
+                      ],
                     ),
                   ],
                 ),

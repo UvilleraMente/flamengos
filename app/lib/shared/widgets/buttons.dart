@@ -110,14 +110,16 @@ class FlamButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (height, fontSize, hPad) = switch (size) {
-      FlamSize.small => (36.0, 14.0, 14.0),
-      FlamSize.medium => (48.0, 16.0, 22.0),
-      FlamSize.large => (58.0, 18.0, 28.0),
+      FlamSize.small => (38.0, 15.0, 16.0),
+      FlamSize.medium => (50.0, 17.0, 22.0),
+      FlamSize.large => (56.0, 17.0, 28.0),
     };
     final radius = BorderRadius.circular(FlamRadius.pill);
-    final color = variant == FlamVariant.ghost
-        ? FlamColors.blush
-        : FlamColors.text;
+    final color = switch (variant) {
+      FlamVariant.ghost => FlamColors.blush,
+      FlamVariant.glass => FlamColors.text,
+      FlamVariant.primary || FlamVariant.danger => FlamColors.onAccent,
+    };
 
     final content = Row(
       mainAxisSize: MainAxisSize.min,
@@ -193,7 +195,13 @@ class FlamIconButton extends StatelessWidget {
         dimension: size,
         child: Center(
           child: IconTheme.merge(
-            data: IconThemeData(color: FlamColors.text, size: size * 0.45),
+            data: IconThemeData(
+              color:
+                  variant == FlamVariant.glass || variant == FlamVariant.ghost
+                  ? FlamColors.text
+                  : FlamColors.onAccent,
+              size: size * 0.45,
+            ),
             child: DefaultTextStyle.merge(
               style: TextStyle(fontSize: size * 0.42),
               child: icon,
@@ -236,14 +244,18 @@ class FlamChip extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (selected) ...[
-              const Icon(Icons.check_rounded, size: 18),
+              const Icon(
+                Icons.check_rounded,
+                size: 18,
+                color: FlamColors.onAccent,
+              ),
               const SizedBox(width: 6),
             ],
             Text(
               label,
               style: TextStyle(
                 fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-                color: selected ? FlamColors.text : FlamColors.textMuted,
+                color: selected ? FlamColors.onAccent : FlamColors.textMuted,
               ),
             ),
           ],

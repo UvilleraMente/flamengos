@@ -101,7 +101,7 @@ class PromptCard extends StatelessWidget {
               children: [
                 Text(
                   prompt.key.question(context.l10n),
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: FlamColors.blush,
                     fontWeight: FontWeight.w600,
                   ),

@@ -18,7 +18,7 @@ class Glass extends StatelessWidget {
     this.radius = FlamRadius.lg,
     this.blur = false,
     this.gradient,
-    this.borderColor = FlamColors.glassBorder,
+    this.borderColor,
   });
 
   final Widget child;
@@ -26,7 +26,7 @@ class Glass extends StatelessWidget {
   final double radius;
   final bool blur;
   final Gradient? gradient;
-  final Color borderColor;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class Glass extends StatelessWidget {
         gradient:
             gradient ?? (blur ? FlamGradients.frosted : FlamGradients.glass),
         borderRadius: shape,
-        border: Border.all(color: borderColor),
+        border: Border.all(color: borderColor ?? FlamColors.glassBorder),
       ),
       child: Padding(padding: padding, child: child),
     );
@@ -80,7 +80,7 @@ class GlassSection extends StatelessWidget {
               padding: const EdgeInsets.only(top: 2),
               child: Text(
                 subtitle!,
-                style: const TextStyle(color: FlamColors.textMuted),
+                style: TextStyle(color: FlamColors.textMuted),
               ),
             ),
           const SizedBox(height: 14),

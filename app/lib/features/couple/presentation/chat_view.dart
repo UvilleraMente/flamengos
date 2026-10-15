@@ -179,14 +179,21 @@ class _Bubble extends StatelessWidget {
           children: [
             Text(
               message.body,
-              style: const TextStyle(fontSize: 15.5, height: 1.3),
+              style: TextStyle(
+                fontSize: 15.5,
+                height: 1.3,
+                color: mine ? FlamColors.onAccent : FlamColors.text,
+              ),
             ),
             const SizedBox(height: 2),
             Text(
               DateFormat.Hm(
                 context.localeTag,
               ).format(message.createdAt.toLocal()),
-              style: const TextStyle(fontSize: 11, color: FlamColors.textMuted),
+              style: TextStyle(
+                fontSize: 11,
+                color: mine ? FlamColors.onPhotoMuted : FlamColors.textMuted,
+              ),
             ),
           ],
         ),

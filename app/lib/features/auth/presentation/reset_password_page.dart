@@ -123,7 +123,7 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage> {
                     Text(
                       t.resetHint,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: FlamColors.textFaint,
                         fontSize: 13,
                       ),

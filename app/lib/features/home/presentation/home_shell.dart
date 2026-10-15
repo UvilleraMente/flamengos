@@ -158,7 +158,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
             Text(
               t.matchTitle,
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'Pacifico',
                 fontSize: 32,
                 color: FlamColors.blush,
@@ -168,7 +168,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
             Text(
               t.matchMessage,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: FlamColors.textMuted, height: 1.4),
+              style: TextStyle(color: FlamColors.textMuted, height: 1.4),
             ),
             const SizedBox(height: 24),
             FlamButton(

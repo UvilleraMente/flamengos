@@ -88,11 +88,30 @@ select * from reports where status = 'open' order by created_at desc;
 Español (base) e inglés. La app usa el idioma del dispositivo; se puede
 cambiar en **Perfil → Ajustes → Idioma** (o en el login).
 
-- Textos nuevos: agrégalos a `lib/l10n/app_es.arb` **y** `app_en.arb`, y úsalos
-  con `context.l10n.miClave`. `flutter run` regenera el código.
+- Textos nuevos: agrégalos a `lib/l10n/app_es.arb` **y** `app_en.arb`, úsalos
+  con `context.l10n.miClave` y regenera:
+  `flutter gen-l10n && dart run tool/gen_text_case.dart`
+  (el segundo genera la versión en MAYÚSCULAS/minúsculas/Título de Ajustes).
 - Otro idioma: crea `app_xx.arb` con las mismas claves.
 - Los errores del servidor llegan como códigos (`already_paired`…) y se
   traducen en `core/errors.dart`.
+
+## Apariencia
+
+Ajustes → Apariencia: tema (**Firefly**, **Claro**, **Oscuro**), fuente (Outfit,
+Nunito, Lora, Quicksand), tamaño de letra y formato de letras. Los colores
+viven en `core/theme/tokens.dart` (`FlamPalette`); usa siempre `FlamColors.*`
+(nunca colores fijos) para que todo cambie con el tema. Sobre fotos o
+degradados rosa usa `FlamColors.onPhoto` / `onAccent`.
+
+## Sitio web y publicación
+
+- `site/`: portada, privacidad, términos y borrado de cuenta (Firebase Hosting,
+  `https://flamengos-app.web.app`). La app web se publica en `/app/`.
+  Publicar: `bash site/deploy.sh`.
+- Google Play paso a paso: [docs/google-play.md](docs/google-play.md).
+- Firma de Android: `app/android/key.properties` + `~/.flamengos/upload-keystore.jks`
+  (fuera del repo, **respáldalos**).
 
 ## Correr la app
 
@@ -111,7 +130,8 @@ sobreescribir con `--dart-define=SUPABASE_URL=... --dart-define=SUPABASE_ANON_KE
 | Servicio | Para qué | Configuración |
 |---|---|---|
 | Supabase | auth, base de datos, tiempo real, fotos | `SUPABASE_URL`, `SUPABASE_ANON_KEY` |
-| MapTiler | mapa (`streets-v4-dark`) y búsqueda de lugares | `MAPTILER_KEY` |
+| MapTiler | mapa (estilo según el tema) y búsqueda de lugares | `MAPTILER_KEY` |
+| Firebase | notificaciones push y hosting del sitio | `firebase_options.dart`, `FIREBASE_VAPID_KEY` |
 
 Las claves de cliente (anon key, MapTiler) viven en `app/lib/app/env.dart`.
 En MapTiler, restringe la clave a tus dominios/apps

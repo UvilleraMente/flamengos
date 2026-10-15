@@ -93,7 +93,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authCheckEmail => 'We sent you an email to confirm your account.';
 
   @override
-  String get authAgeNotice => 'By continuing you confirm you are 18 or older.';
+  String get authAgeNotice =>
+      'By continuing you confirm you are 18 or older and accept the Terms and Privacy Policy.';
 
   @override
   String get splashError => 'We couldn\'t load your profile';
@@ -730,6 +731,118 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unblock => 'Unblock';
+
+  @override
+  String get settingsAppearance => 'Appearance';
+
+  @override
+  String get appearanceTheme => 'Theme';
+
+  @override
+  String get themeFirefly => 'Firefly';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get appearanceFont => 'Font';
+
+  @override
+  String get appearanceTextSize => 'Text size';
+
+  @override
+  String get appearanceTextCase => 'Letter case';
+
+  @override
+  String get textCaseNormal => 'Normal';
+
+  @override
+  String get textCaseUpper => 'UPPERCASE';
+
+  @override
+  String get textCaseLower => 'lowercase';
+
+  @override
+  String get textCaseTitle => 'Title Case';
+
+  @override
+  String coupleMapTitle(int km) {
+    return 'You\'re $km km apart 💕';
+  }
+
+  @override
+  String get helpTitle => 'Help';
+
+  @override
+  String get helpSubtitle => 'FAQ and contact';
+
+  @override
+  String get helpContact => 'Contact us';
+
+  @override
+  String get legalTerms => 'Terms';
+
+  @override
+  String get legalPrivacy => 'Privacy';
+
+  @override
+  String get faqExclusiveQ => 'How does exclusivity work?';
+
+  @override
+  String get faqExclusiveA =>
+      'You can ask several flamingos to pair, but once someone accepts (or you accept), you\'re paired only with each other. While paired, you don\'t show up in Discover and can\'t receive requests.';
+
+  @override
+  String get faqRequestsQ => 'How many requests can I send?';
+
+  @override
+  String get faqRequestsA =>
+      'Up to 3 at a time. Each one expires after 48 hours without an answer, and you can cancel it earlier if you get tired of waiting.';
+
+  @override
+  String get faqAcceptQ => 'What happens when I accept someone?';
+
+  @override
+  String get faqAcceptA =>
+      'You become a pair and all your other requests, sent and received, are cancelled automatically.';
+
+  @override
+  String get faqEndQ => 'How do I end a pair?';
+
+  @override
+  String get faqEndA =>
+      'From your pair\'s menu. If only one of you wants to end it, it dissolves in 12 hours (and you can change your mind before). If you both want to, it\'s immediate.';
+
+  @override
+  String get faqLocationQ => 'Who can see my location?';
+
+  @override
+  String get faqLocationA =>
+      'We only store an approximate area (about 2 km), never your exact location. Others see an approximate distance and an approximate point on the map.';
+
+  @override
+  String get faqSafetyQ => 'How do I report or block someone?';
+
+  @override
+  String get faqSafetyA =>
+      'Open their profile and tap \"Report or block\". We won\'t tell them. Once blocked, you stop seeing each other and, if you were a pair, it ends immediately.';
+
+  @override
+  String get faqVerifyQ => 'Why should I get verified?';
+
+  @override
+  String get faqVerifyA =>
+      'Your profile shows a badge confirming it\'s really you. You take a selfie copying a pose and a moderator compares it with your photos.';
+
+  @override
+  String get faqDeleteQ => 'How do I delete my account?';
+
+  @override
+  String get faqDeleteA =>
+      'In Settings → Account → Delete account. Your profile, photos, requests and chats are erased. This can\'t be undone.';
 
   @override
   String get settingsTitle => 'Settings';

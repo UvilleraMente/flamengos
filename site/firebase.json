@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "public": "public",
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "ignore": ["firebase.json", "**/.*"],
+    "rewrites": [{ "source": "/app/**", "destination": "/app/index.html" }],
+    "headers": [
+      {
+        "source": "/app/**/*.@(js|wasm|png|ttf|otf|json)",
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+      }
+    ]
+  }
+}

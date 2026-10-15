@@ -82,7 +82,7 @@ Future<bool> confirm(
         Text(
           message,
           textAlign: TextAlign.center,
-          style: const TextStyle(color: FlamColors.textMuted, height: 1.4),
+          style: TextStyle(color: FlamColors.textMuted, height: 1.4),
         ),
         const SizedBox(height: 24),
         FlamButton(

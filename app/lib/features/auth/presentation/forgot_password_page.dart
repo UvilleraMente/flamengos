@@ -113,7 +113,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
                           ? t.forgotSentMessage(_email.text.trim())
                           : t.forgotIntro,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: FlamColors.textMuted,
                         height: 1.4,
                       ),

@@ -152,10 +152,7 @@ class _NotificationTile extends ConsumerWidget {
                 const SizedBox(height: 2),
                 Text(
                   timeAgo(n.createdAt, context),
-                  style: const TextStyle(
-                    color: FlamColors.textFaint,
-                    fontSize: 13,
-                  ),
+                  style: TextStyle(color: FlamColors.textFaint, fontSize: 13),
                 ),
               ],
             ),

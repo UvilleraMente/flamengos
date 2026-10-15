@@ -74,7 +74,7 @@ class _DeleteAccountDialogState extends ConsumerState<_DeleteAccountDialog> {
         Text(
           t.deleteAccountMessage,
           textAlign: TextAlign.center,
-          style: const TextStyle(color: FlamColors.textMuted, height: 1.4),
+          style: TextStyle(color: FlamColors.textMuted, height: 1.4),
         ),
         const SizedBox(height: 18),
         TextField(

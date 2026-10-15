@@ -152,7 +152,7 @@ class _FiltersSheetState extends ConsumerState<_FiltersSheet> {
                   ),
                   child: Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.travel_explore_rounded,
                         color: FlamColors.blush,
                       ),
@@ -165,7 +165,7 @@ class _FiltersSheetState extends ConsumerState<_FiltersSheet> {
                       ),
                       Text(
                         t.actionChange,
-                        style: const TextStyle(color: FlamColors.blush),
+                        style: TextStyle(color: FlamColors.blush),
                       ),
                     ],
                   ),
@@ -175,7 +175,7 @@ class _FiltersSheetState extends ConsumerState<_FiltersSheet> {
               const SizedBox(height: 12),
               Text(
                 t.filtersNeedLocation,
-                style: const TextStyle(color: FlamColors.textMuted),
+                style: TextStyle(color: FlamColors.textMuted),
               ),
             ],
             const SizedBox(height: 28),
@@ -211,7 +211,7 @@ class _Label extends StatelessWidget {
       if (value != null)
         Text(
           value!,
-          style: const TextStyle(
+          style: TextStyle(
             color: FlamColors.blush,
             fontWeight: FontWeight.w700,
           ),

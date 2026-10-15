@@ -269,7 +269,7 @@ abstract class AppLocalizations {
   /// No description provided for @authAgeNotice.
   ///
   /// In es, this message translates to:
-  /// **'Al continuar confirmas que tienes 18 años o más.'**
+  /// **'Al continuar confirmas que tienes 18 años o más y aceptas los Términos y la Política de privacidad.'**
   String get authAgeNotice;
 
   /// No description provided for @splashError.
@@ -1363,6 +1363,210 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Desbloquear'**
   String get unblock;
+
+  /// No description provided for @settingsAppearance.
+  ///
+  /// In es, this message translates to:
+  /// **'Apariencia'**
+  String get settingsAppearance;
+
+  /// No description provided for @appearanceTheme.
+  ///
+  /// In es, this message translates to:
+  /// **'Tema'**
+  String get appearanceTheme;
+
+  /// No description provided for @themeFirefly.
+  ///
+  /// In es, this message translates to:
+  /// **'Firefly'**
+  String get themeFirefly;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In es, this message translates to:
+  /// **'Claro'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In es, this message translates to:
+  /// **'Oscuro'**
+  String get themeDark;
+
+  /// No description provided for @appearanceFont.
+  ///
+  /// In es, this message translates to:
+  /// **'Fuente'**
+  String get appearanceFont;
+
+  /// No description provided for @appearanceTextSize.
+  ///
+  /// In es, this message translates to:
+  /// **'Tamaño del texto'**
+  String get appearanceTextSize;
+
+  /// No description provided for @appearanceTextCase.
+  ///
+  /// In es, this message translates to:
+  /// **'Formato de letras'**
+  String get appearanceTextCase;
+
+  /// No description provided for @textCaseNormal.
+  ///
+  /// In es, this message translates to:
+  /// **'Normal'**
+  String get textCaseNormal;
+
+  /// No description provided for @textCaseUpper.
+  ///
+  /// In es, this message translates to:
+  /// **'MAYÚSCULAS'**
+  String get textCaseUpper;
+
+  /// No description provided for @textCaseLower.
+  ///
+  /// In es, this message translates to:
+  /// **'minúsculas'**
+  String get textCaseLower;
+
+  /// No description provided for @textCaseTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Tipo Título'**
+  String get textCaseTitle;
+
+  /// No description provided for @coupleMapTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Están a {km} km 💕'**
+  String coupleMapTitle(int km);
+
+  /// No description provided for @helpTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ayuda'**
+  String get helpTitle;
+
+  /// No description provided for @helpSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Preguntas frecuentes y contacto'**
+  String get helpSubtitle;
+
+  /// No description provided for @helpContact.
+  ///
+  /// In es, this message translates to:
+  /// **'Escríbenos'**
+  String get helpContact;
+
+  /// No description provided for @legalTerms.
+  ///
+  /// In es, this message translates to:
+  /// **'Términos'**
+  String get legalTerms;
+
+  /// No description provided for @legalPrivacy.
+  ///
+  /// In es, this message translates to:
+  /// **'Privacidad'**
+  String get legalPrivacy;
+
+  /// No description provided for @faqExclusiveQ.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cómo funciona la exclusividad?'**
+  String get faqExclusiveQ;
+
+  /// No description provided for @faqExclusiveA.
+  ///
+  /// In es, this message translates to:
+  /// **'Puedes pedirle pareja a varios flamengos, pero cuando alguien acepta (o tú aceptas), quedan emparejados solo entre ustedes dos. Mientras sean pareja no aparecen en Descubrir ni pueden recibir solicitudes.'**
+  String get faqExclusiveA;
+
+  /// No description provided for @faqRequestsQ.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cuántas solicitudes puedo enviar?'**
+  String get faqRequestsQ;
+
+  /// No description provided for @faqRequestsA.
+  ///
+  /// In es, this message translates to:
+  /// **'Hasta 3 a la vez. Cada una expira en 48 horas si no responden, y puedes cancelarla antes si te cansas de esperar.'**
+  String get faqRequestsA;
+
+  /// No description provided for @faqAcceptQ.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué pasa cuando acepto a alguien?'**
+  String get faqAcceptQ;
+
+  /// No description provided for @faqAcceptA.
+  ///
+  /// In es, this message translates to:
+  /// **'Se crea la pareja y todas sus demás solicitudes, enviadas y recibidas, se anulan automáticamente.'**
+  String get faqAcceptA;
+
+  /// No description provided for @faqEndQ.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cómo termino una pareja?'**
+  String get faqEndQ;
+
+  /// No description provided for @faqEndA.
+  ///
+  /// In es, this message translates to:
+  /// **'Desde el menú de tu pareja. Si solo uno quiere terminar, se disuelve en 12 horas (y puedes arrepentirte antes). Si los dos quieren, es inmediato.'**
+  String get faqEndA;
+
+  /// No description provided for @faqLocationQ.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Quién ve mi ubicación?'**
+  String get faqLocationQ;
+
+  /// No description provided for @faqLocationA.
+  ///
+  /// In es, this message translates to:
+  /// **'Solo guardamos una zona aproximada (unos 2 km), nunca tu ubicación exacta. Los demás ven la distancia aproximada y un punto aproximado en el mapa.'**
+  String get faqLocationA;
+
+  /// No description provided for @faqSafetyQ.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cómo reporto o bloqueo a alguien?'**
+  String get faqSafetyQ;
+
+  /// No description provided for @faqSafetyA.
+  ///
+  /// In es, this message translates to:
+  /// **'Abre su perfil y toca \"Reportar o bloquear\". No le avisaremos. Al bloquear, dejan de verse y, si eran pareja, se termina de inmediato.'**
+  String get faqSafetyA;
+
+  /// No description provided for @faqVerifyQ.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Para qué sirve verificarme?'**
+  String get faqVerifyQ;
+
+  /// No description provided for @faqVerifyA.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu perfil muestra una insignia que confirma que eres tú. Te tomas una selfie imitando una pose y un moderador la compara con tus fotos.'**
+  String get faqVerifyA;
+
+  /// No description provided for @faqDeleteQ.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cómo elimino mi cuenta?'**
+  String get faqDeleteQ;
+
+  /// No description provided for @faqDeleteA.
+  ///
+  /// In es, this message translates to:
+  /// **'En Ajustes → Cuenta → Eliminar cuenta. Se borran tu perfil, fotos, solicitudes y conversaciones. No se puede deshacer.'**
+  String get faqDeleteA;
 
   /// No description provided for @settingsTitle.
   ///

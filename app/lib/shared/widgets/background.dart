@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/tokens.dart';
 
-/// Fondo global: degradado nocturno con "luces" de flamenco.
+/// Fondo global: degradado del tema con "luces" de flamenco.
 ///
 /// Las luces son degradados radiales (no blur), así que se pintan una sola
 /// vez y quedan en caché gracias al RepaintBoundary. Por eso el vidrio de la
@@ -14,18 +14,21 @@ class FlamingoBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = FlamColors.palette;
     return DecoratedBox(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [FlamColors.night, FlamColors.plum, FlamColors.night],
+          colors: palette.background,
         ),
       ),
       child: Stack(
         children: [
-          const Positioned.fill(
-            child: RepaintBoundary(child: CustomPaint(painter: _GlowPainter())),
+          Positioned.fill(
+            child: RepaintBoundary(
+              child: CustomPaint(painter: _GlowPainter(palette)),
+            ),
           ),
           Positioned.fill(child: child),
         ],
@@ -35,18 +38,14 @@ class FlamingoBackground extends StatelessWidget {
 }
 
 class _GlowPainter extends CustomPainter {
-  const _GlowPainter();
+  const _GlowPainter(this.palette);
 
-  static const _glows = [
-    (Offset(0.05, 0.08), 0.75, FlamColors.pink, 0.45),
-    (Offset(1.0, 0.42), 0.65, FlamColors.violet, 0.40),
-    (Offset(0.15, 0.98), 0.70, FlamColors.coral, 0.30),
-  ];
+  final FlamPalette palette;
 
   @override
   void paint(Canvas canvas, Size size) {
     final unit = size.shortestSide;
-    for (final (pos, radius, color, alpha) in _glows) {
+    for (final (pos, radius, color, alpha) in palette.glows) {
       final center = Offset(pos.dx * size.width, pos.dy * size.height);
       final r = radius * unit;
       final paint = Paint()
@@ -61,5 +60,5 @@ class _GlowPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(_GlowPainter old) => old.palette != palette;
 }

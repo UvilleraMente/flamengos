@@ -14,6 +14,7 @@ import '../../safety/presentation/report_sheet.dart';
 import '../data/couple_repository.dart';
 import '../domain/couple.dart';
 import 'chat_view.dart';
+import 'couple_distance.dart';
 
 /// Pantalla de la pareja: quiénes son, estado de disolución y chat.
 class CouplePage extends ConsumerWidget {
@@ -127,8 +128,10 @@ class _CoupleHeader extends ConsumerWidget {
                 ),
                 Text(
                   t.coupleTogetherSince(days),
-                  style: const TextStyle(color: FlamColors.textMuted),
+                  style: TextStyle(color: FlamColors.textMuted),
                 ),
+                const SizedBox(height: 4),
+                CoupleDistancePill(me: me, partner: partner),
               ],
             ),
           ),

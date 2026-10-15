@@ -16,3 +16,6 @@ key.properties
 # Supabase CLI (si se usa en el futuro)
 supabase/.temp/
 supabase/.branches/
+
+# Sitio: la app web se copia aquí al desplegar
+site/public/app/

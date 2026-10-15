@@ -153,7 +153,7 @@ class _PromptSheetState extends State<_PromptSheet> {
             Text(
               t.promptsTip,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: FlamColors.textFaint, fontSize: 13),
+              style: TextStyle(color: FlamColors.textFaint, fontSize: 13),
             ),
           ],
         ),

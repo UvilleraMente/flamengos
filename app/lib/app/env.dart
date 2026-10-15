@@ -23,12 +23,17 @@ class Env {
     defaultValue: 'uXYSJvxRc9r63hrqOHRX',
   );
 
-  /// Estilo del mapa (versión oscura del "streets-v4" de MapTiler).
-  static const mapTilerStyle = 'streets-v4-dark';
-
   /// Clave VAPID de Firebase para push en web (Firebase → Configuración del
   /// proyecto → Cloud Messaging → Certificados push web). Vacía = sin push web.
   static const firebaseVapidKey = String.fromEnvironment('FIREBASE_VAPID_KEY');
+
+  /// Sitio público (Firebase Hosting): términos, privacidad, borrar cuenta.
+  static const websiteUrl = 'https://flamengos-app.web.app';
+  static const termsUrl = '$websiteUrl/terminos';
+  static const privacyUrl = '$websiteUrl/privacidad';
+
+  /// Correo de soporte (vacío = se oculta el botón de contacto).
+  static const supportEmail = String.fromEnvironment('SUPPORT_EMAIL');
 
   /// Debe coincidir con cfg_max_active_requests() en el SQL.
   static const maxActiveRequests = 3;

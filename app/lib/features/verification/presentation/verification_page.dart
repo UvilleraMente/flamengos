@@ -133,10 +133,7 @@ class _VerificationPageState extends ConsumerState<VerificationPage> {
                 Text(
                   t.verificationIntro,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: FlamColors.textMuted,
-                    height: 1.4,
-                  ),
+                  style: TextStyle(color: FlamColors.textMuted, height: 1.4),
                 ),
                 const SizedBox(height: 24),
                 Heartbeat(
@@ -168,10 +165,7 @@ class _VerificationPageState extends ConsumerState<VerificationPage> {
                 Text(
                   t.verificationPrivacy,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: FlamColors.textFaint,
-                    fontSize: 13,
-                  ),
+                  style: TextStyle(color: FlamColors.textFaint, fontSize: 13),
                 ),
               ],
             ),

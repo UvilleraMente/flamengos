@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../../app/env.dart';
+import '../../../core/theme/tokens.dart';
 
 /// Centro por defecto si no hay ninguna ubicación (Santo Domingo).
 const defaultMapCenter = LatLng(18.4861, -69.9312);
@@ -17,6 +18,7 @@ class FlamMap extends StatelessWidget {
     required this.layers,
     this.controller,
     this.onTap,
+    this.fit,
   });
 
   final LatLng center;
@@ -25,6 +27,9 @@ class FlamMap extends StatelessWidget {
   final MapController? controller;
   final void Function(LatLng point)? onTap;
 
+  /// Si se da, encuadra estos límites en vez de usar center/zoom.
+  final CameraFit? fit;
+
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
@@ -32,6 +37,7 @@ class FlamMap extends StatelessWidget {
       options: MapOptions(
         initialCenter: center,
         initialZoom: zoom,
+        initialCameraFit: fit,
         minZoom: 3,
         maxZoom: 16,
         backgroundColor: const Color(0xFF0E0E12),
@@ -43,7 +49,7 @@ class FlamMap extends StatelessWidget {
       children: [
         TileLayer(
           urlTemplate:
-              'https://api.maptiler.com/maps/${Env.mapTilerStyle}'
+              'https://api.maptiler.com/maps/${FlamColors.palette.mapStyle}'
               '/256/{z}/{x}/{y}{r}.png?key=${Env.mapTilerKey}',
           retinaMode: RetinaMode.isHighDensity(context),
           userAgentPackageName: 'com.flamengos.flamengos',

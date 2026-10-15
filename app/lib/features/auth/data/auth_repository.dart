@@ -48,8 +48,9 @@ class AuthRepository {
   final PushService _push;
 
   /// A dónde vuelve el enlace del correo: la misma web, o la app por deep link.
-  static String get redirectUrl =>
-      kIsWeb ? Uri.base.origin : 'com.flamengos.flamengos://login-callback';
+  static String get redirectUrl => kIsWeb
+      ? '${Uri.base.origin}${Uri.base.path}' // p. ej. https://flamengos-app.web.app/app/
+      : 'com.flamengos.flamengos://login-callback';
 
   Future<void> signIn(String email, String password) =>
       _db.auth.signInWithPassword(email: email, password: password);

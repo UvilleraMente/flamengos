@@ -95,7 +95,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get authAgeNotice =>
-      'Al continuar confirmas que tienes 18 años o más.';
+      'Al continuar confirmas que tienes 18 años o más y aceptas los Términos y la Política de privacidad.';
 
   @override
   String get splashError => 'No pudimos cargar tu perfil';
@@ -732,6 +732,118 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get unblock => 'Desbloquear';
+
+  @override
+  String get settingsAppearance => 'Apariencia';
+
+  @override
+  String get appearanceTheme => 'Tema';
+
+  @override
+  String get themeFirefly => 'Firefly';
+
+  @override
+  String get themeLight => 'Claro';
+
+  @override
+  String get themeDark => 'Oscuro';
+
+  @override
+  String get appearanceFont => 'Fuente';
+
+  @override
+  String get appearanceTextSize => 'Tamaño del texto';
+
+  @override
+  String get appearanceTextCase => 'Formato de letras';
+
+  @override
+  String get textCaseNormal => 'Normal';
+
+  @override
+  String get textCaseUpper => 'MAYÚSCULAS';
+
+  @override
+  String get textCaseLower => 'minúsculas';
+
+  @override
+  String get textCaseTitle => 'Tipo Título';
+
+  @override
+  String coupleMapTitle(int km) {
+    return 'Están a $km km 💕';
+  }
+
+  @override
+  String get helpTitle => 'Ayuda';
+
+  @override
+  String get helpSubtitle => 'Preguntas frecuentes y contacto';
+
+  @override
+  String get helpContact => 'Escríbenos';
+
+  @override
+  String get legalTerms => 'Términos';
+
+  @override
+  String get legalPrivacy => 'Privacidad';
+
+  @override
+  String get faqExclusiveQ => '¿Cómo funciona la exclusividad?';
+
+  @override
+  String get faqExclusiveA =>
+      'Puedes pedirle pareja a varios flamengos, pero cuando alguien acepta (o tú aceptas), quedan emparejados solo entre ustedes dos. Mientras sean pareja no aparecen en Descubrir ni pueden recibir solicitudes.';
+
+  @override
+  String get faqRequestsQ => '¿Cuántas solicitudes puedo enviar?';
+
+  @override
+  String get faqRequestsA =>
+      'Hasta 3 a la vez. Cada una expira en 48 horas si no responden, y puedes cancelarla antes si te cansas de esperar.';
+
+  @override
+  String get faqAcceptQ => '¿Qué pasa cuando acepto a alguien?';
+
+  @override
+  String get faqAcceptA =>
+      'Se crea la pareja y todas sus demás solicitudes, enviadas y recibidas, se anulan automáticamente.';
+
+  @override
+  String get faqEndQ => '¿Cómo termino una pareja?';
+
+  @override
+  String get faqEndA =>
+      'Desde el menú de tu pareja. Si solo uno quiere terminar, se disuelve en 12 horas (y puedes arrepentirte antes). Si los dos quieren, es inmediato.';
+
+  @override
+  String get faqLocationQ => '¿Quién ve mi ubicación?';
+
+  @override
+  String get faqLocationA =>
+      'Solo guardamos una zona aproximada (unos 2 km), nunca tu ubicación exacta. Los demás ven la distancia aproximada y un punto aproximado en el mapa.';
+
+  @override
+  String get faqSafetyQ => '¿Cómo reporto o bloqueo a alguien?';
+
+  @override
+  String get faqSafetyA =>
+      'Abre su perfil y toca \"Reportar o bloquear\". No le avisaremos. Al bloquear, dejan de verse y, si eran pareja, se termina de inmediato.';
+
+  @override
+  String get faqVerifyQ => '¿Para qué sirve verificarme?';
+
+  @override
+  String get faqVerifyA =>
+      'Tu perfil muestra una insignia que confirma que eres tú. Te tomas una selfie imitando una pose y un moderador la compara con tus fotos.';
+
+  @override
+  String get faqDeleteQ => '¿Cómo elimino mi cuenta?';
+
+  @override
+  String get faqDeleteA =>
+      'En Ajustes → Cuenta → Eliminar cuenta. Se borran tu perfil, fotos, solicitudes y conversaciones. No se puede deshacer.';
 
   @override
   String get settingsTitle => 'Ajustes';

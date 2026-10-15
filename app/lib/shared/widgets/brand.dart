@@ -98,10 +98,7 @@ class EmptyState extends StatelessWidget {
               Text(
                 message,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: FlamColors.textMuted,
-                  height: 1.4,
-                ),
+                style: TextStyle(color: FlamColors.textMuted, height: 1.4),
               ),
               if (action != null) ...[const SizedBox(height: 24), action!],
             ],

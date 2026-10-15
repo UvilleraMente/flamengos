@@ -25,8 +25,8 @@ class FlamImage extends StatelessWidget {
           fit: fit,
           memCacheWidth: width,
           fadeInDuration: FlamMotion.medium,
-          placeholder: (_, _) => const ColoredBox(color: FlamColors.glassFill),
-          errorWidget: (_, _, _) => const ColoredBox(
+          placeholder: (_, _) => ColoredBox(color: FlamColors.glassFill),
+          errorWidget: (_, _, _) => ColoredBox(
             color: FlamColors.glassFill,
             child: Center(child: Icon(Icons.broken_image_outlined)),
           ),
@@ -80,7 +80,7 @@ class Avatar extends StatelessWidget {
       ),
       child: Container(
         padding: const EdgeInsets.all(2),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: FlamColors.night,
         ),

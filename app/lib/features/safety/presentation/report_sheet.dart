@@ -99,7 +99,7 @@ class _ReportSheetState extends ConsumerState<_ReportSheet> {
             const SizedBox(height: 6),
             Text(
               t.reportSubtitle,
-              style: const TextStyle(color: FlamColors.textMuted, height: 1.4),
+              style: TextStyle(color: FlamColors.textMuted, height: 1.4),
             ),
             const SizedBox(height: 18),
             Wrap(
