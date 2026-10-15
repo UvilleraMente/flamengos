@@ -52,9 +52,16 @@ class CoupleRepository {
       .order('created_at', ascending: true)
       .map((rows) => rows.map(ChatMessage.fromJson).toList());
 
-  Future<void> sendMessage(String matchId, String body) => _db
-      .from('messages')
-      .insert({'match_id': matchId, 'sender_id': _db.myId, 'body': body});
+  Future<void> sendMessage(String matchId, String body, {int? replyTo}) =>
+      _db.from('messages').insert({
+        'match_id': matchId,
+        'sender_id': _db.myId,
+        'body': body,
+        'reply_to': ?replyTo,
+      });
+
+  Future<void> editMessage(int id, String body) =>
+      _db.rpc('edit_message', params: {'p_message': id, 'p_body': body});
 
   Future<void> markRead(String matchId) =>
       _db.rpc('mark_chat_read', params: {'p_match': matchId});

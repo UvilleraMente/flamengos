@@ -41,6 +41,8 @@ class ChatMessage {
     required this.senderId,
     required this.body,
     required this.createdAt,
+    this.replyTo,
+    this.editedAt,
   });
 
   factory ChatMessage.fromJson(Map<String, dynamic> json) => ChatMessage(
@@ -48,10 +50,25 @@ class ChatMessage {
     senderId: json['sender_id'] as String,
     body: json['body'] as String,
     createdAt: DateTime.parse(json['created_at'] as String),
+    replyTo: json['reply_to'] as int?,
+    editedAt: json['edited_at'] == null
+        ? null
+        : DateTime.parse(json['edited_at'] as String),
   );
+
+  /// Debe coincidir con cfg_message_edit_window() en el SQL.
+  static const editWindow = Duration(minutes: 1);
 
   final int id;
   final String senderId;
   final String body;
   final DateTime createdAt;
+
+  /// Id del mensaje al que responde.
+  final int? replyTo;
+  final DateTime? editedAt;
+
+  bool get edited => editedAt != null;
+
+  bool canEdit(DateTime now) => now.difference(createdAt) < editWindow;
 }

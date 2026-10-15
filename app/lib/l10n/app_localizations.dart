@@ -944,6 +944,60 @@ abstract class AppLocalizations {
   /// **'Enviar'**
   String get chatSend;
 
+  /// No description provided for @chatReply.
+  ///
+  /// In es, this message translates to:
+  /// **'Responder'**
+  String get chatReply;
+
+  /// No description provided for @chatEdit.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar'**
+  String get chatEdit;
+
+  /// No description provided for @chatCopy.
+  ///
+  /// In es, this message translates to:
+  /// **'Copiar'**
+  String get chatCopy;
+
+  /// No description provided for @chatCopied.
+  ///
+  /// In es, this message translates to:
+  /// **'Copiado'**
+  String get chatCopied;
+
+  /// No description provided for @chatEdited.
+  ///
+  /// In es, this message translates to:
+  /// **'editado'**
+  String get chatEdited;
+
+  /// No description provided for @chatEditing.
+  ///
+  /// In es, this message translates to:
+  /// **'Editando mensaje'**
+  String get chatEditing;
+
+  /// No description provided for @chatYou.
+  ///
+  /// In es, this message translates to:
+  /// **'Tú'**
+  String get chatYou;
+
+  /// No description provided for @chatReplyingTo.
+  ///
+  /// In es, this message translates to:
+  /// **'Respondiendo a {name}'**
+  String chatReplyingTo(String name);
+
+  /// No description provided for @chatMessageUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'Mensaje no disponible'**
+  String get chatMessageUnavailable;
+
   /// No description provided for @chatSeen.
   ///
   /// In es, this message translates to:
@@ -1694,6 +1748,36 @@ abstract class AppLocalizations {
   /// **'Se pide al abrir la app.'**
   String get lockSettingHint;
 
+  /// No description provided for @lockMobileOnly.
+  ///
+  /// In es, this message translates to:
+  /// **'Disponible en la app de Android e iOS.'**
+  String get lockMobileOnly;
+
+  /// No description provided for @lockPasswordTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Confirma tu contraseña'**
+  String get lockPasswordTitle;
+
+  /// No description provided for @lockPasswordMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Se guarda cifrada en este teléfono para que puedas entrar con tu huella o rostro.'**
+  String get lockPasswordMessage;
+
+  /// No description provided for @lockEnable.
+  ///
+  /// In es, this message translates to:
+  /// **'Activar'**
+  String get lockEnable;
+
+  /// No description provided for @loginBiometric.
+  ///
+  /// In es, this message translates to:
+  /// **'Entrar con huella o rostro'**
+  String get loginBiometric;
+
   /// No description provided for @lockUnavailable.
   ///
   /// In es, this message translates to:
@@ -2005,6 +2089,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'No hay una disolución tuya que cancelar.'**
   String get errorNoDissolutionToCancel;
+
+  /// No description provided for @errorEditWindowClosed.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya pasó el minuto para editar ese mensaje.'**
+  String get errorEditWindowClosed;
 
   /// No description provided for @errorVerificationPending.
   ///

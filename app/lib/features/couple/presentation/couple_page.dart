@@ -57,7 +57,11 @@ class CouplePage extends ConsumerWidget {
                 : const SizedBox(width: double.infinity),
           ),
           Expanded(
-            child: ChatView(matchId: couple.id, me: me.id),
+            child: ChatView(
+              matchId: couple.id,
+              me: me.id,
+              partnerName: partner?.displayName,
+            ),
           ),
         ],
       ),

@@ -494,6 +494,35 @@ class AppLocalizationsEs extends AppLocalizations {
   String get chatSend => 'Enviar';
 
   @override
+  String get chatReply => 'Responder';
+
+  @override
+  String get chatEdit => 'Editar';
+
+  @override
+  String get chatCopy => 'Copiar';
+
+  @override
+  String get chatCopied => 'Copiado';
+
+  @override
+  String get chatEdited => 'editado';
+
+  @override
+  String get chatEditing => 'Editando mensaje';
+
+  @override
+  String get chatYou => 'Tú';
+
+  @override
+  String chatReplyingTo(String name) {
+    return 'Respondiendo a $name';
+  }
+
+  @override
+  String get chatMessageUnavailable => 'Mensaje no disponible';
+
+  @override
   String chatSeen(String time) {
     return 'Visto $time';
   }
@@ -912,6 +941,22 @@ class AppLocalizationsEs extends AppLocalizations {
   String get lockSettingHint => 'Se pide al abrir la app.';
 
   @override
+  String get lockMobileOnly => 'Disponible en la app de Android e iOS.';
+
+  @override
+  String get lockPasswordTitle => 'Confirma tu contraseña';
+
+  @override
+  String get lockPasswordMessage =>
+      'Se guarda cifrada en este teléfono para que puedas entrar con tu huella o rostro.';
+
+  @override
+  String get lockEnable => 'Activar';
+
+  @override
+  String get loginBiometric => 'Entrar con huella o rostro';
+
+  @override
   String get lockUnavailable =>
       'Este teléfono no tiene huella, rostro ni PIN configurado.';
 
@@ -1082,6 +1127,10 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get errorNoDissolutionToCancel =>
       'No hay una disolución tuya que cancelar.';
+
+  @override
+  String get errorEditWindowClosed =>
+      'Ya pasó el minuto para editar ese mensaje.';
 
   @override
   String get errorVerificationPending =>

@@ -493,6 +493,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatSend => 'Send';
 
   @override
+  String get chatReply => 'Reply';
+
+  @override
+  String get chatEdit => 'Edit';
+
+  @override
+  String get chatCopy => 'Copy';
+
+  @override
+  String get chatCopied => 'Copied';
+
+  @override
+  String get chatEdited => 'edited';
+
+  @override
+  String get chatEditing => 'Editing message';
+
+  @override
+  String get chatYou => 'You';
+
+  @override
+  String chatReplyingTo(String name) {
+    return 'Replying to $name';
+  }
+
+  @override
+  String get chatMessageUnavailable => 'Message unavailable';
+
+  @override
   String chatSeen(String time) {
     return 'Seen $time';
   }
@@ -911,6 +940,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lockSettingHint => 'Asked when you open the app.';
 
   @override
+  String get lockMobileOnly => 'Available in the Android and iOS app.';
+
+  @override
+  String get lockPasswordTitle => 'Confirm your password';
+
+  @override
+  String get lockPasswordMessage =>
+      'It is stored encrypted on this phone so you can sign in with your fingerprint or face.';
+
+  @override
+  String get lockEnable => 'Turn on';
+
+  @override
+  String get loginBiometric => 'Sign in with fingerprint or face';
+
+  @override
   String get lockUnavailable =>
       'This phone has no fingerprint, face or PIN set up.';
 
@@ -1082,6 +1127,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get errorNoDissolutionToCancel =>
       'There\'s no ending of yours to cancel.';
+
+  @override
+  String get errorEditWindowClosed =>
+      'The 1-minute window to edit that message has passed.';
 
   @override
   String get errorVerificationPending =>

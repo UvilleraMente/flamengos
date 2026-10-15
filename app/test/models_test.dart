@@ -140,4 +140,28 @@ void main() {
     expect(es.coupleTogetherSince(5), 'Juntos hace 5 días');
     expect(en.coupleTogetherSince(1), 'Together since yesterday');
   });
+
+  group('ChatMessage responder y editar', () {
+    final sent = DateTime.utc(2026, 10, 15, 12);
+    ChatMessage parse(Map<String, dynamic> extra) => ChatMessage.fromJson({
+      'id': 7,
+      'sender_id': 'me',
+      'body': 'hola',
+      'created_at': sent.toIso8601String(),
+      ...extra,
+    });
+
+    test('lee la respuesta y la edición', () {
+      final m = parse({'reply_to': 3, 'edited_at': sent.toIso8601String()});
+      expect(m.replyTo, 3);
+      expect(m.edited, isTrue);
+      expect(parse({}).edited, isFalse);
+    });
+
+    test('solo se edita durante 1 minuto', () {
+      final m = parse({});
+      expect(m.canEdit(sent.add(const Duration(seconds: 59))), isTrue);
+      expect(m.canEdit(sent.add(const Duration(minutes: 1))), isFalse);
+    });
+  });
 }

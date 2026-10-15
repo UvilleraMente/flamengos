@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/l10n/l10n.dart';
 import '../../../core/security/app_lock.dart';
+import '../../../core/supabase/supabase_providers.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
@@ -96,7 +97,8 @@ class _LockScreenState extends ConsumerState<LockScreen> {
   }
 }
 
-/// Interruptor en Ajustes → Seguridad (solo en Android e iOS).
+/// Interruptor en Ajustes → Seguridad. En la web se muestra apagado, con
+/// el aviso de que solo funciona en la app de Android e iOS.
 class BiometricLockTile extends ConsumerStatefulWidget {
   const BiometricLockTile({super.key});
 
@@ -110,27 +112,83 @@ class _BiometricLockTileState extends ConsumerState<BiometricLockTile> {
   Future<void> _toggle(bool enabled) async {
     final t = context.l10n;
     final lock = ref.read(appLockProvider.notifier);
-    if (enabled && !await lock.available()) {
+    if (!enabled) {
+      await lock.disable();
+      return;
+    }
+    if (!await lock.available()) {
       if (mounted) showInfo(context, t.lockUnavailable);
       return;
     }
+    final email = ref.read(supabaseProvider).auth.currentUser?.email;
+    if (email == null || !mounted) return;
+    final password = await _askPassword(context);
+    if (password == null || !mounted) return;
+
     setState(() => _busy = true);
-    await lock.setEnabled(enabled, t.lockReason);
-    if (mounted) setState(() => _busy = false);
+    try {
+      // Confirma que la contraseña es correcta antes de guardarla.
+      await ref.read(authRepositoryProvider).signIn(email, password);
+      await lock.enable(email: email, password: password, reason: t.lockReason);
+    } catch (e) {
+      if (mounted) showError(context, e);
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final t = context.l10n;
+    final supported = AppLockController.platformSupported;
     return SettingsTile(
       icon: Icons.fingerprint_rounded,
       color: const Color(0xFF34C759),
       title: t.lockSetting,
-      subtitle: t.lockSettingHint,
+      subtitle: supported ? t.lockSettingHint : t.lockMobileOnly,
       trailing: Switch.adaptive(
         value: ref.watch(appLockProvider).enabled,
-        onChanged: _busy ? null : _toggle,
+        onChanged: supported && !_busy ? _toggle : null,
       ),
     );
   }
+}
+
+Future<String?> _askPassword(BuildContext context) {
+  final t = context.l10n;
+  final controller = TextEditingController();
+  return showDialog<String>(
+    context: context,
+    builder: (dialog) => AlertDialog(
+      title: Text(t.lockPasswordTitle),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            t.lockPasswordMessage,
+            style: TextStyle(color: FlamColors.textMuted),
+          ),
+          const SizedBox(height: 14),
+          TextField(
+            controller: controller,
+            obscureText: true,
+            autofocus: true,
+            decoration: InputDecoration(labelText: t.authPassword),
+            onSubmitted: (v) => Navigator.pop(dialog, v),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(dialog),
+          child: Text(t.actionCancel),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(dialog, controller.text),
+          child: Text(t.lockEnable),
+        ),
+      ],
+    ),
+  );
 }

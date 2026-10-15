@@ -456,6 +456,34 @@ class CasedLocalizations extends AppLocalizations {
   String get chatSend => _transform(_inner.chatSend);
 
   @override
+  String get chatReply => _transform(_inner.chatReply);
+
+  @override
+  String get chatEdit => _transform(_inner.chatEdit);
+
+  @override
+  String get chatCopy => _transform(_inner.chatCopy);
+
+  @override
+  String get chatCopied => _transform(_inner.chatCopied);
+
+  @override
+  String get chatEdited => _transform(_inner.chatEdited);
+
+  @override
+  String get chatEditing => _transform(_inner.chatEditing);
+
+  @override
+  String get chatYou => _transform(_inner.chatYou);
+
+  @override
+  String chatReplyingTo(String name) => _transform(_inner.chatReplyingTo(name));
+
+  @override
+  String get chatMessageUnavailable =>
+      _transform(_inner.chatMessageUnavailable);
+
+  @override
   String chatSeen(String time) => _transform(_inner.chatSeen(time));
 
   @override
@@ -844,6 +872,21 @@ class CasedLocalizations extends AppLocalizations {
   String get lockSettingHint => _transform(_inner.lockSettingHint);
 
   @override
+  String get lockMobileOnly => _transform(_inner.lockMobileOnly);
+
+  @override
+  String get lockPasswordTitle => _transform(_inner.lockPasswordTitle);
+
+  @override
+  String get lockPasswordMessage => _transform(_inner.lockPasswordMessage);
+
+  @override
+  String get lockEnable => _transform(_inner.lockEnable);
+
+  @override
+  String get loginBiometric => _transform(_inner.loginBiometric);
+
+  @override
   String get lockUnavailable => _transform(_inner.lockUnavailable);
 
   @override
@@ -1017,6 +1060,9 @@ class CasedLocalizations extends AppLocalizations {
   @override
   String get errorNoDissolutionToCancel =>
       _transform(_inner.errorNoDissolutionToCancel);
+
+  @override
+  String get errorEditWindowClosed => _transform(_inner.errorEditWindowClosed);
 
   @override
   String get errorVerificationPending =>

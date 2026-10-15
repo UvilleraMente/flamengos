@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/l10n/l10n.dart';
+import '../../../core/security/app_lock.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
 import '../../../shared/widgets/widgets.dart';
@@ -37,8 +38,12 @@ class _DeleteAccountDialogState extends ConsumerState<_DeleteAccountDialog> {
     setState(() => _busy = true);
     final messenger = ScaffoldMessenger.of(context);
     final goodbye = context.l10n.deleteAccountDone;
+    // Se lee antes: al borrar la cuenta el router cierra esta pantalla.
+    final lock = ref.read(appLockProvider.notifier);
     try {
       await ref.read(authRepositoryProvider).deleteAccount();
+      // Borra también el correo y la contraseña guardados para la huella.
+      await lock.disable();
       if (mounted) Navigator.pop(context);
       messenger.showSnackBar(SnackBar(content: Text(goodbye)));
     } catch (e) {

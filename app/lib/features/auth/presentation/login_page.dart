@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../app/env.dart';
 import '../../../app/router.dart';
+import '../../../core/security/app_lock.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/feedback.dart';
@@ -26,6 +27,36 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   bool _isSignUp = false;
   bool _busy = false;
   bool _showPassword = false;
+
+  /// Hay credenciales guardadas para entrar con huella o rostro.
+  bool _canUseBiometrics = false;
+
+  @override
+  void initState() {
+    super.initState();
+    ref.read(appLockProvider.notifier).canSignInWithBiometrics().then((ok) {
+      if (mounted) setState(() => _canUseBiometrics = ok);
+    });
+  }
+
+  Future<void> _biometricSignIn() async {
+    setState(() => _busy = true);
+    try {
+      await ref
+          .read(appLockProvider.notifier)
+          .signInWithBiometrics(
+            context.l10n.lockReason,
+            ref.read(authRepositoryProvider).signIn,
+          );
+    } catch (e) {
+      if (mounted) {
+        showError(context, e);
+        setState(() => _canUseBiometrics = false);
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
 
   @override
   void dispose() {
@@ -169,6 +200,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 loading: _busy,
                                 onPressed: _submit,
                               ),
+                              if (_canUseBiometrics && !_isSignUp) ...[
+                                const SizedBox(height: 10),
+                                FlamButton(
+                                  label: t.loginBiometric,
+                                  icon: const Icon(Icons.fingerprint_rounded),
+                                  variant: FlamVariant.glass,
+                                  expand: true,
+                                  onPressed: _busy ? null : _biometricSignIn,
+                                ),
+                              ],
                             ],
                           ),
                         ),

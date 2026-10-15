@@ -6,7 +6,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../app/env.dart';
 import '../../../app/router.dart';
 import '../../../core/l10n/l10n.dart';
-import '../../../core/security/app_lock.dart';
 import '../../../core/theme/tokens.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../auth/data/auth_repository.dart';
@@ -87,8 +86,7 @@ class SettingsPage extends ConsumerWidget {
               SettingsGroup(
                 title: t.settingsSafety,
                 children: [
-                  if (AppLockController.platformSupported)
-                    const BiometricLockTile(),
+                  const BiometricLockTile(),
                   SettingsTile(
                     icon: Icons.verified_rounded,
                     color: FlamColors.mint,

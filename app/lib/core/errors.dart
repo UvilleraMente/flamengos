@@ -43,5 +43,7 @@ String? _serverCode(BuildContext context, AppLocalizations t, String code) =>
       'not_paired' => t.errorNotPaired,
       'no_dissolution_to_cancel' => t.errorNoDissolutionToCancel,
       'verification_pending' => t.errorVerificationPending,
+      'edit_window_closed' => t.errorEditWindowClosed,
+      'message_not_found' || 'message_invalid' => t.errorGeneric,
       _ => null,
     };
