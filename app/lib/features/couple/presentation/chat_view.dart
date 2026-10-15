@@ -24,6 +24,7 @@ class ChatView extends ConsumerStatefulWidget {
 
 class _ChatViewState extends ConsumerState<ChatView> {
   final _input = TextEditingController();
+  final _scroll = ScrollController();
   bool _sending = false;
 
   /// Último mensaje del otro que ya marcamos como leído.
@@ -37,11 +38,28 @@ class _ChatViewState extends ConsumerState<ChatView> {
           .read(couplePresenceProvider(widget.matchId).notifier)
           .onTyping(_input.text),
     );
-    ref.listenManual(
-      messagesProvider(widget.matchId),
-      (_, next) => _markRead(next.value),
-      fireImmediately: true,
-    );
+    ref.listenManual(messagesProvider(widget.matchId), (before, next) {
+      _markRead(next.value);
+      // Al llegar un mensaje mío (recién enviado), baja hasta verlo.
+      final last = next.value?.lastOrNull;
+      if (last != null &&
+          last.senderId == widget.me &&
+          last.id != before?.value?.lastOrNull?.id) {
+        _scrollToBottom();
+      }
+    }, fireImmediately: true);
+  }
+
+  /// La lista está invertida: el final del chat es la posición 0.
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_scroll.hasClients) return;
+      _scroll.animateTo(
+        0,
+        duration: FlamMotion.medium,
+        curve: Curves.easeOutCubic,
+      );
+    });
   }
 
   void _markRead(List<ChatMessage>? messages) {
@@ -57,6 +75,7 @@ class _ChatViewState extends ConsumerState<ChatView> {
   @override
   void dispose() {
     _input.dispose();
+    _scroll.dispose();
     super.dispose();
   }
 
@@ -69,6 +88,7 @@ class _ChatViewState extends ConsumerState<ChatView> {
           .read(coupleRepositoryProvider)
           .sendMessage(widget.matchId, body);
       _input.clear();
+      _scrollToBottom();
       ref.read(couplePresenceProvider(widget.matchId).notifier).stopTyping();
     } catch (e) {
       if (mounted) showError(context, e);
@@ -114,6 +134,7 @@ class _ChatViewState extends ConsumerState<ChatView> {
                     message: context.l10n.chatEmptyMessage,
                   )
                 : ListView.builder(
+                    controller: _scroll,
                     reverse: true,
                     padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
                     itemCount: list.length + (typing ? 1 : 0),
